@@ -1,0 +1,31 @@
+---
+title: "Python RAG Chatbot"
+description: "Local document Q&A chatbot using RAG. Supports PDF, DOCX, TXT, and XLSX. Runs fully offline with Ollama + Llama 3.2."
+date: 2025-02-01
+tags: ["Python", "LangChain", "ChromaDB", "HuggingFace", "Ollama", "Llama 3.2"]
+category: ai
+featured: true
+status: personal
+role: "Solo Developer"
+githubUrl: "https://github.com/JRioP/Python_Rag"
+coverImage: "/images/projects/rag-cover.png"
+---
+
+## Overview
+
+A fully local document Q&A chatbot using Retrieval-Augmented Generation (RAG).
+No cloud API — everything runs on your own hardware via Ollama.
+
+## Why local?
+
+Privacy. Documents may contain sensitive information — sending them to OpenAI's
+API means that data leaves your machine. Ollama + Llama 3.2 runs entirely offline,
+with no per-token cost and no data leakage.
+
+## How RAG works here
+
+1. Documents are split into chunks and embedded using `all-MiniLM-L6-v2`
+2. Vectors stored in ChromaDB
+3. User query is embedded and semantically matched against stored chunks
+4. Top chunks injected into Llama 3.2 prompt as context
+5. Model answers based on retrieved context, not training data alone

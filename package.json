@@ -1,0 +1,34 @@
+{
+  "name": "joshua-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "clsx": "^2.1.0",
+    "contentlayer": "^0.3.4",
+    "mdx-bundler": "^9.2.1",
+    "next": "^16.2.6",
+    "next-contentlayer": "^0.3.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "resend": "^3.2.0",
+    "tailwind-merge": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.5.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.0",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^5"
+  }
+}

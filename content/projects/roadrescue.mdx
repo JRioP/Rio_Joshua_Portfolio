@@ -1,0 +1,41 @@
+---
+title: "RoadRescue"
+description: "Real-time Android app connecting stranded motorists with nearby verified service providers in the Philippines."
+date: 2025-05-01
+tags: ["Java", "Firebase", "Google Maps SDK", "Cloud Functions", "OAuth 2.0", "AES-256"]
+category: android
+featured: true
+status: capstone
+role: "Lead Developer (Frontend + Backend)"
+githubUrl: "https://github.com/JRioP/RoadRescue"
+coverImage: "/images/projects/roadrescue-cover.png"
+---
+
+## Overview
+
+RoadRescue is a native Android roadside assistance app built as my BSIT capstone at STI College Tanauan.
+It connects stranded motorists with nearby verified service providers in real time.
+
+## The problem
+
+Traditional roadside assistance in the Philippines suffers from slow response times, zero real-time
+visibility, and no standardized way to verify providers.
+
+## How it works
+
+1. Motorist submits a service request with GPS coordinates
+2. Cloud Function finds the nearest available provider via Haversine distance calculation
+3. Both parties track each other live via Firestore `onSnapshot()` listeners
+4. Service is rendered, payment processed, and both parties rate the experience
+
+## Tech decisions
+
+I chose Firebase over a custom REST backend specifically for real-time push updates —
+`onSnapshot()` listeners eliminate polling entirely. Cloud Functions handle the server-side
+matching logic without requiring a managed server.
+
+## What I'd change
+
+- Add automated tests (currently zero test coverage)
+- Migrate relational data (ratings, transactions) to PostgreSQL
+- Split motorist and provider apps into separate modules
