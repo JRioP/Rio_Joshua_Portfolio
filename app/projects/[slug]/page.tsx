@@ -1,12 +1,12 @@
 // app/projects/[slug]/page.tsx — Individual case study
 import { notFound } from "next/navigation";
-import { allProjects } from "contentlayer/generated";
-import { useMDXComponent } from "next-contentlayer/hooks";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getProjectBySlug, getAllProjectSlugs } from "@/lib/mdx";
 import type { Metadata } from "next";
 
 // Tell Next.js all valid slugs at build time (SSG)
 export function generateStaticParams() {
-  return allProjects.map((p) => ({ slug: p.slug }));
+  return getAllProjectSlugs().map((slug) => ({ slug }));
 }
 
 // Dynamic metadata per project
@@ -15,7 +15,7 @@ export function generateMetadata({
 }: {
   params: { slug: string };
 }): Metadata {
-  const project = allProjects.find((p) => p.slug === params.slug);
+  const project = getProjectBySlug(params.slug);
   if (!project) return {};
   return {
     title: project.title,
@@ -28,16 +28,14 @@ export default function CaseStudyPage({
 }: {
   params: { slug: string };
 }) {
-  const project = allProjects.find((p) => p.slug === params.slug);
+  const project = getProjectBySlug(params.slug);
   if (!project) notFound();
-
-  const MDXContent = useMDXComponent(project.body.code);
 
   return (
     <article className="min-h-screen pt-24 pb-20 px-6 max-w-3xl mx-auto">
       {/* Project header */}
       <header className="mb-16">
-        <p className="font-mono text-xs text-accent tracking-widest uppercase mb-4">
+        <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-4">
           Case study
         </p>
         <h1 className="font-display text-6xl font-bold leading-none tracking-tight mb-6">
@@ -58,12 +56,14 @@ export default function CaseStudyPage({
         </div>
       </header>
 
-      {/* MDX content renders here */}
+      {/* MDX content */}
       <div className="prose prose-invert prose-neutral max-w-none
-                      prose-headings:font-display prose-headings:tracking-tight
-                      prose-a:text-accent prose-a:no-underline hover:prose-a:underline
-                      prose-code:font-mono prose-code:text-orange-300">
-        <MDXContent />
+                      prose-headings:font-display prose-headings:tracking-tight prose-headings:mt-8 prose-headings:mb-4
+                      prose-a:text-orange-500 prose-a:no-underline hover:prose-a:underline
+                      prose-code:font-mono prose-code:text-orange-300
+                      prose-p:text-neutral-300 prose-p:leading-relaxed
+                      prose-strong:text-neutral-100">
+        <MDXRemote source={project.content} />
       </div>
 
       {/* Links */}
@@ -73,7 +73,7 @@ export default function CaseStudyPage({
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 bg-accent text-black font-semibold rounded-lg text-sm hover:bg-accent-hover transition-colors"
+            className="px-5 py-2.5 bg-orange-500 text-black font-semibold rounded-lg text-sm hover:bg-orange-400 transition-colors"
           >
             View on GitHub →
           </a>

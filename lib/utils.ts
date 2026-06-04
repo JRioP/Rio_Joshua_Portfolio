@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 /** Format a date string to readable format */
 export function formatDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString("en-PH", {
-    year: "month",
+    year: "numeric",
     month: "long",
   });
 }

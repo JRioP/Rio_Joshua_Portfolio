@@ -1,13 +1,6 @@
-"use client";
-import { useState, useEffect, useRef } from "react";
-
-const ROTATING_TEXTS = [
-  "a Full-Stack Developer.",
-  "an Android Developer.",
-  "a Web Developer.",
-  "an AI Enthusiast.",
-  "a Problem Solver.",
-];
+import Image from "next/image";
+import { PROJECTS } from "@/lib/projects";
+import { RotatingText } from "@/components/RotatingText";
 
 const TECH_STACK = [
   { label: "Java", category: "Android" },
@@ -20,62 +13,23 @@ const TECH_STACK = [
   { label: "MySQL", category: "DB" },
   { label: "Git", category: "Tools" },
   { label: "Figma", category: "Tools" },
+  { label: "WordPress", category: "CMS" },
 ];
 
 export default function Home() {
-  const [displayed, setDisplayed] = useState("");
-  const indexRef = useRef(0);
-  const isDeletingRef = useRef(false);
-  const posRef = useRef(0);
-
-  useEffect(() => {
-    const tick = () => {
-      const current = ROTATING_TEXTS[indexRef.current];
-
-      if (!isDeletingRef.current) {
-        posRef.current += 1;
-        setDisplayed(current.slice(0, posRef.current));
-
-        if (posRef.current === current.length) {
-          isDeletingRef.current = true;
-          setTimeout(tick, 1800);
-          return;
-        }
-        setTimeout(tick, 80);
-      } else {
-        posRef.current -= 1;
-        setDisplayed(current.slice(0, posRef.current));
-
-        if (posRef.current === 0) {
-          isDeletingRef.current = false;
-          indexRef.current = (indexRef.current + 1) % ROTATING_TEXTS.length;
-          setTimeout(tick, 300);
-          return;
-        }
-        setTimeout(tick, 40);
-      }
-    };
-
-    const timer = setTimeout(tick, 500);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
-    <main className="min-h-screen flex items-center px-6 py-32 max-w-6xl mx-auto">
-
-      {/* LEFT COLUMN — text content */}
-      <div className="flex-1 max-w-xl">
+    <main className="min-h-screen px-6 py-32 max-w-6xl mx-auto">
+      <div className="flex items-center gap-12">
+        {/* LEFT COLUMN — text content */}
+        <div className="flex-1 max-w-xl">
         <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-5">
           portfolio
         </p>
 
         <h1 className="font-display text-5xl font-bold leading-tight tracking-tight mb-6">
-          Hi, I am Joshua
-          <br />
-          <span className="text-orange-500">
-            {displayed}
-            <span className="animate-pulse">|</span>
-          </span>
+          Hi, I am Joshua <br />
+          <RotatingText />
         </h1>
 
         <p className="text-neutral-400 text-lg leading-relaxed mb-4">
@@ -153,6 +107,100 @@ export default function Home() {
           </div>
         </div>
       </div>
+      </div>
+
+      {/* FEATURED PROJECTS */}
+      <section className="w-full mt-32">
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-3">
+              selected work
+            </p>
+            <h2 className="font-display text-4xl font-bold tracking-tight">
+              Featured Projects
+            </h2>
+          </div>
+          <a
+            href="/projects"
+            className="font-mono text-xs text-neutral-400 hover:text-orange-500 transition-colors uppercase tracking-widest"
+          >
+            See all →
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {PROJECTS.filter((p) => p.featured).map((project) => (
+            <a
+              key={project.slug}
+              href={`/projects/${project.slug}`}
+              className="group bg-neutral-900 border border-neutral-800 rounded-2xl p-6 hover:border-neutral-600 transition-all duration-200 hover:-translate-y-1"
+            >
+              <p className="font-mono text-xs text-orange-500 uppercase tracking-widest mb-4">
+                {project.category}
+              </p>
+              <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-orange-500 transition-colors">
+                {project.title}
+              </h3>
+              <p className="text-neutral-400 text-sm leading-relaxed mb-5">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-mono text-xs px-2 py-0.5 rounded bg-neutral-800 text-neutral-500"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* About Me */}
+      <section className="w-full mt-32">
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-3">
+              Introduction
+            </p>
+            <h2 className="font-display text-4xl font-bold tracking-tight">
+              About Me
+            </h2>
+          </div>
+          <a
+            href="/about"
+            className="font-mono text-xs text-neutral-400 hover:text-orange-500 transition-colors uppercase tracking-widest"
+          >
+            Full story →
+          </a>
+        </div>
+        
+        <div className="flex flex-col md:flex-row gap-8 items-start">
+          {/* Image */}
+          <div className="flex-shrink-0">
+            <Image
+              src="/images/about.jpg"
+              alt="Joshua"
+              width={280}
+              height={280}
+              className="rounded-2xl border border-neutral-800 object-cover"
+              priority={false}
+            />
+          </div>
+          
+          {/* Text */}
+          <div className="max-w-2xl">
+            <p className="text-neutral-400 text-sm leading-relaxed mb-5">
+             I'm a BSIT graduate from STI College Tanauan, based in Batangas. 
+             I like building things that solve real problems — a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
+              I'm currently looking for my first professional role, open to Metro Manila or remote.
+            </p>
+          </div>
+        </div>
+      </section>
 
     </main>
   );

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { clsx } from "clsx";
-import type { Project } from "contentlayer/generated";
+import type { Project } from "@/lib/projects";
 
 const CATEGORIES = [
   { value: "all",     label: "All"     },
@@ -31,7 +31,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
             className={clsx(
               "font-mono text-xs uppercase tracking-widest px-4 py-2 rounded-full border transition-all",
               active === value
-                ? "bg-accent text-black border-accent"
+                ? "bg-orange-500 text-black border-orange-500"
                 : "border-neutral-700 text-neutral-500 hover:border-neutral-500 hover:text-neutral-300"
             )}
           >
@@ -45,11 +45,11 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
         {filtered.map((project) => (
           <Link
             key={project.slug}
-            href={project.url}
+            href={`/projects/${project.slug}`}
             className="group block bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-neutral-600 transition-all duration-200 hover:-translate-y-0.5"
           >
             <div className="flex items-center justify-between mb-4">
-              <span className="font-mono text-xs text-accent uppercase tracking-widest">
+              <span className="font-mono text-xs text-orange-500 uppercase tracking-widest">
                 {project.category}
               </span>
               {project.featured && (
@@ -58,7 +58,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
                 </span>
               )}
             </div>
-            <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-accent transition-colors">
+            <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-orange-500 transition-colors">
               {project.title}
             </h3>
             <p className="text-neutral-500 text-sm leading-relaxed mb-5 line-clamp-2">
