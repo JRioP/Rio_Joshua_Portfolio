@@ -23,7 +23,7 @@ export default function Home() {
       <div className="flex items-center gap-12">
         {/* LEFT COLUMN — text content */}
         <div className="flex-1 max-w-xl">
-        <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-5">
+        <p className="font-mono text-xs text-accent-500 tracking-widest uppercase mb-5">
           portfolio
         </p>
 
@@ -45,7 +45,7 @@ export default function Home() {
         <div className="flex gap-4">
           <a
             href="/projects"
-            className="px-6 py-3 bg-orange-500 text-black font-bold rounded-lg hover:bg-orange-400 transition-colors"
+            className="px-6 py-3 bg-accent-500 text-black font-bold rounded-lg hover:bg-accent-400 transition-colors"
           >
             See my work
           </a>
@@ -99,7 +99,7 @@ export default function Home() {
                 href="https://github.com/JRioP"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-xs text-orange-500 hover:underline"
+                className="font-mono text-xs text-accent-500 hover:underline"
               >
                 JRioP
               </a>
@@ -113,7 +113,7 @@ export default function Home() {
       <section className="w-full mt-32">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-3">
+            <p className="font-mono text-xs text-accent-500 tracking-widest uppercase mb-3">
               selected work
             </p>
             <h2 className="font-display text-4xl font-bold tracking-tight">
@@ -122,7 +122,7 @@ export default function Home() {
           </div>
           <a
             href="/projects"
-            className="font-mono text-xs text-neutral-400 hover:text-orange-500 transition-colors uppercase tracking-widest"
+            className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest"
           >
             See all →
           </a>
@@ -135,10 +135,10 @@ export default function Home() {
               href={`/projects/${project.slug}`}
               className="group bg-neutral-900 border border-neutral-800 rounded-2xl p-6 hover:border-neutral-600 transition-all duration-200 hover:-translate-y-1"
             >
-              <p className="font-mono text-xs text-orange-500 uppercase tracking-widest mb-4">
+              <p className="font-mono text-xs text-accent-500 uppercase tracking-widest mb-4">
                 {project.category}
               </p>
-              <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-orange-500 transition-colors">
+              <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-accent-500 transition-colors">
                 {project.title}
               </h3>
               <p className="text-neutral-400 text-sm leading-relaxed mb-5">
@@ -163,7 +163,7 @@ export default function Home() {
       <section className="w-full mt-32">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-3">
+            <p className="font-mono text-xs text-accent-500 tracking-widest uppercase mb-3">
               Introduction
             </p>
             <h2 className="font-display text-4xl font-bold tracking-tight">
@@ -172,7 +172,7 @@ export default function Home() {
           </div>
           <a
             href="/about"
-            className="font-mono text-xs text-neutral-400 hover:text-orange-500 transition-colors uppercase tracking-widest"
+            className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest"
           >
             Full story →
           </a>
@@ -192,7 +192,7 @@ export default function Home() {
           </div>
           
           {/* Text */}
-          <div className="max-w-2xl">
+          <div className="flex-1 min-w-0">
             <p className="text-neutral-400 text-sm leading-relaxed mb-5">
              I'm a BSIT graduate from STI College Tanauan, based in Batangas. 
              I like building things that solve real problems — a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.

@@ -50,7 +50,7 @@ export function RotatingText() {
   }, []);
 
   return (
-    <span className="text-orange-500">
+    <span className="text-accent-400">
       {displayed}
       <span className="animate-pulse">|</span>
     </span>
