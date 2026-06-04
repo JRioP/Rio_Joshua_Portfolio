@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PROJECTS } from "@/lib/projects";
 import { RotatingText } from "@/components/RotatingText";
 
@@ -12,6 +13,7 @@ const TECH_STACK = [
   { label: "MySQL", category: "DB" },
   { label: "Git", category: "Tools" },
   { label: "Figma", category: "Tools" },
+  { label: "WordPress", category: "CMS" },
 ];
 
 export default function Home() {
@@ -156,6 +158,50 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* About Me */}
+      <section className="w-full mt-32">
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-3">
+              Introduction
+            </p>
+            <h2 className="font-display text-4xl font-bold tracking-tight">
+              About Me
+            </h2>
+          </div>
+          <a
+            href="/about"
+            className="font-mono text-xs text-neutral-400 hover:text-orange-500 transition-colors uppercase tracking-widest"
+          >
+            Full story →
+          </a>
+        </div>
+        
+        <div className="flex flex-col md:flex-row gap-8 items-start">
+          {/* Image */}
+          <div className="flex-shrink-0">
+            <Image
+              src="/images/about.jpg"
+              alt="Joshua"
+              width={280}
+              height={280}
+              className="rounded-2xl border border-neutral-800 object-cover"
+              priority={false}
+            />
+          </div>
+          
+          {/* Text */}
+          <div className="max-w-2xl">
+            <p className="text-neutral-400 text-sm leading-relaxed mb-5">
+             I'm a BSIT graduate from STI College Tanauan, based in Batangas. 
+             I like building things that solve real problems — a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
+              I'm currently looking for my first professional role, open to Metro Manila or remote.
+            </p>
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }
