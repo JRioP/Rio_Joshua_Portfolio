@@ -21,9 +21,16 @@ const TECH_STACK = [
 export default function Home() {
 
   return (
-    <main className="px-6 max-w-6xl mx-auto">
+    <>
+    <main className="relative px-6 max-w-6xl mx-auto">
       <section className="min-h-screen flex items-center relative">
-      <div className="flex items-center gap-12 w-full">
+        {/* Animated background blobs */}
+        <div className="hero-blobs">
+          <div className="blob blob-1" />
+          <div className="blob blob-2" />
+          <div className="blob blob-3" />
+        </div>
+      <div className="flex items-center gap-12 w-full relative z-10">
         {/* LEFT COLUMN — text content */}
         <div className="flex-1 max-w-xl">
         <h1 className="font-display text-5xl font-bold leading-tight tracking-tight mb-6">
@@ -44,7 +51,7 @@ export default function Home() {
         <div className="flex gap-4">
           <a
             href="/projects"
-            className="px-6 py-3 bg-accent-500 text-black font-bold rounded-lg hover:bg-accent-400 transition-colors"
+            className="px-6 py-3 bg-accent-500 text-black font-bold rounded-lg hover:bg-accent-400 hover:text-amber-50 transition-colors"
           >
             See my work
           </a>
@@ -56,7 +63,7 @@ export default function Home() {
           </a>
         </div>
       </div>
-
+      
       {/* RIGHT COLUMN — tech stack card */}
       <div className="hidden lg:flex flex-1 justify-end">
         <div className="w-80 bg-neutral-900 border border-neutral-800 rounded-2xl p-6">
@@ -118,12 +125,12 @@ export default function Home() {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="w-full mt-32">
+      <section className="w-full mt-32 relative z-10">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <h2 className="font-display text-4xl font-bold tracking-tight mb-12">
-          Featured Projects<span className="text-accent-500">.</span>
-          </h2>
+            <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
+            Featured Projects<span className="text-accent-500">.</span>
+            </h2>
           </div>
           <a
             href="/projects"
@@ -170,11 +177,8 @@ export default function Home() {
       <section className="w-full mt-32">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="font-mono text-xs text-accent-500 tracking-widest uppercase mb-3">
-              Introduction
-            </p>
-            <h2 className="font-display text-4xl font-bold tracking-tight">
-              About Me
+            <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
+            About Me<span className="text-accent-500">.</span>
             </h2>
           </div>
           <a
@@ -209,9 +213,9 @@ export default function Home() {
         </div>
       </section>
 
-    <section className="px-6 max-w-2xl mx-auto">
-        <div className="min-h-screen pt-24 pb-20 px-6 max-w-2xl mx-auto">
-              <h1 className="font-display text-5xl font-bold mb-4">Get in touch.</h1>
+    <section className="min-h-screen flex items-center relative">
+        <div className="min-h-screen pt-30 pb-20 px-6 max-w-2xl mx-auto">
+              <h1 className="font-display text-6xl font-bold mb-4">Get in touch<span className="text-accent-500">.</span></h1>
               <p className="text-neutral-400 mb-12">
                 Open to full-time roles and interesting projects. Based in Batangas — available remotely.
               </p>
@@ -220,5 +224,6 @@ export default function Home() {
     </section>
 
     </main>
+    </>
   );
 }

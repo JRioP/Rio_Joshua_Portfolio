@@ -44,7 +44,7 @@ export default function ExperienceSection() {
 
   return (
     <section className="w-full mt-32">
-      <h2 className="font-display text-4xl font-bold tracking-tight mb-12">
+      <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
         Experience<span className="text-accent-500">.</span>
       </h2>
 
