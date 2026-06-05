@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { PROJECTS } from "@/lib/projects";
 import { RotatingText } from "@/components/RotatingText";
+import ContactForm from "@/components/ui/ContactForm";
+import ExperienceSection from "@/components/ui/ExperienceSection";
 
 const TECH_STACK = [
   { label: "Java", category: "Android" },
@@ -19,21 +21,25 @@ const TECH_STACK = [
 export default function Home() {
 
   return (
-    <main className="min-h-screen px-6 py-32 max-w-6xl mx-auto">
-      <div className="flex items-center gap-12">
+    <>
+    <main className="relative px-6 max-w-6xl mx-auto">
+      <section className="min-h-screen flex items-center relative">
+        {/* Animated background blobs */}
+        <div className="hero-blobs">
+          <div className="blob blob-1" />
+          <div className="blob blob-2" />
+          <div className="blob blob-3" />
+        </div>
+      <div className="flex items-center gap-12 w-full relative z-10">
         {/* LEFT COLUMN — text content */}
         <div className="flex-1 max-w-xl">
-        <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-5">
-          portfolio
-        </p>
-
         <h1 className="font-display text-5xl font-bold leading-tight tracking-tight mb-6">
           Hi, I am Joshua <br />
           <RotatingText />
         </h1>
 
         <p className="text-neutral-400 text-lg leading-relaxed mb-4">
-          Full-stack developer from Batangas. I've shipped a real-time
+          Full-stack developer from the Philippines. I've shipped a real-time
           Android app, a live corporate website, and a local AI chatbot.
         </p>
 
@@ -45,7 +51,7 @@ export default function Home() {
         <div className="flex gap-4">
           <a
             href="/projects"
-            className="px-6 py-3 bg-orange-500 text-black font-bold rounded-lg hover:bg-orange-400 transition-colors"
+            className="px-6 py-3 bg-accent-500 text-black font-bold rounded-lg hover:bg-accent-400 hover:text-amber-50 transition-colors"
           >
             See my work
           </a>
@@ -57,7 +63,7 @@ export default function Home() {
           </a>
         </div>
       </div>
-
+      
       {/* RIGHT COLUMN — tech stack card */}
       <div className="hidden lg:flex flex-1 justify-end">
         <div className="w-80 bg-neutral-900 border border-neutral-800 rounded-2xl p-6">
@@ -99,7 +105,7 @@ export default function Home() {
                 href="https://github.com/JRioP"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-xs text-orange-500 hover:underline"
+                className="font-mono text-xs text-accent-500 hover:underline"
               >
                 JRioP
               </a>
@@ -109,20 +115,26 @@ export default function Home() {
       </div>
       </div>
 
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-neutral-600 animate-bounce">
+        <span className="font-mono text-xs tracking-widest uppercase">scroll</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-neutral-600">
+          <path d="M8 3v10M8 13l-4-4M8 13l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+      </section>
+
       {/* FEATURED PROJECTS */}
-      <section className="w-full mt-32">
+      <section className="w-full mt-32 relative z-10">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-3">
-              selected work
-            </p>
-            <h2 className="font-display text-4xl font-bold tracking-tight">
-              Featured Projects
+            <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
+            Featured Projects<span className="text-accent-500">.</span>
             </h2>
           </div>
           <a
             href="/projects"
-            className="font-mono text-xs text-neutral-400 hover:text-orange-500 transition-colors uppercase tracking-widest"
+            className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest"
           >
             See all →
           </a>
@@ -135,10 +147,10 @@ export default function Home() {
               href={`/projects/${project.slug}`}
               className="group bg-neutral-900 border border-neutral-800 rounded-2xl p-6 hover:border-neutral-600 transition-all duration-200 hover:-translate-y-1"
             >
-              <p className="font-mono text-xs text-orange-500 uppercase tracking-widest mb-4">
+              <p className="font-mono text-xs text-accent-500 uppercase tracking-widest mb-4">
                 {project.category}
               </p>
-              <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-orange-500 transition-colors">
+              <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-accent-500 transition-colors">
                 {project.title}
               </h3>
               <p className="text-neutral-400 text-sm leading-relaxed mb-5">
@@ -159,20 +171,19 @@ export default function Home() {
         </div>
       </section>
 
+      <ExperienceSection />
+
       {/* About Me */}
       <section className="w-full mt-32">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="font-mono text-xs text-orange-500 tracking-widest uppercase mb-3">
-              Introduction
-            </p>
-            <h2 className="font-display text-4xl font-bold tracking-tight">
-              About Me
+            <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
+            About Me<span className="text-accent-500">.</span>
             </h2>
           </div>
           <a
             href="/about"
-            className="font-mono text-xs text-neutral-400 hover:text-orange-500 transition-colors uppercase tracking-widest"
+            className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest"
           >
             Full story →
           </a>
@@ -192,7 +203,7 @@ export default function Home() {
           </div>
           
           {/* Text */}
-          <div className="max-w-2xl">
+          <div className="flex-1 min-w-0">
             <p className="text-neutral-400 text-sm leading-relaxed mb-5">
              I'm a BSIT graduate from STI College Tanauan, based in Batangas. 
              I like building things that solve real problems — a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
@@ -202,6 +213,17 @@ export default function Home() {
         </div>
       </section>
 
+    <section className="min-h-screen flex items-center relative">
+        <div className="min-h-screen pt-30 pb-20 px-6 max-w-2xl mx-auto">
+              <h1 className="font-display text-6xl font-bold mb-4">Get in touch<span className="text-accent-500">.</span></h1>
+              <p className="text-neutral-400 mb-12">
+                Open to full-time roles and interesting projects. Based in Batangas — available remotely.
+              </p>
+              <ContactForm />
+            </div>
+    </section>
+
     </main>
+    </>
   );
 }

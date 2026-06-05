@@ -63,7 +63,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${syne.variable} ${dmMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-neutral-950 text-neutral-100 antialiased">
+      <body className="bg-neutral-950 text-neutral-100 antialiased" suppressHydrationWarning>
         <Navbar />
         <main>{children}</main>
         <Footer />

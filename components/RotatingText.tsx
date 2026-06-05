@@ -8,7 +8,8 @@ const ROTATING_TEXTS = [
   "an AI Enthusiast.",
   "a Problem Solver.",
   "a Lifelong Learner.",
-  "a WordPress Developer."
+  "a WordPress Developer.",
+  "a Gamer."
 ];
 
 export function RotatingText() {
@@ -50,9 +51,11 @@ export function RotatingText() {
   }, []);
 
   return (
-    <span className="text-orange-500">
-      {displayed}
-      <span className="animate-pulse">|</span>
+    <span className="block whitespace-nowrap overflow-hidden">
+      <span className="text-accent-400">
+        {displayed}
+        <span className="animate-pulse">|</span>
+      </span>
     </span>
   );
 }
