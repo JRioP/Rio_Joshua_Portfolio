@@ -26,7 +26,7 @@ export default function Navbar() {
   return (
     <nav
   className={clsx(
-    "fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between transition-all duration-300",
+    "fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between transition-all duration-300 z-index-99",
     scrolled && "bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800"
   )}
 >
