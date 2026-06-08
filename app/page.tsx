@@ -1,26 +1,41 @@
 import Image from "next/image";
 import { PROJECTS } from "@/lib/projects";
 import { RotatingText } from "@/components/RotatingText";
+import {TechStackModal} from "@/components/TechStackModal";
 import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
 
 const TECH_STACK = [
-  { label: "JavaScript", category: "Frontend" },
-  { label: "TypeScript", category: "Frontend" },
-  { label: "React", category: "Frontend" },
+  // Frontend
   { label: "Next.js", category: "Frontend" },
-  { label: "Vue.js", category: "Frontend" },
-  { label: "Tailwind CSS", category: "Frontend" },
-  { label: "Node.js", category: "Backend" },
-  { label: "Python", category: "Backend" },
+  { label: "React", category: "Frontend" },
+  { label: "TypeScript", category: "Frontend" },
+
+  // Backend
   { label: "PHP", category: "Backend" },
-  { label: "Laravel", category: "Backend" },
-  { label: "PostgreSQL", category: "Backend" },
-  { label: "MongoDB", category: "Backend" },
-  { label: "AWS", category: "DevOps & Cloud" },
-  { label: "Docker", category: "DevOps & Cloud" },
-  { label: "Kubernetes", category: "DevOps & Cloud" },
-  { label: "GitHub Actions", category: "DevOps & Cloud" },
+  { label: "Python", category: "Backend" },
+  { label: "Java", category: "Backend" },
+
+  // Database
+  { label: "Firebase", category: "Database" },
+  { label: "MySQL", category: "Database" },
+
+  // CMS & Web
+  { label: "WordPress", category: "CMS & Web" },
+  { label: "MDX", category: "CMS & Web" },
+
+  // DevOps & Tools
+  { label: "Git / GitHub", category: "DevOps & Tools" },
+  { label: "Vercel", category: "DevOps & Tools" },
+  { label: "Figma", category: "DevOps & Tools" },
+
+  // Mobile
+  { label: "Android (Java)", category: "Mobile" },
+  { label: "Android Studio", category: "Mobile" },
+
+  // Enterprise & AI
+  { label: "LangChain", category: "Enterprise & AI" },
+  { label: "SAP S/4HANA", category: "Enterprise & AI" },
 ];
 
 export default function Home() {
@@ -38,20 +53,33 @@ export default function Home() {
       <div className="flex items-center gap-12 w-full relative z-10">
         {/* LEFT COLUMN — text content */}
         <div className="flex-1 max-w-xl">
-        <h1 className="font-display text-5xl font-bold leading-tight tracking-tight mb-6">
-          Hi, I'm <span className="text-accent-500">Joshua</span> <br />
-          <RotatingText />
+        <h1 className="font-display text-6xl font-bold leading-tight tracking-tight">
+          Hi, I'm Joshua <br />
         </h1>
+        <h1 className="font-display text-4xl font-bold leading-tight tracking-tight mb-6">
+          <RotatingText/>
+        </h1>
+        
 
         <p className="text-neutral-400 text-lg leading-relaxed mb-4">
           Full-stack developer from the Philippines. I've shipped a real-time
           Android app, a live corporate website, and a local AI chatbot.
         </p>
 
-        <p className="text-neutral-100 text-lg leading-relaxed mb-10">
-          I don't just follow tutorials — I deploy things, secure them,
-          and make them fast. Open to roles in Metro Manila or remote.
-        </p>
+        <ul className="flex flex-col gap-3 mb-10">
+        {[
+          "Builds things that actually get deployed.",
+          "Solves real problems, not just tutorial projects.",
+          "Ships fast, secures properly, and documents clearly.",
+            ].map((item) => (
+          <li key={item} className="flex items-start gap-3">
+          <span className="mt-1 w-4 h-4 rounded-full border border-accent-500 flex items-center justify-center shrink-0">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent-500" />
+            </span>
+          <span className="text-neutral-300 text-sm leading-relaxed">{item}</span>
+          </li>
+          ))}
+          </ul>
 
         <div className="flex gap-4">
           <a
@@ -73,15 +101,13 @@ export default function Home() {
       <div className="hidden lg:flex flex-1 justify-end">
         <div className="w-80 bg-neutral-900 border border-neutral-800 rounded-2xl p-6">
 
-          <div className="flex items-center justify-between mb-5">
-            <p className="font-bold text-base text-neutral-100">Tech Stack</p>
-            <a href="/projects" className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors flex items-center gap-1">
-              View All <span>›</span>
-            </a>
-          </div>
+          <div className="flex items-center justify-between">
+          <h3 className="font-semibold">Tech Stack<span className="text-accent-500">.</span></h3>
+          <TechStackModal />
+            </div>
 
-          <div className="flex flex-col gap-4">
-            {["Frontend", "Backend", "DevOps & Cloud"].map((category) => (
+          <div className="flex flex-col pt-1.5 gap-4">
+            {["Frontend", "Backend", "Database", "CMS & Web", "DevOps & Tools", "Mobile", "Enterprise & AI"].map((category) => (
               <div key={category}>
                 <p className="font-bold text-sm text-neutral-100 mb-2">{category}</p>
                 <div className="flex flex-wrap gap-2">
@@ -108,7 +134,7 @@ export default function Home() {
             </div>
             <div className="flex justify-between items-center">
               <span className="font-mono text-xs text-neutral-600">Location</span>
-              <span className="font-mono text-xs text-neutral-300">Batangas, PH</span>
+              <span className="font-mono text-xs text-neutral-300">Laguna, PH</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="font-mono text-xs text-neutral-600">Available</span>
@@ -140,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="w-full mt-32 relative z-10">
+      <section className="w-full mt-32 relative">
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
@@ -219,10 +245,10 @@ export default function Home() {
           
           {/* Text */}
           <div className="flex-1 min-w-0">
-            <p className="text-neutral-400 text-sm leading-relaxed mb-5">
-             I'm a BSIT graduate from STI College Tanauan, based in Batangas. 
+            <p className="text-neutral-400 text-3xl leading-relaxed mb-5">
+             I'm a BSIT graduate from STI College Tanauan, based in Laguna. 
              I like building things that solve real problems — a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
-              I'm currently looking for my first professional role, open to Metro Manila or remote.
+              I'm currently looking for a professional role, open to Metro Manila or remote.
             </p>
           </div>
         </div>
@@ -232,7 +258,7 @@ export default function Home() {
         <div className="min-h-screen pt-30 pb-20 px-6 max-w-2xl mx-auto">
               <h1 className="font-display text-6xl font-bold mb-4">Get in touch<span className="text-accent-500">.</span></h1>
               <p className="text-neutral-400 mb-12">
-                Open to full-time roles and interesting projects. Based in Batangas — available remotely.
+                Open to full-time roles and interesting projects. Based in Laguna — available remotely.
               </p>
               <ContactForm />
             </div>

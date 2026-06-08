@@ -32,6 +32,8 @@ const EXPERIENCES = [
     bullets: [
       "Led a team building a real-time roadside assistance Android app using Java and Firebase.",
       "Designed the system architecture, Firebase Realtime Database schema, and all core UI flows.",
+      "Create an Exam Study mobile application using andriod studio and java, implementing a firebase backend.",
+      "Coded DentaVault a C# desktop application for local dental clinic inventory management, implementing a custom SQL database and a user-friendly interface. Won as Best Project in the 2023 on Integration Programming Showcase.",
       "Presented and defended the project as part of the BSIT capstone requirement.",
     ],
   },
