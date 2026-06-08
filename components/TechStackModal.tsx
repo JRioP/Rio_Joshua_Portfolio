@@ -76,7 +76,7 @@ export function TechStackModal() {
               </h2>
               <button
                 onClick={() => setOpen(false)}
-                className="text-muted-foreground hover:text-white transition-colors text-xl leading-none"
+                className="text-muted-foreground hover:text-white transition-colors text-xl leading-none cursor-pointer"
               >
                 ✕
               </button>
