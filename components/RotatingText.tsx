@@ -13,12 +13,19 @@ const ROTATING_TEXTS = [
 ];
 
 export function RotatingText() {
+  const [mounted, setMounted] = useState(false);
   const [displayed, setDisplayed] = useState("");
   const indexRef = useRef(0);
   const isDeletingRef = useRef(false);
   const posRef = useRef(0);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const tick = () => {
       const current = ROTATING_TEXTS[indexRef.current];
 
@@ -48,7 +55,18 @@ export function RotatingText() {
 
     const timer = setTimeout(tick, 500);
     return () => clearTimeout(timer);
-  }, []);
+  }, [mounted]);
+
+  if (!mounted) {
+    return (
+      <span className="block whitespace-nowrap overflow-hidden">
+        <span className="text-accent-400">
+          a Full-Stack Developer.
+          <span>|</span>
+        </span>
+      </span>
+    );
+  }
 
   return (
     <span className="block whitespace-nowrap overflow-hidden">

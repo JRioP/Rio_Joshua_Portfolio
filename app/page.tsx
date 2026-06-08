@@ -5,17 +5,22 @@ import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
 
 const TECH_STACK = [
-  { label: "Java", category: "Android" },
-  { label: "Firebase", category: "Android" },
-  { label: "Next.js", category: "Web" },
-  { label: "TypeScript", category: "Web" },
-  { label: "PHP", category: "Web" },
-  { label: "Python", category: "AI" },
-  { label: "LangChain", category: "AI" },
-  { label: "MySQL", category: "DB" },
-  { label: "Git", category: "Tools" },
-  { label: "Figma", category: "Tools" },
-  { label: "WordPress", category: "CMS" },
+  { label: "JavaScript", category: "Frontend" },
+  { label: "TypeScript", category: "Frontend" },
+  { label: "React", category: "Frontend" },
+  { label: "Next.js", category: "Frontend" },
+  { label: "Vue.js", category: "Frontend" },
+  { label: "Tailwind CSS", category: "Frontend" },
+  { label: "Node.js", category: "Backend" },
+  { label: "Python", category: "Backend" },
+  { label: "PHP", category: "Backend" },
+  { label: "Laravel", category: "Backend" },
+  { label: "PostgreSQL", category: "Backend" },
+  { label: "MongoDB", category: "Backend" },
+  { label: "AWS", category: "DevOps & Cloud" },
+  { label: "Docker", category: "DevOps & Cloud" },
+  { label: "Kubernetes", category: "DevOps & Cloud" },
+  { label: "GitHub Actions", category: "DevOps & Cloud" },
 ];
 
 export default function Home() {
@@ -34,7 +39,7 @@ export default function Home() {
         {/* LEFT COLUMN — text content */}
         <div className="flex-1 max-w-xl">
         <h1 className="font-display text-5xl font-bold leading-tight tracking-tight mb-6">
-          Hi, I am Joshua <br />
+          Hi, I'm <span className="text-accent-500">Joshua</span> <br />
           <RotatingText />
         </h1>
 
@@ -68,18 +73,28 @@ export default function Home() {
       <div className="hidden lg:flex flex-1 justify-end">
         <div className="w-80 bg-neutral-900 border border-neutral-800 rounded-2xl p-6">
 
-          <p className="font-mono text-xs text-neutral-600 uppercase tracking-widest mb-5">
-            Tech stack
-          </p>
+          <div className="flex items-center justify-between mb-5">
+            <p className="font-bold text-base text-neutral-100">Tech Stack</p>
+            <a href="/projects" className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors flex items-center gap-1">
+              View All <span>›</span>
+            </a>
+          </div>
 
-          <div className="flex flex-wrap gap-2">
-            {TECH_STACK.map((tech) => (
-              <span
-                key={tech.label}
-                className="font-mono text-xs px-3 py-1.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700"
-              >
-                {tech.label}
-              </span>
+          <div className="flex flex-col gap-4">
+            {["Frontend", "Backend", "DevOps & Cloud"].map((category) => (
+              <div key={category}>
+                <p className="font-bold text-sm text-neutral-100 mb-2">{category}</p>
+                <div className="flex flex-wrap gap-2">
+                  {TECH_STACK.filter((t) => t.category === category).map((tech) => (
+                    <span
+                      key={tech.label}
+                      className="font-mono text-xs px-3 py-1 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700"
+                    >
+                      {tech.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
 
@@ -191,7 +206,7 @@ export default function Home() {
         
         <div className="flex flex-col md:flex-row gap-8 items-start">
           {/* Image */}
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <Image
               src="/images/about.jpg"
               alt="Joshua"
