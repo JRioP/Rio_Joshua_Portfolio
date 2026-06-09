@@ -56,7 +56,7 @@ export default function Home() {
         <h1 className="font-display text-6xl font-bold leading-tight tracking-tight">
           Hi, I'm Joshua <br />
         </h1>
-        <h1 className="font-display text-4xl font-bold leading-tight tracking-tight mb-6">
+        <h1 className="font-display text-4xl text-accent-500 font-bold leading-tight tracking-tight mb-6">
           <RotatingText/>
         </h1>
         
