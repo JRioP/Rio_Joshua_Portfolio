@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useRef } from "react";
-import type { ReactNode, ElementType } from "react";
+import type { ReactNode } from "react";
 
 type Direction = "up" | "left" | "right";
+type IntrinsicTag = keyof JSX.IntrinsicElements;
 
+// Shared observer state
 const callbackMap = new Map<Element, () => void>();
-
 let sharedObserver: IntersectionObserver | null = null;
+let observerCount = 0; 
 
 function getSharedObserver(): IntersectionObserver {
   if (!sharedObserver) {
@@ -19,6 +21,14 @@ function getSharedObserver(): IntersectionObserver {
               cb();
               callbackMap.delete(entry.target);
               sharedObserver?.unobserve(entry.target);
+              observerCount--;
+
+              // Disconnect and destroy when no elements left
+              if (observerCount <= 0) {
+                sharedObserver?.disconnect();
+                sharedObserver = null;
+                observerCount = 0;
+              }
             }
           }
         });
@@ -40,7 +50,7 @@ export default function FadeIn({
   className?: string;
   delay?: number;
   direction?: Direction;
-  as?: ElementType;
+  as?: IntrinsicTag;
 }) {
   const ref = useRef<HTMLElement>(null);
 
@@ -50,6 +60,8 @@ export default function FadeIn({
 
     let timeoutId: ReturnType<typeof setTimeout>;
 
+    el.classList.remove("is-visible");
+
     callbackMap.set(el, () => {
       timeoutId = setTimeout(() => {
         el.classList.add("is-visible");
@@ -58,13 +70,22 @@ export default function FadeIn({
 
     const observer = getSharedObserver();
     observer.observe(el);
+    observerCount++; 
 
     return () => {
       observer.unobserve(el);
       callbackMap.delete(el);
       clearTimeout(timeoutId);
+      observerCount--; 
+
+      // Disconnect and destroy when no elements left
+      if (observerCount <= 0) {
+        sharedObserver?.disconnect();
+        sharedObserver = null;
+        observerCount = 0;
+      }
     };
-  }, [delay]);
+  }, [delay, direction]);
 
   const directionClass = {
     up:    "push-up",
@@ -73,6 +94,7 @@ export default function FadeIn({
   }[direction];
 
   return (
+    // @ts-expect-error — Tag is restricted to IntrinsicElements so ref is always safe
     <Tag ref={ref} className={`${directionClass} ${className}`}>
       {children}
     </Tag>
