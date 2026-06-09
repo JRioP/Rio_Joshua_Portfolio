@@ -3,14 +3,25 @@ import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
 type Direction = "up" | "left" | "right";
-type IntrinsicTag = keyof JSX.IntrinsicElements;
+type HTMLTag = keyof HTMLElementTagNameMap;
 
-// Shared observer state
 const callbackMap = new Map<Element, () => void>();
+const observedElements = new Set<Element>();
 let sharedObserver: IntersectionObserver | null = null;
-let observerCount = 0; 
 
-function getSharedObserver(): IntersectionObserver {
+function unregisterElement(el: Element) {
+  if (!observedElements.has(el)) return;
+  observedElements.delete(el);
+  callbackMap.delete(el);
+  sharedObserver?.unobserve(el);
+  if (observedElements.size === 0) {
+    sharedObserver?.disconnect();
+    sharedObserver = null;
+  }
+}
+
+function getSharedObserver(): IntersectionObserver | null {
+  if (typeof IntersectionObserver === "undefined") return null;
   if (!sharedObserver) {
     sharedObserver = new IntersectionObserver(
       (entries) => {
@@ -19,16 +30,7 @@ function getSharedObserver(): IntersectionObserver {
             const cb = callbackMap.get(entry.target);
             if (cb) {
               cb();
-              callbackMap.delete(entry.target);
-              sharedObserver?.unobserve(entry.target);
-              observerCount--;
-
-              // Disconnect and destroy when no elements left
-              if (observerCount <= 0) {
-                sharedObserver?.disconnect();
-                sharedObserver = null;
-                observerCount = 0;
-              }
+              unregisterElement(entry.target);
             }
           }
         });
@@ -44,13 +46,13 @@ export default function FadeIn({
   className = "",
   delay = 0,
   direction = "up",
-  as: Tag = "div",
+  as = "div",
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   direction?: Direction;
-  as?: IntrinsicTag;
+  as?: HTMLTag;
 }) {
   const ref = useRef<HTMLElement>(null);
 
@@ -62,39 +64,36 @@ export default function FadeIn({
 
     el.classList.remove("is-visible");
 
+    const observer = getSharedObserver();
+
+    if (!observer) {
+      el.classList.add("is-visible");
+      return;
+    }
+
     callbackMap.set(el, () => {
       timeoutId = setTimeout(() => {
         el.classList.add("is-visible");
       }, delay);
     });
 
-    const observer = getSharedObserver();
+    observedElements.add(el);
     observer.observe(el);
-    observerCount++; 
 
     return () => {
-      observer.unobserve(el);
-      callbackMap.delete(el);
       clearTimeout(timeoutId);
-      observerCount--; 
-
-      // Disconnect and destroy when no elements left
-      if (observerCount <= 0) {
-        sharedObserver?.disconnect();
-        sharedObserver = null;
-        observerCount = 0;
-      }
+      unregisterElement(el);
     };
-  }, [delay, direction]);
+  }, [delay , direction]);
 
   const directionClass = {
     up:    "push-up",
     left:  "push-left",
     right: "push-right",
   }[direction];
+  const Tag = as as any;
 
   return (
-    // @ts-expect-error — Tag is restricted to IntrinsicElements so ref is always safe
     <Tag ref={ref} className={`${directionClass} ${className}`}>
       {children}
     </Tag>
