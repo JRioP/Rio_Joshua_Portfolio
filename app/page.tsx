@@ -4,7 +4,7 @@ import { RotatingText } from "@/components/RotatingText";
 import {TechStackModal} from "@/components/TechStackModal";
 import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
-
+import FadeIn from "@/components/ui/animations/fadeIn";
 
 const TECH_STACK = [
   // Frontend
@@ -167,7 +167,8 @@ export default function Home() {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="w-full mt-20 relative">
+      <FadeIn direction="up">
+      <section className="w-full mt-20 relative ">
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
@@ -223,9 +224,11 @@ export default function Home() {
           ))}
         </div>
       </section>
-
+    </FadeIn>
+    <FadeIn direction="left" delay={100}>
       <ExperienceSection />
-
+    </FadeIn>
+    <FadeIn direction="right" delay={100}>
       {/* About Me */}
       <section className="w-full mt-32">
         <div className="flex items-end justify-between mb-10">
@@ -265,16 +268,19 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-    <section className="min-h-screen flex items-center relative">
-        <div className="min-h-screen pt-30 pb-20 px-6 max-w-2xl mx-auto">
-              <h1 className="font-display text-6xl font-bold mb-4">Get in touch<span className="text-accent-500">.</span></h1>
-              <p className="text-neutral-400 mb-12">
-                Open to full-time roles and interesting projects. Based in Laguna — available remotely.
+    </FadeIn>
+    
+      <FadeIn direction="up" delay={200}>
+        <section className="min-h-screen flex items-center relative">
+          <div className="min-h-screen pt-30 pb-20 px-6 max-w-2xl mx-auto">
+            <h1 className="font-display text-6xl font-bold mb-4">Get in touch<span className="text-accent-500">.</span></h1>
+            <p className="text-neutral-400 mb-12">
+              Open to full-time roles and interesting projects. Based in Laguna — available remotely.
               </p>
-              <ContactForm />
+            <ContactForm />
             </div>
     </section>
+    </FadeIn>
 
     </main>
     </>
