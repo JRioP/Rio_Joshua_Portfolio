@@ -14,6 +14,7 @@ export interface ProjectFrontmatter {
   featured: boolean;
   githubUrl?: string;
   liveUrl?: string;
+  coverImage?: string;
 }
 
 export interface ProjectWithContent extends ProjectFrontmatter {

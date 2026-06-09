@@ -166,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="w-full mt-32 relative">
+      <section className="w-full mt-20 relative">
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
@@ -191,6 +191,15 @@ export default function Home() {
               <p className="font-mono text-xs text-accent-500 uppercase tracking-widest mb-4">
                 {project.category}
               </p>
+              {project.coverImage && (
+                 <div className="relative w-full h-70 rounded-xl overflow-hidden mb-5 bg-neutral-800">
+                  <img
+                    src={project.coverImage}
+                   alt={project.title}
+                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              )}
               <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-accent-500 transition-colors">
                 {project.title}
               </h3>
