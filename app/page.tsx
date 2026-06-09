@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { PROJECTS } from "@/lib/projects";
+import { getProjects } from "@/lib/projects";
 import { RotatingText } from "@/components/RotatingText";
 import {TechStackModal} from "@/components/TechStackModal";
 import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
+
 
 const TECH_STACK = [
   // Frontend
@@ -39,7 +40,7 @@ const TECH_STACK = [
 ];
 
 export default function Home() {
-
+  const projects = getProjects();
   return (
     <>
     <main className="relative px-6 max-w-6xl mx-auto">
@@ -166,7 +167,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="w-full mt-32 relative">
+      <section className="w-full mt-20 relative">
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
@@ -182,7 +183,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {PROJECTS.filter((p) => p.featured).map((project) => (
+          {projects.filter((p) => p.featured).map((project) => (
             <a
               key={project.slug}
               href={`/projects/${project.slug}`}
@@ -191,6 +192,17 @@ export default function Home() {
               <p className="font-mono text-xs text-accent-500 uppercase tracking-widest mb-4">
                 {project.category}
               </p>
+              {project.coverImage && (
+                 <div className="relative w-full h-72 rounded-xl overflow-hidden mb-5 bg-neutral-800">
+                  <Image
+                    src={project.coverImage}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              )}
               <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-accent-500 transition-colors">
                 {project.title}
               </h3>

@@ -14,10 +14,20 @@ export interface ProjectFrontmatter {
   featured: boolean;
   githubUrl?: string;
   liveUrl?: string;
+  coverImage?: string;
 }
 
 export interface ProjectWithContent extends ProjectFrontmatter {
   content: string;
+}
+
+// Validates coverImage is a safe local path only
+function isValidCoverImage(value: unknown): value is string {
+  return (
+    typeof value === "string" &&
+    value.startsWith("/images/") &&
+    !value.includes("..")
+  );
 }
 
 // Get all project files
@@ -35,9 +45,15 @@ export function getProjectBySlug(slug: string): ProjectWithContent | null {
     const fileContent = fs.readFileSync(filePath, "utf8");
     const { data, content } = matter(fileContent);
 
+    const raw = data as Omit<ProjectFrontmatter, "slug">;
+
     return {
       slug,
-      ...(data as Omit<ProjectFrontmatter, "slug">),
+      ...raw,
+      // Override coverImage with validated value only
+      coverImage: isValidCoverImage(raw.coverImage)
+        ? raw.coverImage
+        : undefined,
       content,
     };
   } catch {

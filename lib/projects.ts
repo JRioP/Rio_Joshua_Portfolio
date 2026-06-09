@@ -1,10 +1,10 @@
-import { getAllProjects } from "./mdx";
+import "server-only";
+import { getAllProjects, type ProjectWithContent } from "./mdx";
 
-export type Project = Omit<ReturnType<typeof getAllProjects>[0], "content">;
+// Derive Project from the explicit ProjectWithContent interface
+// Safe regardless of how many projects exist — no [0] array indexing
+export type Project = Omit<ProjectWithContent, "content">;
 
-// Get all projects (metadata only, no content)
 export function getProjects(): Project[] {
   return getAllProjects().map(({ content, ...project }) => project);
 }
-
-export const PROJECTS = getProjects();

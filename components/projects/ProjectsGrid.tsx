@@ -5,6 +5,7 @@ import Link from "next/link";
 import { clsx } from "clsx";
 import type { Project } from "@/lib/projects";
 
+
 const CATEGORIES = [
   { value: "all",     label: "All"     },
   { value: "android", label: "Android" },

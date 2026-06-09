@@ -9,7 +9,7 @@ const ROTATING_TEXTS = [
   "a Problem Solver.",
   "a Lifelong Learner.",
   "a WordPress Developer.",
-  "a Gamer."
+  "a Technology Enthusiast."
 ];
 
 export function RotatingText() {
