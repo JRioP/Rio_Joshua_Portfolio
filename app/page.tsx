@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { PROJECTS } from "@/lib/projects";
+import { getProjects } from "@/lib/projects";
 import { RotatingText } from "@/components/RotatingText";
 import {TechStackModal} from "@/components/TechStackModal";
 import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
+
 
 const TECH_STACK = [
   // Frontend
@@ -39,7 +40,7 @@ const TECH_STACK = [
 ];
 
 export default function Home() {
-
+  const PROJECTS = getProjects();
   return (
     <>
     <main className="relative px-6 max-w-6xl mx-auto">
@@ -192,11 +193,12 @@ export default function Home() {
                 {project.category}
               </p>
               {project.coverImage && (
-                 <div className="relative w-full h-70 rounded-xl overflow-hidden mb-5 bg-neutral-800">
-                  <img
+                 <div className="relative w-full h-72 rounded-xl overflow-hidden mb-5 bg-neutral-800">
+                  <Image
                     src={project.coverImage}
                    alt={project.title}
-                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                   fill
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               )}

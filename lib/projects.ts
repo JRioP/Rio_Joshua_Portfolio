@@ -6,5 +6,3 @@ export type Project = Omit<ReturnType<typeof getAllProjects>[0], "content">;
 export function getProjects(): Project[] {
   return getAllProjects().map(({ content, ...project }) => project);
 }
-
-export const PROJECTS = getProjects();
