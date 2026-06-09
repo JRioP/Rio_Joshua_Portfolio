@@ -196,8 +196,9 @@ export default function Home() {
                  <div className="relative w-full h-72 rounded-xl overflow-hidden mb-5 bg-neutral-800">
                   <Image
                     src={project.coverImage}
-                   alt={project.title}
-                   fill
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
