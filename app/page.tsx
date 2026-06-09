@@ -40,7 +40,7 @@ const TECH_STACK = [
 ];
 
 export default function Home() {
-  const PROJECTS = getProjects();
+  const projects = getProjects();
   return (
     <>
     <main className="relative px-6 max-w-6xl mx-auto">
@@ -183,7 +183,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {PROJECTS.filter((p) => p.featured).map((project) => (
+          {projects.filter((p) => p.featured).map((project) => (
             <a
               key={project.slug}
               href={`/projects/${project.slug}`}
