@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --font-sans: var(--font-dm-sans), sans-serif;
@@ -11,10 +12,6 @@
 
 * {
   box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -112,4 +109,38 @@ body {
 .push-up.is-visible {
   opacity: 1;
   transform: translate(0);
+}
+
+/* MDX prose table styles */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin: 1.5rem 0;
+  display: table;
+}
+
+.prose :where(table) {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prose :where(thead th) {
+  text-align: left;
+  padding: 0.5rem 1rem 0.5rem 0;
+  color: #9ca3af;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid #404040;
+}
+
+.prose :where(tbody td) {
+  padding: 0.5rem 1rem 0.5rem 0;
+  color: #d4d4d4;
+  border-bottom: 1px solid #262626;
+}
+
+.prose :where(tbody tr:last-child td) {
+  border-bottom: none;
 }

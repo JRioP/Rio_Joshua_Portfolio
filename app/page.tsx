@@ -55,7 +55,7 @@ export default function Home() {
         {/* LEFT COLUMN — text content */}
         <div className="flex-1 max-w-xl">
         <h1 className="font-display text-6xl font-bold leading-tight tracking-tight">
-          Hi, I'm Joshua <br />
+          Hi, I'm Josh <br />
         </h1>
         <h1 className="font-display text-4xl text-accent-500 font-bold leading-tight tracking-tight mb-6">
           <RotatingText/>
