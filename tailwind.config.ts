@@ -19,6 +19,7 @@ const config: Config = {
         accent: {
           DEFAULT: "#f97316",
           hover:   "#fb923c",
+           "muted-foreground": "hsl(var(--muted-foreground) / 0.8)",
         },
       },
       animation: {

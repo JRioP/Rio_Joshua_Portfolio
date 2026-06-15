@@ -1,110 +1,111 @@
+// components/TechStackModal.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, useRef, forwardRef, Ref } from "react";
+import { GROUPED_TECH_STACK } from "@/lib/tech-stack";
 
-// Your full tech stack (all 30 items)
-const ALL_TECH_STACK = [
-  { label: "JavaScript", category: "Frontend" },
-  { label: "TypeScript", category: "Frontend" },
-  { label: "React", category: "Frontend" },
-  { label: "Next.js", category: "Frontend" },
-  { label: "HTML5 / CSS3", category: "Frontend" },
-  { label: "Tailwind CSS", category: "Frontend" },
-  { label: "Elementor", category: "Frontend" },
-  { label: "PHP", category: "Backend" },
-  { label: "Python", category: "Backend" },
-  { label: "Java", category: "Backend" },
-  { label: "Node.js", category: "Backend" },
-  { label: "Firebase", category: "Backend" },
-  { label: "SQL", category: "Database" },
-  { label: "MySQL", category: "Database" },
-  { label: "Firestore", category: "Database" },
-  { label: "WordPress", category: "CMS & Web" },
-  { label: "MDX", category: "CMS & Web" },
-  { label: "Git / GitHub", category: "DevOps & Tools" },
-  { label: "Vercel", category: "DevOps & Tools" },
-  { label: "Cloudflare", category: "DevOps & Tools" },
-  { label: "Figma", category: "DevOps & Tools" },
-  { label: "Wireshark", category: "DevOps & Tools" },
-  { label: "Android (Java)", category: "Mobile" },
-  { label: "Android Studio", category: "Mobile" },
-  { label: "Google Maps SDK", category: "Mobile" },
-  { label: "SAP S/4HANA", category: "Enterprise & AI" },
-  { label: "LangChain", category: "Enterprise & AI" },
-  { label: "Ollama", category: "Enterprise & AI" },
-  { label: "ChromaDB", category: "Enterprise & AI" },
-];
+export const TechStackModal = forwardRef(
+  (props, ref: Ref<HTMLButtonElement>) => {
+    const [open, setOpen] = useState(false);
+    const closeBtnRef = useRef<HTMLButtonElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
 
-// Group by category
-const grouped = ALL_TECH_STACK.reduce((acc, item) => {
-  if (!acc[item.category]) acc[item.category] = [];
-  acc[item.category].push(item);
-  return acc;
-}, {} as Record<string, typeof ALL_TECH_STACK>);
+    useEffect(() => {
+      if (typeof ref === "function") {
+        ref(triggerRef.current);
+      } else if (ref && "current" in ref) {
+        (ref as React.MutableRefObject<HTMLButtonElement | null>).current =
+          triggerRef.current;
+      }
+    }, [ref]);
 
-export function TechStackModal() {
-  const [open, setOpen] = useState(false);
+    useEffect(() => {
+      const handler = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setOpen(false);
+      };
+      if (open) window.addEventListener("keydown", handler);
+      return () => window.removeEventListener("keydown", handler);
+    }, [open]);
 
-  return (
-    <>
-      {/* Trigger button — replace your existing "View All ›" with this */}
-      <button
-        onClick={() => setOpen(true)}
-        className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest cursor-pointer"
-      >
-        View All ›
-      </button>
+    useEffect(() => {
+      if (open) closeBtnRef.current?.focus();
+      else triggerRef.current?.focus();
+    }, [open]);
 
-      {/* Backdrop + Modal */}
-      {open && (
-        <div
-          className="fixed inset-0 z-99 flex items-center justify-center p-4"
-          onClick={() => setOpen(false)} // click outside to close
+    const grouped = GROUPED_TECH_STACK;
+
+    return (
+      <>
+        <button
+          ref={triggerRef}
+          onClick={() => setOpen(true)}
+          className="sr-only"
+          type="button"
         >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          View All
+        </button>
 
-          {/* Modal */}
+        {open && (
           <div
-            className="relative z-10 w-full max-w-lg max-h-[80vh] overflow-y-auto rounded-xl border border-white/10 bg-[#0f1117] p-6 shadow-2xl"
-            onClick={(e) => e.stopPropagation()} // prevent close on modal click
+            className="fixed inset-0 z-99 flex items-center justify-center p-6"
+            onClick={() => setOpen(false)} // click outside → close
           >
-            {/* Header */}
-            <div className="flex items-center justify-between mb-5">
-              <h2 className="text-4xl font-semibold text-white">
-                Full Tech Stack <span className="text-accent-500">.</span>
-              </h2>
-              <button
-                onClick={() => setOpen(false)}
-                className="text-muted-foreground hover:text-white transition-colors text-xl leading-none cursor-pointer"
-              >
-                ✕
-              </button>
-            </div>
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm" />
 
-            {/* Grouped tags */}
-            <div className="space-y-5">
-              {Object.entries(grouped).map(([category, items]) => (
-                <div key={category}>
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                    {category}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {items.map((item) => (
-                      <span
-                        key={item.label}
-                        className="px-3 py-1 text-sm rounded-full border border-white/10 bg-white/5 text-white/80"
-                      >
-                        {item.label}
-                      </span>
-                    ))}
+            {/* Modal panel */}
+            <div
+              className="relative z-10 w-full max-w-lg max-h-[80vh] overflow-y-auto rounded-xl border border-white/10 bg-neutral-900 p-4 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="tech-stack-modal-title"
+                className="flex items-center justify-between mb-5"
+              >
+                <h2
+                  id="tech-stack-modal-title"
+                  className="text-4xl font-semibold text-white"
+                >
+                  Full Tech Stack <span className="text-accent-500">.</span>
+                </h2>
+                <button
+                  ref={closeBtnRef}
+                  onClick={() => setOpen(false)}
+                  className="text-neutral-400 hover:text-white transition-colors text-xl leading-none"
+                  aria-label="Close tech stack modal"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="space-y-5">
+                {Object.entries(grouped).map(([category, items]) => (
+                  <div key={category}>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                      {category}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {items.map((item) => (
+                        <span
+                          key={item.label}
+                          className="px-3 py-1 text-sm rounded-full border border-white/10 bg-white/5 text-white/80"
+                        >
+                          {item.label}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </>
-  );
-}
+        )}
+      </>
+    );
+  }
+);
+
+export default TechStackModal;

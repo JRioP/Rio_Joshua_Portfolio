@@ -1,43 +1,11 @@
 import Image from "next/image";
 import { getProjects } from "@/lib/projects";
 import { RotatingText } from "@/components/RotatingText";
-import {TechStackModal} from "@/components/TechStackModal";
 import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
 import FadeIn from "@/components/ui/animations/fadeIn";
-
-const TECH_STACK = [
-  // Frontend
-  { label: "Next.js", category: "Frontend" },
-  { label: "React", category: "Frontend" },
-  { label: "TypeScript", category: "Frontend" },
-
-  // Backend
-  { label: "PHP", category: "Backend" },
-  { label: "Python", category: "Backend" },
-  { label: "Java", category: "Backend" },
-
-  // Database
-  { label: "Firebase", category: "Database" },
-  { label: "MySQL", category: "Database" },
-
-  // CMS & Web
-  { label: "WordPress", category: "CMS & Web" },
-  { label: "MDX", category: "CMS & Web" },
-
-  // DevOps & Tools
-  { label: "Git / GitHub", category: "DevOps & Tools" },
-  { label: "Vercel", category: "DevOps & Tools" },
-  { label: "Figma", category: "DevOps & Tools" },
-
-  // Mobile
-  { label: "Android (Java)", category: "Mobile" },
-  { label: "Android Studio", category: "Mobile" },
-
-  // Enterprise & AI
-  { label: "LangChain", category: "Enterprise & AI" },
-  { label: "SAP S/4HANA", category: "Enterprise & AI" },
-];
+import { TechStackCard } from "@/components/TechStackCard";
+import dynamic from "next/dynamic";
 
 export default function Home() {
   const projects = getProjects();
@@ -103,26 +71,7 @@ export default function Home() {
         <div className="w-80 bg-neutral-900 border border-neutral-800 rounded-2xl p-6">
 
           <div className="flex items-center justify-between">
-          <h3 className="font-semibold">Tech Stack<span className="text-accent-500">.</span></h3>
-          <TechStackModal />
-            </div>
-
-          <div className="flex flex-col pt-1.5 gap-4">
-            {["Frontend", "Backend", "Database", "CMS & Web", "DevOps & Tools", "Mobile", "Enterprise & AI"].map((category) => (
-              <div key={category}>
-                <p className="font-bold text-sm text-neutral-100 mb-2">{category}</p>
-                <div className="flex flex-wrap gap-2">
-                  {TECH_STACK.filter((t) => t.category === category).map((tech) => (
-                    <span
-                      key={tech.label}
-                      className="font-mono text-xs px-3 py-1 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700"
-                    >
-                      {tech.label}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+          <TechStackCard/>
           </div>
 
           <div className="mt-6 pt-6 border-t border-neutral-800 flex flex-col gap-3">
