@@ -36,6 +36,9 @@ export default async function CaseStudyPage({
         <h3 className="font-display text-4xl font-bold tracking-tight mb-12">
             Case Study<span className="text-accent-500">.</span>
             </h3>
+            <p className="text-accent-400 text-sm uppercase tracking-widest mb-4">
+              {project.category}
+            </p>
         <h1 className="font-display text-6xl font-bold leading-none tracking-tight mb-6">
           {project.title}
         </h1>
