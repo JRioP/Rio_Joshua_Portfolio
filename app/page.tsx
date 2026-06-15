@@ -85,7 +85,7 @@ export default function Home() {
         <div className="flex gap-4">
           <a
             href="/projects"
-            className="px-6 py-3 bg-accent-500 text-black font-bold rounded-lg hover:bg-accent-400 hover:text-amber-50 transition-colors"
+            className="px-6 py-3 bg-accent-500 text-neutral-300 font-bold rounded-lg hover:bg-accent-400 hover:text-amber-50 transition-colors"
           >
             See my work
           </a>
@@ -169,59 +169,63 @@ export default function Home() {
       {/* FEATURED PROJECTS */}
       <FadeIn as="section" className="w-full mt-20 relative" direction="up">
         <div className="flex items-end justify-between mb-10">
-          <div>
-            <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
-            Featured Projects<span className="text-accent-500">.</span>
-            </h2>
-          </div>
-          <a
-            href="/projects"
-            className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest"
-          >
-            See all →
-          </a>
-        </div>
+  <div>
+    <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
+      Featured Projects<span className="text-accent-500">.</span>
+    </h2>
+  </div>
+  <a href="/projects" className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest">
+    See all →
+  </a>
+</div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {projects.filter((p) => p.featured).map((project) => (
-            <a
-              key={project.slug}
-              href={`/projects/${project.slug}`}
-              className="group bg-neutral-900 border border-neutral-800 rounded-2xl p-6 hover:border-neutral-600 transition-all duration-200 hover:-translate-y-1"
-            >
-              <p className="font-mono text-xs text-accent-500 uppercase tracking-widest mb-4">
-                {project.category}
-              </p>
-              {project.coverImage && (
-                 <div className="relative w-full h-72 rounded-xl overflow-hidden mb-5 bg-neutral-800">
-                  <Image
-                    src={project.coverImage}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              )}
-              <h3 className="font-display text-xl font-bold tracking-tight mb-2 group-hover:text-accent-500 transition-colors">
-                {project.title}
-              </h3>
-              <p className="text-neutral-400 text-sm leading-relaxed mb-5">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-mono text-xs px-2 py-0.5 rounded bg-neutral-800 text-neutral-500"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </a>
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  {projects.filter((p) => p.featured).map((project) => (
+    <div key={project.slug} className="group bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden hover:border-neutral-600 transition-all duration-200 flex flex-col">
+
+      {project.coverImage && (
+        <div className="relative w-full h-48 bg-neutral-800">
+          <Image src={project.coverImage} alt={project.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw" className="object-cover object-top group-hover:scale-105 transition-transform duration-300" />
+        </div>
+      )}
+
+      <div className="p-6 flex flex-col flex-1">
+        <p className="font-mono text-xs text-accent-500 uppercase tracking-widest mb-3">
+          {project.category}
+        </p>
+        <h3 className="font-display text-xl font-bold tracking-tight mb-2">
+          {project.title}
+        </h3>
+        <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+          {project.description}
+        </p>
+        <div className="flex flex-wrap gap-1.5 mb-6">
+          {project.tags.map((tag) => (
+            <span key={tag} className="font-mono text-xs px-2 py-0.5 rounded bg-neutral-800 text-neutral-500">
+              {tag}
+            </span>
           ))}
         </div>
+
+        <div className="flex gap-3 mt-auto pt-4 border-t border-neutral-800">
+          <a href={`/projects/${project.slug}`} className="flex-1 text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg bg-accent-500 text-neutral-300 font-bold hover:bg-accent-400 hover:text-white transition-colors">
+            Case study
+          </a>
+          {project.liveUrl ? (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
+              Live site
+            </a>
+          ) : project.githubUrl ? (
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
+              GitHub
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+        
     </FadeIn>
     
     <FadeIn as="section" className="w-full mt-32" direction="left" delay={100}>

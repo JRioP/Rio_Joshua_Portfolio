@@ -64,7 +64,7 @@ export default function ExperienceSection() {
             <li key={e.company}>
               <button
                 onClick={() => setActive(i)}
-                className={`w-full text-left px-5 py-3 font-mono text-sm transition-colors border-l-2 -ml-px ${
+                className={`w-full text-left px-5 py-3 font-mono text-sm transition-colors border-l-2 -ml-px cursor-pointer${
                   active === i
                     ? "border-accent-500 text-accent-500 bg-neutral-900"
                     : "border-transparent text-neutral-500 hover:text-neutral-200 hover:bg-neutral-900/50"
