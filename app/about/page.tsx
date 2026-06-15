@@ -1,5 +1,6 @@
 // app/about/page.tsx
 import type { Metadata } from "next";
+import { ALL_TECH_STACK, GROUPED_TECH_STACK } from "@/lib/tech-stack";
 
 export const metadata: Metadata = {
   title: "About",
