@@ -16,6 +16,16 @@ const EXPERIENCES = [
     ],
   },
   {
+    company: "STI Tanauan",
+    role: "Thesis Lead Developer",
+    period: "2024 – 2025",
+    bullets: [
+      "Led a team building a real-time roadside assistance Android app using Java and Firebase.",
+      "Designed the system architecture, Firebase Realtime Database schema, and all core UI flows.",
+      "Presented and defended the project as part of the BSIT capstone requirement.",
+    ],
+  },
+  {
     company: "Smplfy Creative Labs",
     role: "WordPress Developer",
     period: "2023 – 2024",
@@ -24,16 +34,6 @@ const EXPERIENCES = [
       "Conducted stakeholder interviews with LGU staff to define requirements, translating community needs into functional website features through iterative feedback cycles.",
       "Delivered responsive, accessible front-end interfaces using WordPress, Elementor, and vanilla JavaScript — reducing page load time through site-wide performance optimization.",
       "Ensured full mobile responsiveness across all devices, improving public accessibility to government information and services.",
-    ],
-  },
-  {
-    company: "STI Tanauan",
-    role: "Thesis Lead Developer",
-    period: "2024 – 2025",
-    bullets: [
-      "Led a team building a real-time roadside assistance Android app using Java and Firebase.",
-      "Designed the system architecture, Firebase Realtime Database schema, and all core UI flows.",
-      "Presented and defended the project as part of the BSIT capstone requirement.",
     ],
   },
   {
@@ -59,22 +59,44 @@ export default function ExperienceSection() {
 
       <div className="flex gap-0">
         {/* Left sidebar */}
-        <ul className="flex flex-col min-w-36 border-l border-neutral-800">
-          {EXPERIENCES.map((e, i) => (
-            <li key={e.company}>
-              <button
-                onClick={() => setActive(i)}
-                className={`w-full text-left px-5 py-3 font-mono text-sm transition-colors border-l-2 -ml-px cursor-pointer${
-                  active === i
-                    ? "border-accent-500 text-accent-500 bg-neutral-900"
-                    : "border-transparent text-neutral-500 hover:text-neutral-200 hover:bg-neutral-900/50"
-                }`}
-              >
-                {e.company}
-              </button>
-            </li>
-          ))}
-        </ul>
+        
+        {/* Timeline */}
+        <div className="relative">
+        {/* Vertical connecting line */}
+        <div className="absolute left-1.75 top-2 bottom-2 w-px bg-neutral-800" />
+
+  <div className="flex flex-col gap-6">
+    {EXPERIENCES.map((e, i) => (
+      <div key={e.company} className="flex gap-5 items-start relative">
+        
+        {/* Dot — filled accent when active, hollow when not */}
+        <button
+          onClick={() => setActive(i)}
+          className={`w-4 h-4 rounded-full border-2 shrink-0 mt-1 z-10 transition-all cursor-pointer ${
+            active === i
+              ? "bg-accent-500 border-accent-500"
+              : "bg-neutral-950 border-neutral-700 hover:border-accent-500"
+          }`}
+          aria-label={`View ${e.company}`}
+        />
+
+        {/* Label */}
+        <button
+          onClick={() => setActive(i)}
+          className={`text-left font-mono text-sm transition-colors cursor-pointer pb-6 ${
+            active === i
+              ? "text-accent-500"
+              : "text-neutral-500 hover:text-neutral-200"
+          }`}
+        >
+          {e.company}<br/>
+          {e.period.slice(0,4)}
+        </button>
+
+      </div>
+    ))}
+  </div>
+</div>
 
         {/* Right content */}
         <div className="flex-1 pl-10">
