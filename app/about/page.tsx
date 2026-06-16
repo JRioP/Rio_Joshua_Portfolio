@@ -17,7 +17,7 @@ export default function AboutPage() {
             - Certifications table (LPI, SAP, Oracle, Python)
             - Education timeline (STI Tanauan, BSIT 2025)
       */}
-      <h1 className="font-display text-5xl font-bold">About</h1>
+      <h1 className="font-display text-5xl font-bold">About <span className="text-blue-500">.</span></h1>
     </div>
   );
 }
