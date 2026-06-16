@@ -11,69 +11,70 @@ export default function Home() {
   const projects = getProjects();
   return (
     <>
-    <main className="relative px-6 max-w-6xl mx-auto">
+      {/* Hero Section */}
+      <main className="relative px-6 max-w-6xl mx-auto">
       <section className="min-h-screen flex items-center relative">
-        {/* Animated background blobs */}
-        <div className="hero-blobs">
-          <div className="blob blob-1" />
-          <div className="blob blob-2" />
-          <div className="blob blob-3" />
-        </div>
-      <div className="flex items-center gap-12 w-full relative z-10">
-        {/* LEFT COLUMN — text content */}
-        <div className="flex-1 max-w-xl">
-        <h1 className="font-display text-6xl font-bold leading-tight tracking-tight">
-          Hi, I'm Josh <br />
-        </h1>
-        <h1 className="font-display text-4xl text-accent-500 font-bold leading-tight tracking-tight mb-6">
-          <RotatingText/>
-        </h1>
         
-
-        <p className="text-neutral-400 text-lg leading-relaxed mb-4">
+        {/* Animated background blobs */}
+          <div className="flex items-center gap-12 w-full relative z-10">
+          <div className="hero-blobs">
+            <div className="blob blob-1" />
+            <div className="blob blob-2" />
+            <div className="blob blob-3" />
+          </div>
+            
+        {/* LEFT COLUMN — text content */}
+          <div className="flex-1 max-w-xl">
+          <h1 className="font-display text-6xl font-bold leading-tight tracking-tight">
+          Hi, I'm Josh <br />
+          </h1>
+          <h1 className="font-display text-4xl text-accent-500 font-bold leading-tight tracking-tight mb-6">
+          <RotatingText/>
+          </h1>
+          <p className="text-neutral-400 text-lg leading-relaxed mb-4">
           Full-stack developer from the Philippines. I've shipped a real-time
           Android app, a live corporate website, and a local AI chatbot.
-        </p>
+          </p>
 
-        <ul className="flex flex-col gap-3 mb-10">
-        {[
-          "Builds things that actually get deployed.",
-          "Solves real problems, not just tutorial projects.",
-          "Ships fast, secures properly, and documents clearly.",
+          <ul className="flex flex-col gap-3 mb-10">
+          {[
+            "Builds things that actually get deployed.",
+            "Solves real problems, not just tutorial projects.",
+            "Ships fast, secures properly, and documents clearly.",
             ].map((item) => (
           <li key={item} className="flex items-start gap-3">
           <span className="mt-1 w-4 h-4 rounded-full border border-accent-500 flex items-center justify-center shrink-0">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent-500" />
-            </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-accent-500" /></span>
           <span className="text-neutral-300 text-sm leading-relaxed">{item}</span>
           </li>
           ))}
           </ul>
-
-        <div className="flex gap-4">
-          <a
-            href="/projects"
-            className="px-6 py-3 bg-accent-500 text-neutral-300 font-bold rounded-lg hover:bg-accent-400 hover:text-amber-50 transition-colors"
-          >
-            See my work
-          </a>
-          <a
-            href="/contact"
-            className="px-6 py-3 border border-neutral-700 text-neutral-300 font-bold rounded-lg hover:border-neutral-500 hover:text-white transition-colors"
-          >
-            Contact me
-          </a>
-        </div>
-      </div>
+        
+        {/* CTA buttons */}
+          <div className="flex gap-4">
+              <a
+              href="/projects"
+              className="px-6 py-3 bg-accent-500 text-neutral-300 font-bold rounded-lg hover:bg-accent-400 hover:text-amber-50 transition-colors"
+                >
+              See my work
+              </a>
+              <a
+                href="/contact"
+                className="px-6 py-3 border border-neutral-700 text-neutral-300 font-bold rounded-lg hover:border-neutral-500 hover:text-white transition-colors"
+                >
+               Contact me
+              </a>
+            </div>
+          </div>
       
       {/* RIGHT COLUMN — tech stack card */}
       <div className="hidden lg:flex flex-1 justify-end">
         <div className="w-80 bg-neutral-900 border border-neutral-800 rounded-2xl p-6">
-
-          <div className="flex items-center justify-between">
-          <TechStackCard/>
-          </div>
-
+          {/* Tech Stack Card */}
+            <div className="flex items-center justify-between">
+            <TechStackCard/>
+            </div>
+          {/* Status, Location, Available, GitHub */}
           <div className="mt-6 pt-6 border-t border-neutral-800 flex flex-col gap-3">
             <div className="flex justify-between items-center">
               <span className="font-mono text-xs text-neutral-600">Status</span>
@@ -127,9 +128,9 @@ export default function Home() {
     See all →
   </a>
 </div>
-
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-  {projects.filter((p) => p.featured).map((project) => (
+  {/* Project Grid */}
+   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {projects.filter((p) => p.featured).map((project) => (
     <div key={project.slug} className="group bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden hover:border-neutral-600 transition-all duration-200 flex flex-col">
 
       {project.coverImage && (
@@ -155,7 +156,8 @@ export default function Home() {
             </span>
           ))}
         </div>
-
+      
+      {/* buttons */}
         <div className="flex gap-3 mt-auto pt-4 border-t border-neutral-800">
           <a href={`/projects/${project.slug}`} className="flex-1 text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg bg-accent-500 text-neutral-300 font-bold hover:bg-accent-400 hover:text-white transition-colors">
             Case study
@@ -173,16 +175,16 @@ export default function Home() {
       </div>
     </div>
   ))}
-</div>
-        
+</div> 
     </FadeIn>
-    
+
+    {/* Experience Section */}
     <FadeIn as="section" className="w-full mt-32" direction="left" delay={100}>
       <ExperienceSection />
     </FadeIn>
-    
+
+    {/* About Me Section */}
     <FadeIn as="section" className="w-full mt-32" direction="right" delay={100}>
-      {/* About Me */}
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
@@ -220,7 +222,8 @@ export default function Home() {
           </div>
         </div>
       </FadeIn>
-
+      
+      {/* Contact Section */}
       <FadeIn as="section" className="min-h-screen flex items-center relative" direction="up" delay={200}>
           <div className="min-h-screen pt-32 pb-20 px-6 max-w-2xl mx-auto">
             <h1 className="font-display text-6xl font-bold mb-4">Get in touch<span className="text-accent-500">.</span></h1>
@@ -230,7 +233,6 @@ export default function Home() {
             <ContactForm />
             </div>
       </FadeIn>
-
     </main>
     </>
   );
