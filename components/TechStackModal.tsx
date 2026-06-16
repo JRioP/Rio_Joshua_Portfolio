@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState, useRef, forwardRef, Ref } from "react";
+import Image from "next/image";                     // <-- new import
 import { GROUPED_TECH_STACK } from "@/lib/tech-stack";
 
 export const TechStackModal = forwardRef(
@@ -10,6 +11,7 @@ export const TechStackModal = forwardRef(
     const closeBtnRef = useRef<HTMLButtonElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
 
+    /* ----- same focus & escape‑key handling (unchanged) ----- */
     useEffect(() => {
       if (typeof ref === "function") {
         ref(triggerRef.current);
@@ -48,7 +50,7 @@ export const TechStackModal = forwardRef(
         {open && (
           <div
             className="fixed inset-0 z-99 flex items-center justify-center p-6"
-            onClick={() => setOpen(false)} // click outside → close
+            onClick={() => setOpen(false)}
           >
             {/* Backdrop */}
             <div className="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm" />
@@ -81,19 +83,31 @@ export const TechStackModal = forwardRef(
                 </button>
               </div>
 
+              {/* Body – list grouped items */}
               <div className="space-y-5">
                 {Object.entries(grouped).map(([category, items]) => (
                   <div key={category}>
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
                       {category}
                     </p>
+
                     <div className="flex flex-wrap gap-2">
                       {items.map((item) => (
                         <span
-                          key={item.label}
-                          className="px-3 py-1 text-sm rounded-full border border-white/10 bg-white/5 text-white/80"
+                          key={item.name}                                   // <-- use name as key
+                          className="inline-flex items-center gap-2 px-3 py-1 text-sm rounded-full border border-white/10 bg-white/5 text-white/80"
                         >
-                          {item.label}
+                          {/* Icon (optional) */}
+                          {item.icon && (
+                            <Image
+                              src={item.icon}
+                              alt={item.name}
+                              width={16}
+                              height={16}
+                              className="object-contain"
+                            />
+                          )}
+                          {item.name}
                         </span>
                       ))}
                     </div>

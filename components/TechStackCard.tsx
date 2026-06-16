@@ -23,10 +23,10 @@ export function TechStackCard() {
       <div className="flex flex-wrap gap-2 justify-start mt-2 w-full">
         {previewItems.map((item) => (
           <span
-            key={item.label}
+            key={item.name}
             className="font-mono text-xs px-3 py-1 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700"
           >
-            {item.label}
+          {item.name}
           </span>
         ))}
         

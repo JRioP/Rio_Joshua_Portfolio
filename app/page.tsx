@@ -16,13 +16,12 @@ export default function Home() {
       <section className="min-h-screen flex items-center relative">
         
         {/* Animated background blobs */}
-          <div className="flex items-center gap-12 w-full relative z-10">
           <div className="hero-blobs">
             <div className="blob blob-1" />
             <div className="blob blob-2" />
             <div className="blob blob-3" />
           </div>
-            
+        <div className="flex items-center gap-12 w-full relative z-10">
         {/* LEFT COLUMN — text content */}
           <div className="flex-1 max-w-xl">
           <h1 className="font-display text-6xl font-bold leading-tight tracking-tight">
@@ -119,15 +118,15 @@ export default function Home() {
       {/* FEATURED PROJECTS */}
       <FadeIn as="section" className="w-full mt-20 relative" direction="up">
         <div className="flex items-end justify-between mb-10">
-  <div>
-    <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
-      Featured Projects<span className="text-accent-500">.</span>
-    </h2>
-  </div>
-  <a href="/projects" className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest">
-    See all →
-  </a>
-</div>
+        <div>
+          <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
+            Featured Projects<span className="text-accent-500">.</span>
+          </h2>
+        </div>
+        <a href="/projects" className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest">
+         See all →
+        </a>
+        </div>
   {/* Project Grid */}
    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
     {projects.filter((p) => p.featured).map((project) => (
