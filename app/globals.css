@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 @theme {
   --font-sans: var(--font-dm-sans), sans-serif;
@@ -144,3 +145,4 @@ body {
 .prose :where(tbody tr:last-child td) {
   border-bottom: none;
 }
+
