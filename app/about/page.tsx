@@ -1,8 +1,10 @@
 // app/about/page.tsx
 import Image from "next/image";
 import type { Metadata } from "next";
-import { ALL_TECH_STACK, GROUPED_TECH_STACK } from "@/lib/tech-stack";
+import { GROUPED_TECH_STACK } from "@/lib/tech-stack";
+import { GROUPED_CERTIFICATE } from "@/lib/certications";
 import FadeIn from "@/components/ui/animations/fadeIn";
+import CertificateCarousel from "@/components/ui/CertificateCarousel";
 
 export const metadata: Metadata = {
   title: "About",
@@ -10,6 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+
+  const groupedTech = GROUPED_TECH_STACK;
+  const groupedCert = GROUPED_CERTIFICATE;
+
   return (
     <div className="min-h-screen pt-24 pb-20 px-6 max-w-6xl mx-auto">
       <h1 className="font-display text-6xl font-bold tracking-tight mb-12">About<span className="text-accent-500">.</span></h1>
@@ -20,7 +26,7 @@ export default function AboutPage() {
           <div className="shrink-0">
              <div className="relative w-56 h-64 rounded-2xl overflow-hidden border border-neutral-800">
               <Image
-                src="/images/about.jpg"
+                src="/images/BSIT_RIO.jpg"
                 alt="Joshua Rio"
                 fill
                 priority
@@ -73,24 +79,49 @@ export default function AboutPage() {
         </div>
       </FadeIn>
 
+      {/* Tech Stack Section */}
       <FadeIn as ="section" className="w-full mt-20 relative" direction="left">
         <div className="flex flex-col gap-6">
           <h2 className="text-3xl font-bold tracking-tight">Tech Stack <span className="text-accent-400">.</span></h2>
-          <p className="text-neutral-400 text-lg leading-relaxed max-w-2xl">
-            I work across the stack, but I specialize in Android development and backend APIs. 
-            Here are some of the technologies I use:
-          </p>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-            {ALL_TECH_STACK.map((tech) => (
-              <div key={tech.name} className="flex items-center gap-3 p-4 border border-neutral-800 rounded-lg">
-                <Image src={tech.icon} alt={tech.name} width={32} height={32} className="object-contain" />
-                <span className="text-sm text-neutral-300">{tech.name}</span>
+            <p className="text-neutral-400 text-lg leading-relaxed max-w-2xl">
+              I worked across these stack, but I specialize in Android development and backend APIs. 
+              Here are some of the technologies I use:
+            </p>
+          <div className="space-y-5">
+            {Object.entries(groupedTech).map(([category, items]) => (
+              <div key={category}>
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                  {category}
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+                  {items.map((tech) => (
+                      <div key={tech.name} className="flex items-center gap-3 p-4 border border-neutral-800 rounded-lg">
+                        <Image src={tech.icon} alt={tech.name} width={32} height={32} className="object-contain" />
+                        <span className="text-sm text-neutral-300">{tech.name}</span>
+                      </div>
+                    ))}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </FadeIn>
+
+    <div className="flex flex-col mt-20 gap-6">
+    <h1 className="text-3xl font-bold tracking-tight">
+      Certifications<span className="text-accent-400">.</span>
+    </h1>
+
+    {/* Render a carousel for each certificate category */}
+    {Object.entries(groupedCert).map(([category, items]) => (
+      <div key={category} className="mb-8">
+        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+          {category}
+        </p> 
+        <CertificateCarousel certificates={items} />
+      </div>
+    ))}
+  </div>
       {/* TODO: Build out About sections */}
       {/* Sections to include:
             - Photo + bio paragraph
