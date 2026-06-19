@@ -6,12 +6,11 @@ import Image from "next/image";
 
 interface Certificate {
   name: string;
-  icon: string;        // path to the image (e.g. /images/certs/lpi.png)
+  icon: string;  
 }
 
 interface CertificateCarouselProps {
   certificates: Certificate[];
-  /** optional props for customizing the carousel */
   showArrows?: boolean;
   autoPlay?: boolean;
 }
@@ -19,7 +18,7 @@ interface CertificateCarouselProps {
 export default function CertificateCarousel({
   certificates,
   showArrows = true,
-  autoPlay = false,
+  autoPlay = true,
 }: CertificateCarouselProps) {
   return (
     <Carousel
@@ -32,18 +31,21 @@ export default function CertificateCarousel({
       interval={5000}
       swipeable
       emulateTouch
-      className="max-w-2xl mx-auto min-h-[320px] md:min-h-[380px]"
+      className="max-w-2xl mx-auto min-h-80 md:min-h-95"
     >
       {certificates.map((cert) => (
-        <div key={cert.name} className="flex justify-center p-3">
+        <div key={cert.name} tabIndex={-1} className="flex justify-center p-1 pointer‑events: none;">
+          <div className="absolute inset-x-0 top-0 bg-black/50 py-3 text-center text-sm text-white pointer-events-none select-none">
+            {cert.name}
+          </div>
           <Image
             src={cert.icon}
             alt={cert.name}
             width={500}
             height={500}
-            className="object-contain"
+            className="object-contain pointer-events-none select-none"
             priority={false}
-          />
+          />          
         </div>
       ))}
     </Carousel>
