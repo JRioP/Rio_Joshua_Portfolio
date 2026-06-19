@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss"; 
 @plugin "@tailwindcss/typography";
 @import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -145,4 +145,3 @@ body {
 .prose :where(tbody tr:last-child td) {
   border-bottom: none;
 }
-

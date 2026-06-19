@@ -21,7 +21,7 @@ export default function AboutPage() {
       <h1 className="font-display text-6xl font-bold tracking-tight mb-12">About<span className="text-accent-500">.</span></h1>
       
       {/* Photo + bio section */}
-      <FadeIn as="section" className="w-full mt-20 relative" direction="up">
+      <FadeIn as="section" className="w-full mt-20 relative" direction="up" delay={0.15}>
         <div className="flex flex-col md:flex-row gap-12 items-start">
           <div className="shrink-0">
              <div className="relative w-56 h-64 rounded-2xl overflow-hidden border border-neutral-800">
@@ -30,6 +30,7 @@ export default function AboutPage() {
                 alt="Joshua Rio"
                 fill
                 priority
+                sizes="100"
                 className="object-cover object-top"
                 />
               </div>
@@ -80,23 +81,23 @@ export default function AboutPage() {
       </FadeIn>
 
       {/* Tech Stack Section */}
-      <FadeIn as ="section" className="w-full mt-20 relative" direction="left">
+      <FadeIn as ="section" className="w-full mt-20 relative" direction="left" delay={0.15}>
         <div className="flex flex-col gap-6">
           <h2 className="text-3xl font-bold tracking-tight">Tech Stack <span className="text-accent-400">.</span></h2>
             <p className="text-neutral-400 text-lg leading-relaxed max-w-2xl">
               I worked across these stack, but I specialize in Android development and backend APIs. 
               Here are some of the technologies I use:
             </p>
-          <div className="space-y-5">
+          <div className="flex flex-row space-y-5">
             {Object.entries(groupedTech).map(([category, items]) => (
               <div key={category}>
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                <p className="text-xs font-semibold text-center text-muted-foreground uppercase tracking-wider mb-2">
                   {category}
                 </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+                <div className="grid grid-cols-2 md:grid-cols-1 gap-3 mt-6 mr-3">
                   {items.map((tech) => (
-                      <div key={tech.name} className="flex items-center gap-3 p-4 border border-neutral-800 rounded-lg">
-                        <Image src={tech.icon} alt={tech.name} width={32} height={32} className="object-contain" />
+                      <div key={tech.name} className="flex items-center gap-2 p-4 border border-neutral-800 rounded-lg">
+                        <Image src={tech.icon} alt={tech.name} width={30} height={30} className="object-contain" />
                         <span className="text-sm text-neutral-300">{tech.name}</span>
                       </div>
                     ))}
@@ -107,28 +108,82 @@ export default function AboutPage() {
         </div>
       </FadeIn>
 
-    <div className="flex flex-col mt-20 gap-6">
-    <h1 className="text-3xl font-bold tracking-tight">
-      Certifications<span className="text-accent-400">.</span>
-    </h1>
-
-    {/* Render a carousel for each certificate category */}
-    {Object.entries(groupedCert).map(([category, items]) => (
-      <div key={category} className="mb-8">
-        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-          {category}
-        </p> 
-        <CertificateCarousel certificates={items} />
+    <FadeIn as ="section" className="w-full mt-20 relative" direction="right" delay={0.15}>
+      <h1 className="text-3xl font-bold tracking-tight">
+        Certifications<span className="text-accent-400">.</span>
+      </h1>
+      <div className="grid grid-cols-2 mt-10 space-y-5">
+        {/* Render a carousel for each certificate category */}
+        {Object.entries(groupedCert).map(([category, items]) => (
+        <div key={category} className="mb-8">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+              {category}
+            </p> 
+            <CertificateCarousel certificates={items} />
+          </div>
+        ))}
       </div>
-    ))}
+    </FadeIn>
+
+    <FadeIn as="section" className="w-full mt-20" direction="up" delay={0.15}>
+      <div className="flex flex-col gap-6">
+      <h1 className="text-3xl font-bold tracking-tight">
+       Education timeline<span className="text-accent-400">.</span>
+      </h1>
+
+      {/* Timeline list */}
+      <ul className="relative flex flex-col gap-0">
+
+      {/* Vertical connecting line */}
+      <div className="absolute left-1.75 top-2 bottom-2 w-px bg-neutral-800" />
+
+      {/* 1 — BSIT */}
+      <li className="relative flex gap-5 items-start pb-10">
+        <div className="w-4 h-4 rounded-full bg-accent-500 border-2 border-accent-500 shrink-0 mt-1 z-10" />
+        <div>
+          <time className="font-mono text-xs text-accent-500 tracking-widest">2022 – 2026</time>
+          <h3 className="text-lg font-semibold text-neutral-100 mt-1 mb-1">
+            BSIT — STI College Tanauan
+          </h3>
+          <p className="text-neutral-400 text-sm leading-relaxed">
+            Major: Information Technology. Expected graduation 2026.
+            Relevant coursework: Android Development, OOP, Data Structures.
+            Capstone: RoadRescue — real-time Android roadside assistance app.
+          </p>
+        </div>
+      </li>
+
+      {/* 2 — SPIS */}
+      <li className="relative flex gap-5 items-start pb-10">
+        <div className="w-4 h-4 rounded-full bg-neutral-950 border-2 border-neutral-700 shrink-0 mt-1 z-10" />
+        <div>
+          <time className="font-mono text-xs text-neutral-500 tracking-widest">2014 – 2016</time>
+          <h3 className="text-lg font-semibold text-neutral-100 mt-1 mb-1">
+            Associate in Information Technology — Second Philippine International School
+          </h3>
+          <p className="text-neutral-400 text-sm leading-relaxed">
+            Graduated 2016. <br></br>
+            Lead developer of the school robotics club&apos;s competition bot.
+          </p>
+        </div>
+      </li>
+
+      <li className="relative flex gap-5 items-start pb-10">
+        <div className="w-4 h-4 rounded-full bg-neutral-950 border-2 border-neutral-700 shrink-0 mt-1 z-10" />
+        <div>
+          <time className="font-mono text-xs text-neutral-500 tracking-widest">2009 – 2014</time>
+          <h3 className="text-lg font-semibold text-neutral-100 mt-1 mb-1">
+            HighSchool — Second Philippine International School
+          </h3>
+          <p className="text-neutral-400 text-sm leading-relaxed">
+            Graduated 2014. <br></br>
+            Lead developer of the school robotics club&apos;s competition bot.
+          </p>
+        </div>
+      </li>
+    </ul>
   </div>
-      {/* TODO: Build out About sections */}
-      {/* Sections to include:
-            - Photo + bio paragraph
-            - Tech stack grid (Android, Web, AI, Tools)
-            - Certifications table (LPI, SAP, Oracle, Python)
-            - Education timeline (STI Tanauan, BSIT 2025)
-      */}
-    </div>
+</FadeIn>
+</div>
   );
 }
