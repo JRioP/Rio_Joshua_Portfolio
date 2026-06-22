@@ -12,7 +12,7 @@ export default function ProjectsPage() {
             Projects<span className="text-accent-500">.</span>
             </h1>
       <p className="text-neutral-400 text-lg leading-relaxed mb-10">
-        A collection of my work, experiments, and collaborations. Each project is a reflection of my passion for creativity and innovation. From web applications to design explorations, these projects showcase my skills and dedication to crafting meaningful experiences.
+        A collection of production-ready applications, local AI experiments, and technical solutions. Each project demonstrates a focus on clean code, secure deployment pipelines, and optimized performance. From cross-platform development to structural system design, these works showcase practical engineering solutions built to solve real-world problems.
       </p>
       {/* FEATURED PROJECTS */}
             <FadeIn as="section" className="w-full mt-20 relative" direction="up">
