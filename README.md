@@ -43,5 +43,5 @@ Add `RESEND_API_KEY` to Vercel environment variables before deploying.
 
 ## Architecture
 
-<img width="1016" height="595" alt="image" src="https://github.com/user-attachments/assets/a0595361-e26e-4fa0-9e13-1bbc0864d9f6" />
-Cloudflare, Vercel, and the Next.js app, plus content sourcing and email delivery.
+<img width="1645" height="973" alt="Rio_Portfolio_Final" src="https://github.com/user-attachments/assets/2668d09b-f734-4189-a103-5e23c2ddffe4" />
+Vercel, and the Next.js app, plus content sourcing and email delivery.
