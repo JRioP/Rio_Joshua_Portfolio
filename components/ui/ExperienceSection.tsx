@@ -8,7 +8,7 @@ const EXPERIENCES = [
     role: "IT Intern (OJT)",
     period: "2026",
     bullets: [
-      "Built and deployed a full corporate website for MHCI from local staging to live production using WordPress and Elementor, including DNS configuration, server redirect setup, and a post-migration database search-and-replace to update all internal URLs.",
+      "Completed a 486-Hour Internship, builded and deployed a full corporate website for MHCI from local staging to live production using WordPress and Elementor, including DNS configuration, server redirect setup, and a post-migration database search-and-replace to update all internal URLs.",
       "Optimized site performance from baseline to a 92 PageSpeed score by configuring LiteSpeed Cache, WP Super Cache, and raising the server WP_MEMORY_LIMIT from 40MB to 512MB; secured the site with Wordfence WAF, achieving an external A+ security rating.",
       "Engineered a custom PHP email routing system with dynamic service-based dropdown auto-selection and auto-labeled subject lines for inquiry tracking, effectively creating a lightweight ticketing system for incoming website leads.",
       "Ensured full cross-platform responsiveness by implementing custom layout breakpoints (1024px) and mobile-specific design fixes; consolidated 19 services into 8 structured categories with an icon-grid layout to improve UX and site navigability.",
