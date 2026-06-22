@@ -6,9 +6,9 @@ import { useState, useEffect } from "react";
 import { clsx } from "clsx";
 
 const NAV_LINKS = [
+  { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/about",    label: "About"    },
-  { href: "/resume",   label: "Resume"   },
   { href: "/contact",  label: "Contact"  },
 ];
 
@@ -56,8 +56,6 @@ export default function Navbar() {
       </li>
     ))}
   </ul>
-
-  {/* Spacer to balance the logo (keeps mobile hamburger on right) */}
   <div className="w-8" />
 </nav>
   );

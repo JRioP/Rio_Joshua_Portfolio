@@ -41,7 +41,7 @@ export default function AboutPage() {
             </div>
               <div className="flex-1 min-w-0">
               <div>
-              <h1 className="text-neutral-200 text-4xl font-bold mb-4 tracking-tight">
+              <h1 className="text-neutral-200 text-xl font-bold mb-4 tracking-tight">
                 I build real things that get deployed.
               </h1>
               <p className="text-neutral-400 text-lg leading-relaxed mb-4 max-w-2xl">
@@ -163,20 +163,6 @@ export default function AboutPage() {
           </h3>
           <p className="text-neutral-400 text-sm leading-relaxed">
             Graduated 2016. <br></br>
-            Lead developer of the school robotics club&apos;s competition bot.
-          </p>
-        </div>
-      </li>
-
-      <li className="relative flex gap-5 items-start pb-10">
-        <div className="w-4 h-4 rounded-full bg-neutral-950 border-2 border-neutral-700 shrink-0 mt-1 z-10" />
-        <div>
-          <time className="font-mono text-xs text-neutral-500 tracking-widest">2009 – 2014</time>
-          <h3 className="text-lg font-semibold text-neutral-100 mt-1 mb-1">
-            HighSchool — Second Philippine International School
-          </h3>
-          <p className="text-neutral-400 text-sm leading-relaxed">
-            Graduated 2014. <br></br>
             Lead developer of the school robotics club&apos;s competition bot.
           </p>
         </div>
