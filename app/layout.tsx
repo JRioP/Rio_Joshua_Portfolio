@@ -3,6 +3,8 @@ import { DM_Sans, Syne, DM_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_PH",
-    url: "https://joshuario.dev", // TODO: update to your domain
+    url: "https://joshuario.vercel.app", // TODO: update to your domain
     title: "Joshua Rio — Full-Stack Developer",
     description: "Full-stack developer from Batangas. I build Android apps, production websites, and AI-powered tools.",
     siteName: "Joshua Rio",
@@ -64,6 +66,8 @@ export default function RootLayout({
       className={`${dmSans.variable} ${syne.variable} ${dmMono.variable}`}
       suppressHydrationWarning
     >
+      <SpeedInsights/>
+      <Analytics/>
       <body className="bg-neutral-950 text-neutral-100 antialiased" suppressHydrationWarning>
         <Navbar />
         <main>{children}</main>
