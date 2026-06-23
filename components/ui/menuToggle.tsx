@@ -4,10 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
-  { href: "/",         label: "Home" },
-  { href: "/about",    label: "About"    },
-  { href: "/resume",   label: "Resume"   },
-  { href: "/contact",  label: "Contact"  },
+  { href:   "/",         label: "Home"},
+   { href:  "/project",  label: "Projects"},
+  { href:   "/about",    label: "About"    },
+  { href:   "/contact",  label: "Contact"  },
 ];
 
 export default function MenuToggle() {
@@ -29,22 +29,23 @@ export default function MenuToggle() {
         onClick={() => setOpen(!open)}
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
-        className="relative z-50 flex items-center gap-2 font-mono text-xs uppercase tracking-widest cursor-pointer transition-colors text-neutral-400 hover:text-neutral-100"
+        className="relative z-60 flex items-center gap-2 font-mono text-xs uppercase tracking-widest cursor-pointer transition-colors text-neutral-400 hover:text-neutral-100"
       >
         <div className="w-5 h-4 flex flex-col justify-between">
           <span className={`block h-px bg-current transition-all duration-300 origin-center ${open ? "rotate-45 translate-y-[7px]" : ""}`} />
           <span className={`block h-px bg-current transition-all duration-300 ${open ? "opacity-0 scale-x-0" : ""}`} />
           <span className={`block h-px bg-current transition-all duration-300 origin-center ${open ? "-rotate-45 -translate-y-[9px]" : ""}`} />
         </div>
-        <span>
+        <span className="hidden md:block">
           {open ? "Close" : "Menu"}
         </span>
       </button>
 
-      <div className={`fixed inset-0 z-40 transition-all duration-500 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+      <div className={`fixed inset-0 z-50 transition-all duration-500 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+       style={{ height: "100dvh" }}>
         <div className="absolute inset-0 bg-neutral-950/95 backdrop-blur-md" onClick={() => setOpen(false)} />
 
-        <div className="relative z-50 flex flex-col justify-center h-full px-10 md:px-20">
+        <div className="relative z-60 flex flex-col justify-center h-full px-10 md:px-20">
           <nav className="flex flex-col gap-2 mb-16">
             {NAV_LINKS.map(({ href, label }, i) => (
               <Link
