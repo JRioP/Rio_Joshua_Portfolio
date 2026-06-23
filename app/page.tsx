@@ -5,25 +5,24 @@ import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
 import FadeIn from "@/components/ui/animations/fadeIn";
 import { TechStackCard } from "@/components/TechStackCard";
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import dynamic from "next/dynamic";
 
 export default function Home() {
   const projects = getProjects();
   return (
     <>
       {/* Hero Section */}
-      <main className="relative px-6 max-w-6xl mx-auto">
-      <section className="min-h-screen flex items-center relative">
+      <main className=" relative px-6 max-w-6xl mx-auto">
         
-        {/* Animated background blobs */}
-          <div className="hero-blobs">
+        <div className="hero-blobs">
             <div className="blob blob-1" />
             <div className="blob blob-2" />
             <div className="blob blob-3" />
           </div>
-        <div className="flex items-center gap-12 w-full relative z-10">
+
+      <section className="min-h-screen flex items-center relative py-12 md:py-0">
+        {/* Animated background blobs */}
+          
+        <div className="flex flex-col md:flex-row items-center gap-12 w-full relative z-10">
         {/* LEFT COLUMN — text content */}
           <div className="flex-1 max-w-xl">
           <h1 className="font-display text-6xl font-bold leading-tight tracking-tight">

@@ -7,7 +7,7 @@ import { clsx } from "clsx";
 import MenuToggle from "@/components/ui/menuToggle";
 
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
+  { href: "/",         label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/about",    label: "About"    },
   { href: "/contact",  label: "Contact"  },
