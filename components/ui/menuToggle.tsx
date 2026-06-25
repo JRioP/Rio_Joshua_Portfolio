@@ -29,12 +29,12 @@ export default function MenuToggle() {
         onClick={() => setOpen(!open)}
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
-        className="relative z-60 flex items-center gap-2 font-mono text-xs uppercase tracking-widest cursor-pointer transition-colors text-neutral-400 hover:text-neutral-100"
+        className="relative z-60 flex items-center px-6 gap-2 font-mono text-xs uppercase tracking-widest cursor-pointer transition-colors text-neutral-400 hover:text-neutral-100"
       >
         <div className="w-5 h-4 flex flex-col justify-between">
-          <span className={`block h-px bg-current transition-all duration-300 origin-center ${open ? "rotate-45 translate-y-[7px]" : ""}`} />
+          <span className={`block h-px bg-current transition-all duration-300 origin-center ${open ? "rotate-45 translate-y-1.75" : ""}`} />
           <span className={`block h-px bg-current transition-all duration-300 ${open ? "opacity-0 scale-x-0" : ""}`} />
-          <span className={`block h-px bg-current transition-all duration-300 origin-center ${open ? "-rotate-45 -translate-y-[9px]" : ""}`} />
+          <span className={`block h-px bg-current transition-all duration-300 origin-center ${open ? "-rotate-45 -translate-y-2.25" : ""}`} />
         </div>
         <span className="hidden md:block">
           {open ? "Close" : "Menu"}
@@ -60,16 +60,16 @@ export default function MenuToggle() {
           </nav>
 
           <div className={`flex flex-wrap items-center gap-6 transition-all duration-300 ${open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: open ? "280ms" : "0ms" }}>
-            <a href="https://github.com/JRioP" target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-neutral-500 hover:text-neutral-100 uppercase tracking-widest transition-colors">
+            <a href="https://github.com/JRioP" target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-neutral-400 hover:text-neutral-100 uppercase tracking-widest transition-colors">
               GitHub
             </a>
-            <a href="https://linkedin.com/in/japrdev" target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-neutral-500 hover:text-neutral-100 uppercase tracking-widest transition-colors">
+            <a href="https://linkedin.com/in/japrdev" target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-neutral-300 hover:text-neutral-100 uppercase tracking-widest transition-colors">
               LinkedIn
             </a>
-            <a href="mailto:riojoshuadev@gmail.com" className="font-mono text-xs text-neutral-500 hover:text-neutral-100 uppercase tracking-widest transition-colors">
+            <a href="mailto:riojoshuadev@gmail.com" className="font-mono text-xs text-neutral-200 hover:text-neutral-100 uppercase tracking-widest transition-colors">
               Email
             </a>
-            <span className="font-mono text-xs text-neutral-700 uppercase tracking-widest ml-auto">
+            <span className="font-mono text-xs text-neutral-100 uppercase tracking-widest ml-auto">
               Laguna, PH · Open to work
             </span>
           </div>

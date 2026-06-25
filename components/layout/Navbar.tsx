@@ -47,7 +47,7 @@ export default function Navbar() {
   return (
     <nav
   className={clsx(
-    "fixed top-0 left-0 right-0 z-50 px-6 py-3 flex items-center justify-between transition-all duration-300 z-index-99",
+    "fixed top-0 left-0 right-0 z-50 px-0 py-3 flex items-center justify-between transition-all duration-300 z-index-99",
     visible ? "translate-y-0" : "-translate-y-full",
     scrolled && "bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800", 
   )}
@@ -55,7 +55,7 @@ export default function Navbar() {
   {/* Logo */}
   <Link
     href="/"
-    className="font-display font-black text-3xl tracking-tight text-neutral-100"
+    className="font-display font-black text-3xl tracking-tight text-neutral-100 px-5 md:px-15 lg:px-40"
   >
     J<span className="text-accent-500">.</span>Rio
   </Link>

@@ -11,24 +11,22 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <main className=" relative px-6 max-w-6xl mx-auto">
-        
-        <div className="hero-blobs">
+      <main className="min-h-screen relative w-full overflow-hidden">
+        <section className="min-h-screen w-full flex items-center relative py-12 md:py-0 px-[50px] overflow-hidden">
+          {/* Animated background blobs */}
+          <div className="min-h-screen hero-blobs pointer-events-none">
             <div className="blob blob-1" />
             <div className="blob blob-2" />
             <div className="blob blob-3" />
           </div>
-
-      <section className="min-h-screen flex items-center relative py-12 md:py-0">
-        {/* Animated background blobs */}
           
-        <div className="flex flex-col md:flex-row items-center gap-12 w-full relative z-10">
+        <div className="flex flex-col md:flex-row items-center gap-12 w-full relative z-10 max-w-6xl mx-auto">
         {/* LEFT COLUMN — text content */}
           <div className="flex-1 max-w-xl">
-          <h1 className="font-display text-6xl font-bold leading-tight tracking-tight">
+          <h1 className="text-4xl font-display md:text-6xl font-bold leading-tight tracking-tight">
           Hi, I'm Josh <br />
           </h1>
-          <h1 className="font-display text-4xl text-accent-500 font-bold leading-tight tracking-tight mb-6">
+          <h1 className="text-xl font-display md:text-4xl text-accent-500 font-bold leading-tight tracking-tight mb-6">
           <RotatingText/>
           </h1>
           <p className="text-neutral-400 text-lg leading-relaxed mb-4">
@@ -114,16 +112,27 @@ export default function Home() {
           <path d="M8 3v10M8 13l-4-4M8 13l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
-      </section>
+        </section>
 
-      {/* FEATURED PROJECTS */}
-      <FadeIn as="section" className="w-full mt-20 relative" direction="up">
+        {/* FEATURED PROJECTS */}
+        <FadeIn as="section" className="min-h-screen w-full mt-20 relative overflow-visible px-15 md:px-25 lg:px-50" direction="up">
+             
+      <Image
+       src="/images/bg/doodles.2f5849cf.svg"
+       alt="Background doodles"
+       fill
+       className="object-cover object-center pointer-events-none select-none opacity-100 overflow-visible"
+       priority={false}
+      />
+        
+        {/* Content */}
+        <div className="relative z-10">
         <div className="flex items-end justify-between mb-10">
-        <div>
-          <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
-            Featured Projects<span className="text-accent-500">.</span>
-          </h2>
-        </div>
+          <div>
+            <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
+              Featured Projects<span className="text-accent-500">.</span>
+            </h2>
+          </div>
         <a href="/projects" className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest">
          See all →
         </a>
@@ -149,7 +158,7 @@ export default function Home() {
         <p className="text-neutral-400 text-sm leading-relaxed mb-4">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-1.5 mb-6">
+        <div className="flex flex-wrap gap-1.5 mb-2">
           {project.tags.map((tag) => (
             <span key={tag} className="font-mono text-xs px-2 py-0.5 rounded bg-neutral-800 text-neutral-500">
               {tag}
@@ -175,16 +184,17 @@ export default function Home() {
       </div>
     </div>
   ))}
+  </div>
 </div> 
-    </FadeIn>
+        </FadeIn>
 
-    {/* Experience Section */}
-    <FadeIn as="section" className="w-full mt-32" direction="left" delay={100}>
+        {/* Experience Section */}
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-15 md:px-25 lg:px-50" direction="left" delay={100}>
       <ExperienceSection />
-    </FadeIn>
+        </FadeIn>
 
-    {/* About Me Section */}
-    <FadeIn as="section" className="w-full mt-32" direction="right" delay={100}>
+        {/* About Me Section */}
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-15 md:px-25 lg:px-50" direction="right" delay={100}>
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
@@ -221,10 +231,10 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </FadeIn>
+        </FadeIn>
       
-      {/* Contact Section */}
-      <FadeIn as="section" className="min-h-screen flex items-center relative" direction="up" delay={200}>
+        {/* Contact Section */}
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-15 md:px-25 lg:px-50" direction="up" delay={200}>
           <div className="min-h-screen pt-32 pb-20 px-6 max-w-2xl mx-auto">
             <h1 className="font-display text-6xl font-bold mb-4">Get in touch<span className="text-accent-500">.</span></h1>
             <p className="text-neutral-400 mb-12">
@@ -232,8 +242,8 @@ export default function Home() {
               </p>
             <ContactForm />
             </div>
-      </FadeIn>
-    </main>
+        </FadeIn>
+      </main>
     </>
   );
 }
