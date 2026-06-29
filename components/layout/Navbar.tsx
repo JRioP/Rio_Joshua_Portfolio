@@ -55,7 +55,7 @@ export default function Navbar() {
   {/* Logo */}
   <Link
     href="/"
-    className="font-display font-black text-3xl tracking-tight text-neutral-100 px-5 md:px-15 lg:px-40"
+    className="font-display font-black text-2xl tracking-tight text-neutral-100 px-12 md:px-15 lg:px-50"
   >
     J<span className="text-accent-500">.</span>Rio
   </Link>
