@@ -7,8 +7,8 @@ import Image from "next/image";
 export default function ProjectsPage() {
   const projects = getProjects();
   return (
-    <div className="min-h-screen pt-24 pb-20 px-6 max-w-6xl mx-auto">
-      <h1 className="font-display text-6xl font-bold tracking-tight mb-12">
+    <div className="min-h-screen w-full mt-20 relative overflow-visible py-10 px-10 md:px-15 lg:px-50">
+      <h1 className="font-display text-4xl font-bold tracking-tight mb-12 md:text-6xl">
             Projects<span className="text-accent-500">.</span>
             </h1>
       <p className="text-neutral-400 text-lg leading-relaxed mb-10">

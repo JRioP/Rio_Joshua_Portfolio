@@ -4,10 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
-  { href:   "/",         label: "Home"},
-   { href:  "/project",  label: "Projects"},
-  { href:   "/about",    label: "About"    },
-  { href:   "/contact",  label: "Contact"  },
+  { href:   "/",        label: "Home"},
+  { href:  "/projects",  label: "Projects"},
+  { href:   "/about",   label: "About"    },
+  { href:   "/contact", label: "Contact"  },
 ];
 
 export default function MenuToggle() {
