@@ -11,24 +11,22 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <main className=" relative px-6 max-w-6xl mx-auto">
-        
-        <div className="hero-blobs">
+      <main className="min-h-screen relative w-full overflow-hidden">
+        <section className="min-h-screen w-full flex items-center relative py-12 md:py-0 px-[50px] overflow-hidden">
+          {/* Animated background blobs */}
+          <div className="min-h-screen hero-blobs pointer-events-none">
             <div className="blob blob-1" />
             <div className="blob blob-2" />
             <div className="blob blob-3" />
           </div>
-
-      <section className="min-h-screen flex items-center relative py-12 md:py-0">
-        {/* Animated background blobs */}
           
-        <div className="flex flex-col md:flex-row items-center gap-12 w-full relative z-10">
+        <div className="flex flex-col md:flex-row items-center gap-12 w-full relative z-10 max-w-6xl mx-auto">
         {/* LEFT COLUMN — text content */}
           <div className="flex-1 max-w-xl">
-          <h1 className="font-display text-6xl font-bold leading-tight tracking-tight">
+          <h1 className="text-4xl font-display md:text-6xl font-bold leading-tight tracking-tight">
           Hi, I'm Josh <br />
           </h1>
-          <h1 className="font-display text-4xl text-accent-500 font-bold leading-tight tracking-tight mb-6">
+          <h1 className="text-xl font-display md:text-4xl text-accent-500 font-bold leading-tight tracking-tight mb-6">
           <RotatingText/>
           </h1>
           <p className="text-neutral-400 text-lg leading-relaxed mb-4">
@@ -114,80 +112,102 @@ export default function Home() {
           <path d="M8 3v10M8 13l-4-4M8 13l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
-      </section>
+        </section>
 
-      {/* FEATURED PROJECTS */}
-      <FadeIn as="section" className="w-full mt-20 relative" direction="up">
-        <div className="flex items-end justify-between mb-10">
-        <div>
-          <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
-            Featured Projects<span className="text-accent-500">.</span>
-          </h2>
-        </div>
-        <a href="/projects" className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest">
-         See all →
-        </a>
-        </div>
-  {/* Project Grid */}
-   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-    {projects.filter((p) => p.featured).map((project) => (
-    <div key={project.slug} className="group bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden hover:border-neutral-600 transition-all duration-200 flex flex-col">
+        {/* FEATURED PROJECTS */}
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="up">   
+          <Image
+            src="/images/bg/doodles.2f5849cf.svg"
+            alt="Background doodles"
+            fill
+            className="object-cover object-center pointer-events-none select-none opacity-100 overflow-visible"
+            priority={false}
+          />
+        
+          {/* Content */}
+          <div className="relative z-10">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <h2 className="font-display font-bold tracking-tight mb-12 text-4xl md:text-6xl">
+                  Featured Projects<span className="text-accent-500">.</span>
+                </h2>
+              </div>
+            <a href="/projects" className="font-mono text-xs text-neutral-400 hover:text-accent-500 transition-colors uppercase tracking-widest">
+              See all →
+            </a>
+          </div>
+  
+          {/* Project Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {projects.filter((p) => p.featured).map((project) => (
+            <div key={project.slug} className="group bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden hover:border-neutral-600 transition-all duration-200 flex flex-col">
+            
+          {/* Project grid image*/}
+            {project.coverImage && (
+            <div className="relative w-full h-48 bg-neutral-800">
+            <Image src={project.coverImage} alt={project.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw" className="object-cover object-top group-hover:scale-105 transition-transform duration-300" />
+            </div>
+            )}
 
-      {project.coverImage && (
-        <div className="relative w-full h-48 bg-neutral-800">
-          <Image src={project.coverImage} alt={project.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw" className="object-cover object-top group-hover:scale-105 transition-transform duration-300" />
-        </div>
-      )}
-
-      <div className="p-6 flex flex-col flex-1">
-        <p className="font-mono text-xs text-accent-500 uppercase tracking-widest mb-3">
-          {project.category}
-        </p>
-        <h3 className="font-display text-xl font-bold tracking-tight mb-2">
-          {project.title}
-        </h3>
-        <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-          {project.description}
-        </p>
-        <div className="flex flex-wrap gap-1.5 mb-6">
-          {project.tags.map((tag) => (
+          {/* Project grid category text */}
+            <div className="p-6 flex flex-col flex-1">
+            <p className="font-mono text-xs text-accent-500 uppercase tracking-widest mb-3">
+            {project.category}
+            </p>
+            
+          {/* Project grid category title or heading */}
+            <h3 className="font-display text-xl font-bold tracking-tight mb-2">
+            {project.title}
+            </h3>
+            
+          {/* Project grid short description */}
+            <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+            {project.description}
+            </p>
+            
+          {/* Project grid tags */}
+            <div className="flex flex-wrap gap-1.5 mb-2">
+            {project.tags.map((tag) => (
             <span key={tag} className="font-mono text-xs px-2 py-0.5 rounded bg-neutral-800 text-neutral-500">
               {tag}
             </span>
-          ))}
-        </div>
+            ))}
+            </div>
       
-      {/* buttons */}
-        <div className="flex gap-3 mt-auto pt-4 border-t border-neutral-800">
-          <a href={`/projects/${project.slug}`} className="flex-1 text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg bg-accent-500 text-neutral-300 font-bold hover:bg-accent-400 hover:text-white transition-colors">
-            Case study
-          </a>
-          {project.liveUrl ? (
+          {/* buttons */}
+            <div className="flex gap-3 mt-auto pt-4 border-t border-neutral-800">
+            <a href={`/projects/${project.slug}`} className="flex-1 text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg bg-accent-500 text-neutral-300 font-bold hover:bg-accent-400 hover:text-white transition-colors">
+              Case study
+            </a>
+          
+          {/* buttons for live url or github*/}
+            {project.liveUrl ? (
             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
               Live site
             </a>
-          ) : project.githubUrl ? (
+            ) : project.githubUrl ? (
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
               GitHub
             </a>
-          ) : null}
-        </div>
-      </div>
-    </div>
-  ))}
-</div> 
-    </FadeIn>
+            ) : null}
+            </div>
+            </div>
+            </div>
+           ))}
+          </div>
+          </div> 
+        </FadeIn>
 
-    {/* Experience Section */}
-    <FadeIn as="section" className="w-full mt-32" direction="left" delay={100}>
-      <ExperienceSection />
-    </FadeIn>
+        {/* Experience Section */}
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="left" delay={100}>
+        <ExperienceSection/>
+        </FadeIn>
 
-    {/* About Me Section */}
-    <FadeIn as="section" className="w-full mt-32" direction="right" delay={100}>
+        {/* About Me Section */}
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="right" delay={100}>
         <div className="flex items-end justify-between mb-10">
           <div>
-            <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
+            <h2 className="font-display text-4xl font-bold tracking-tight mb-12 md:text-6xl">
             About Me<span className="text-accent-500">.</span>
             </h2>
           </div>
@@ -214,26 +234,27 @@ export default function Home() {
           
           {/* Text */}
           <div className="flex-1 min-w-0">
-            <p className="text-neutral-400 text-3xl leading-relaxed mb-5">
+            <p className="text-neutral-400 text-2xl leading-relaxed mb-5 md:text-4xl">
              I'm a BSIT graduate from STI College Tanauan, based in Laguna. 
              I like building things that solve real problems — a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
               I'm currently looking for a professional role, open to Metro Manila or remote.
             </p>
           </div>
         </div>
-      </FadeIn>
+        </FadeIn>
       
-      {/* Contact Section */}
-      <FadeIn as="section" className="min-h-screen flex items-center relative" direction="up" delay={200}>
+        {/* Contact Section */}
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="up" delay={200}>
           <div className="min-h-screen pt-32 pb-20 px-6 max-w-2xl mx-auto">
-            <h1 className="font-display text-6xl font-bold mb-4">Get in touch<span className="text-accent-500">.</span></h1>
+            <h1 className="font-display text-4xl font-bold mb-4 md:text-6xl">Get in touch<span className="text-accent-500">.</span></h1>
             <p className="text-neutral-400 mb-12">
               Open to full-time roles and interesting projects. Based in Laguna — available remotely.
               </p>
             <ContactForm />
             </div>
-      </FadeIn>
-    </main>
+        </FadeIn>
+      
+      </main>
     </>
   );
 }

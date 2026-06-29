@@ -53,56 +53,56 @@ export default function ExperienceSection() {
 
   return (
     <section className="w-full mt-32">
-      <h2 className="font-display text-6xl font-bold tracking-tight mb-12">
+      <h2 className="font-display text-4xl font-bold tracking-tight mb-12 md:text-6xl">
         Experience<span className="text-accent-500">.</span>
       </h2>
 
-      <div className="flex gap-0">
-        {/* Left sidebar */}
+      <div className="flex-row gap-0 md:flex">
+      {/* Left sidebar */}
         
-        {/* Timeline */}
-        <div className="relative">
-        {/* Vertical connecting line */}
-        <div className="absolute left-1.75 top-2 bottom-2 w-px bg-neutral-800" />
+      {/* Timeline */}
+      <div className="relative">
+      {/* Vertical connecting line */}
+      <div className="absolute left-1.75 top-2 bottom-2 w-px bg-neutral-800" />
 
-  <div className="flex flex-col gap-6">
-    {EXPERIENCES.map((e, i) => (
+      <div className="flex flex-col gap-6">
+      {EXPERIENCES.map((e, i) => (
       <div key={e.company} className="flex gap-5 items-start relative">
         
-        {/* Dot — filled accent when active, hollow when not */}
+      {/* Dot — filled accent when active, hollow when not */}
         <button
           onClick={() => setActive(i)}
           className={`w-4 h-4 rounded-full border-2 shrink-0 mt-1 z-10 transition-all cursor-pointer ${
-            active === i
-              ? "bg-accent-500 border-accent-500"
-              : "bg-neutral-950 border-neutral-700 hover:border-accent-500"
+          active === i
+            ? "bg-accent-500 border-accent-500"
+            : "bg-neutral-950 border-neutral-700 hover:border-accent-500"
           }`}
           aria-label={`View ${e.company}`}
-        />
+          />
 
-        {/* Label */}
+      {/* Label */}
         <button
           onClick={() => setActive(i)}
           className={`text-left font-mono text-sm transition-colors cursor-pointer pb-6 ${
-            active === i
-              ? "text-accent-500"
-              : "text-neutral-500 hover:text-neutral-200"
+          active === i
+            ? "text-accent-500"
+            : "text-neutral-500 hover:text-neutral-200"
           }`}
         >
           {e.company}<br/>
           {e.period.slice(0,4)}
         </button>
 
-      </div>
-    ))}
-  </div>
-</div>
+        </div>
+        ))}
+        </div>
+        </div>
 
         {/* Right content */}
         <div className="flex-1 pl-10">
           <h3 className="font-display text-2xl font-bold mb-1">
-            {exp.role}{" "}
-            <span className="text-accent-500">@ {exp.company}</span>
+          {exp.role}{" "}
+          <span className="text-accent-500">@ {exp.company}</span>
           </h3>
           <p className="font-mono text-xs text-neutral-500 mb-6">{exp.period}</p>
           <ul className="flex flex-col gap-3">
@@ -115,12 +115,12 @@ export default function ExperienceSection() {
                   viewBox="0 0 14 14"
                   fill="none"
                 >
-                  <path
-                    d="M2 7l3.5 3.5L12 3.5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                <path
+                  d="M2 7l3.5 3.5L12 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   />
                 </svg>
                 {b}
