@@ -31,22 +31,22 @@ export const metadata: Metadata = {
     template: "%s · Joshua Rio",
   },
   description:
-    "Full-stack developer from Batangas. I build Android apps, production websites, and AI-powered tools.",
-  keywords: ["Joshua Rio", "full-stack developer", "Android", "Next.js", "Philippines", "Batangas"],
+    "Aspiring Full-stack developer from Laguna. I build Android apps, production websites, and AI-powered tools.",
+  keywords: ["Joshua Rio", "full-stack developer", "Android", "Next.js", "Philippines", "Laguna"],
   authors: [{ name: "Joshua Rio", url: "https://github.com/JRioP" }],
   creator: "Joshua Rio",
   openGraph: {
     type: "website",
     locale: "en_PH",
     url: "https://joshuario.vercel.app", // TODO: update to your domain
-    title: "Joshua Rio — Full-Stack Developer",
-    description: "Full-stack developer from Batangas. I build Android apps, production websites, and AI-powered tools.",
+    title: "Joshua Rio — Aspiring Full-Stack Developer",
+    description: "Aspiring full-stack developer from Laguna. I build Android apps, production websites, and AI-powered tools.",
     siteName: "Joshua Rio",
   },
   twitter: {
     card: "summary_large_image",
     title: "Joshua Rio — Full-Stack Developer",
-    description: "Full-stack developer from Batangas.",
+    description: "Aspiring Full-stack developer from Laguna .",
   },
   robots: {
     index: true,
