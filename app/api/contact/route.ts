@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { name, email, message } = await req.json();
+    
     const error = validateInput(name, email, message);
     if (error) return NextResponse.json({ error }, { status: 400 });
 
@@ -28,6 +29,33 @@ export async function POST(req: NextRequest) {
     if (resendError) {
       console.error("[Resend error]", resendError);
       return NextResponse.json({ error: "Failed to send." }, { status: 500 });
+    }
+
+    const { error: confirmError } = await resend.emails.send({
+      from:    "<No Reply> Joshua Rio <onboarding@resend.dev>",
+      to:      email,
+      subject: `Got your message, ${name}!`,
+      text:    `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nHere's a copy of what you sent:\n\n"${message}"\n\nBest,\nJoshua Rio\nhttps://joshuario.vercel.app`,
+      html: `
+        <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px">
+          <h1 style="font-size:24px;font-weight:700;margin-bottom:4px">Got your message, ${name}! 👋</h1>
+          <p style="color:#666;margin-top:0">Thanks for reaching out — I'll get back to you within 24 hours.</p>
+          <hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>
+          <p style="color:#444;font-size:14px;margin-bottom:8px">Here's a copy of your message:</p>
+          <div style="background:#f9f9f9;border-left:3px solid #3b82f6;padding:16px;border-radius:0 8px 8px 0;margin-bottom:24px">
+            <p style="margin:0;color:#555;font-size:14px;white-space:pre-wrap">${message}</p>
+          </div>
+          <hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>
+          <p style="color:#444;font-size:14px">Best,</p>
+          <p style="font-weight:700;margin-top:4px">Joshua Rio</p>
+          <a href="https://joshuario.vercel.app" style="color:#3b82f6;font-size:12px">joshuario.vercel.app</a>
+        </div>
+      `,
+    });
+
+    if (confirmError) {
+      // Log but don't fail — you still got notified
+      console.error("[Resend confirmation error]", confirmError);
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
