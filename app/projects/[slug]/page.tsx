@@ -33,13 +33,13 @@ export default async function CaseStudyPage({
   return (
     <article className="min-h-screen pt-24 pb-20 px-6 max-w-3xl mx-auto">
       <header className="mb-16">
-        <h3 className="font-display text-4xl font-bold tracking-tight mb-12">
+        <h3 className="font-display text-2xl font-bold tracking-tight mb-12 md:text-4xl">
             Case Study<span className="text-accent-500">.</span>
             </h3>
             <p className="text-accent-400 text-sm uppercase tracking-widest mb-4">
               {project.category}
             </p>
-        <h1 className="font-display text-6xl font-bold leading-none tracking-tight mb-6">
+        <h1 className="font-display text-3xl font-bold leading-none tracking-tight mb-6 md:text-6xl">
           {project.title}
         </h1>
         <p className="text-neutral-400 text-xl leading-relaxed mb-8">
