@@ -14,13 +14,6 @@ export const CERTIFICATIONS: Certification[] = [
     issuer: "Oracle Academy",
     typeOfCertificate: "Completed Courses",
     year: "2023",
-    icon: iconPath("Rio_Java_Fundamentals.png")
-    },
-    {
-    name: "Java Fundamentals 2",
-    issuer: "Oracle Academy",
-    typeOfCertificate: "Completed Courses",
-    year: "2023",
     icon: iconPath("java_fundamental_2.png")
     },
     {
@@ -36,6 +29,27 @@ export const CERTIFICATIONS: Certification[] = [
     typeOfCertificate: "Awards / Recognitions",
     year: "2024",
     icon: iconPath("Exploring_Hardware_Cert.png")
+    },
+    {
+    name: "Cum Laude",
+    issuer: "STI College Tanauan",
+    typeOfCertificate: "Awards / Recognitions",
+    year: "2026",
+    icon: iconPath("Rio_Cum_Laude.png")
+    },
+    {
+    name: "Best in Capstone",
+    issuer: "STI College Tanauan",
+    typeOfCertificate: "Awards / Recognitions",
+    year: "2026",
+    icon: iconPath("Rio_Best_in_Capstone.png")
+    },
+    {
+    name: "Programmer of the Year",
+    issuer: "STI College Tanauan",
+    typeOfCertificate: "Awards / Recognitions",
+    year: "2026",
+    icon: iconPath("Rio_Programmer_of_the_Year.png")
     },
     {
     name: "SSC Appreciation",
