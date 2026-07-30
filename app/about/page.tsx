@@ -29,7 +29,7 @@ export default function AboutPage() {
 
         {/* Photo */}
         <div className="shrink-0">
-          <div className="relative w-87 h-87 rounded-2xl overflow-hidden border border-neutral-800 md:w-56 md:h-64">
+          <div className="relative w-64 h-64 rounded-2xl overflow-hidden border border-neutral-800 md:w-72 md:h-56">
             <Image
               src="/images/BSIT_RIO.jpg"
               alt="Joshua Rio"
