@@ -77,6 +77,12 @@ export default function Navbar() {
         </Link>
       </li>
     ))}
+    <a
+          href="/resume"
+          className="px-6 py-3 bg-accent text-accent-100 font-semibold rounded-lg text-sm bg-accent-500 hover:bg-accent-400 hover:text-amber-50 transition-colors"
+        >
+          View Resume
+        </a>
   </ul>
 
   {/* Mobile nav menu */}
