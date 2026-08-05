@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s · Joshua Rio",
   },
   description:
-    "Aspiring Full-stack developer from Laguna. I build Android apps, production websites, and AI-powered tools.",
+    "Full-stack developer from Laguna. I build Android apps, production websites, and AI-powered tools.",
   keywords: ["Joshua Rio", "full-stack developer", "Android", "Next.js", "Philippines", "Laguna"],
   authors: [{ name: "Joshua Rio", url: "https://github.com/JRioP" }],
   creator: "Joshua Rio",
@@ -59,6 +59,32 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Joshua Alnie Padilla Rio",
+      "alternateName": "Joshua Rio",
+      "url": "https://joshuario.vercel.app",
+      "email": "riojoshuadev@gmail.com",
+      "jobTitle": "Junior Full-Stack Developer",
+      "description": "Cum Laude BSIT graduate, Programmer of the Year. Ships production-ready web, mobile, and AI applications.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cabuyao",
+        "addressRegion": "Laguna",
+        "addressCountry": "PH"
+        },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "STI College Tanauan"
+        },
+      "knowsAbout": ["PHP", "Java", "Python", "React", "Next.js", "Firebase", "WordPress", "Android Development", "AI/LLM"],
+      "sameAs": [
+        "https://github.com/JRioP",
+       "https://linkedin.com/in/japrdev"
+        ]
+      };
+
   return (
     <html
       lang="en"
