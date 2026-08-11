@@ -5,6 +5,7 @@ import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
 import FadeIn from "@/components/ui/animations/fadeIn";
 import { TechStackCard } from "@/components/TechStackCard";
+import { FloatingChat } from "@/components/FloatingChat";
 
 export default function Home() {
   const projects = getProjects();
@@ -103,6 +104,8 @@ export default function Home() {
            </div>
           </div>
         </div>
+        {/* floating chat component */}
+        <FloatingChat/>
       </div>
 
       {/* Scroll indicator */}
