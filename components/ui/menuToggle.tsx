@@ -49,6 +49,7 @@ export default function MenuToggle() {
           <nav className="flex flex-col gap-2 mb-16">
             {NAV_LINKS.map(({ href, label }, i) => (
               <Link
+                prefetch={false}
                 key={href}
                 href={href}
                 className={`font-display font-bold tracking-tight transition-all duration-300 ${open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"} ${pathname === href ? "text-accent-500" : "text-neutral-100 hover:text-accent-500"}`}

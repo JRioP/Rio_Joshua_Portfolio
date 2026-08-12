@@ -55,6 +55,7 @@ export default function Navbar() {
   {/* Logo */}
   <Link
     href="/"
+    prefetch={false}
     className="font-display font-black text-2xl tracking-tight text-neutral-100 px-12 md:px-15 lg:px-50"
   >
     J<span className="text-accent-500">.</span>Rio
@@ -66,6 +67,7 @@ export default function Navbar() {
       <li key={href}>
         <Link
           href={href}
+          prefetch={false}
           className={clsx(
             "font-mono uppercase tracking-widest transition-colors",
             pathname === href
