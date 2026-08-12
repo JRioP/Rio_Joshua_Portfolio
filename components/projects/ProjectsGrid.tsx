@@ -45,6 +45,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filtered.map((project) => (
           <Link
+            prefetch={false}
             key={project.slug}
             href={`/projects/${project.slug}`}
             className="group block bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-neutral-600 transition-all duration-200 hover:-translate-y-0.5"
