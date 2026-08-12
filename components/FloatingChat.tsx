@@ -1,96 +1,204 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+
+type Message = { role: "user" | "assistant"; content: string };
+
+const SUGGESTED = [
+  "What is RoadRescue?",
+  "What stack do you know?",
+  "Tell me about MaYo Holdings.",
+  "Are you open to work?",
+];
 
 export function FloatingChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const chatRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
+  // Close on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-        if(chatRef.current && !chatRef.current.contains(e.target as Node)) {
-            setIsOpen(false);
-        }
-    };
+      if (toggleRef.current?.contains(e.target as Node)) return;
+    if (chatRef.current && !chatRef.current.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  };
     document.addEventListener("mousedown", handler);
-    return () => {
-        document.removeEventListener("mousedown", handler);
-    };
-    }, []);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
-    const sendQuestion = async () => {
-        if (!question.trim()) return;
-        setIsLoading(true);
-        setAnswer("");
-        try {
-            const res = await fetch("/api/chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ question })
-            });
-            const data = await res.json();
-            setAnswer(data.answer);
-        } catch (error) {
-            console.error("Error fetching chat response:", error);
-            setAnswer("Sorry, I encountered an error while processing your request.");
-        } finally {
-            setIsLoading(false);
-        }
-    };
+  // Auto-scroll to latest message
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
 
-    return (
-    <div className="fixed bottom-4 right-4 z-50">
-      {/* Toggle button */}
-      <button
-        onClick={() => setIsOpen((o) => !o)}
-        className="p-3 rounded-full bg-accent-500 text-white shadow-lg"
-      >
-        💬
-      </button>
+  // Focus input when opened
+  useEffect(() => {
+    if (isOpen) setTimeout(() => inputRef.current?.focus(), 100);
+  }, [isOpen]);
+
+  const sendQuestion = async (text?: string) => {
+    const q = (text ?? question).trim();
+    if (!q || isLoading) return;
+
+    setMessages((prev) => [...prev, { role: "user", content: q }]);
+    setQuestion("");
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: data.answer ?? "No answer returned." },
+      ]);
+    } catch (err) {
+      console.error("[Chat error]", err);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Sorry, something went wrong. Try again in a moment.",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
 
       {/* Chat panel */}
       {isOpen && (
         <div
           ref={chatRef}
-          className="mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden"
+          className="w-80 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+          style={{ height: "420px" }}
         >
-          <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-            <h3 className="font-semibold text-gray-800 dark:text-gray-200">
-              Chat
-            </h3>
+          {/* Header */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800 bg-neutral-950">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="font-mono text-xs text-neutral-300 uppercase tracking-widest">
+                Ask Josh's AI
+              </span>
+            </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-neutral-600 hover:text-neutral-300 transition-colors font-mono text-xs cursor-pointer"
+              aria-label="Close chat"
+            >
+              ✕
+            </button>
           </div>
 
-          <div className="p-4 h-48 overflow-y-auto">
-            {isLoading ? (
-              <p className="text-gray-500">Thinking…</p>
-            ) : (
-              <p className="text-gray-800 dark:text-gray-200">{answer}</p>
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-3">
+            {/* Welcome message */}
+            {messages.length === 0 && !isLoading && (
+              <div className="flex flex-col gap-3">
+                <p className="text-neutral-400 text-xs leading-relaxed">
+                  Hi! I'm Josh's AI assistant. Ask me anything about his projects, skills, or experience.
+                </p>
+                <div className="flex flex-col gap-2">
+                  {SUGGESTED.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => sendQuestion(s)}
+                      className="text-left font-mono text-xs px-3 py-2 rounded-lg border border-neutral-700 text-neutral-400 hover:border-accent-500 hover:text-accent-500 transition-colors cursor-pointer"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
+
+            {/* Message bubbles */}
+            {messages.map((msg, idx) => (
+              <div
+                key={idx}
+                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`max-w-[85%] px-3 py-2 rounded-xl text-xs leading-relaxed whitespace-pre-wrap ${
+                    msg.role === "user"
+                      ? "bg-accent-500 text-black font-medium"
+                      : "bg-neutral-800 text-neutral-200 border border-neutral-700"
+                  }`}
+                >
+                  {msg.content}
+                </div>
+              </div>
+            ))}
+
+            {/* Typing indicator */}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="bg-neutral-800 border border-neutral-700 px-3 py-2 rounded-xl flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+                </div>
+              </div>
+            )}
+
+            <div ref={bottomRef} />
           </div>
 
-          <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+          {/* Input */}
+          <div className="px-3 py-3 border-t border-neutral-800 bg-neutral-950 flex gap-2">
             <input
+              ref={inputRef}
               type="text"
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendQuestion()}
               placeholder="Ask something…"
-              className="w-full p-2 rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+              disabled={isLoading}
+              className="flex-1 bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-xs text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent-500 transition-colors disabled:opacity-50"
             />
             <button
-              onClick={sendQuestion}
-              disabled={isLoading}
-              className="mt-2 w-full bg-accent-400 text-white py-2 rounded disabled:opacity-50"
+              onClick={() => sendQuestion()}
+              disabled={isLoading || !question.trim()}
+              className="px-3 py-2 bg-accent-500 text-black rounded-lg text-xs font-bold hover:bg-accent-400 transition-colors disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
             >
-              Send
+              →
             </button>
           </div>
         </div>
       )}
+
+      {/* Toggle button */}
+      <button
+        ref={toggleRef}
+        onClick={() => setIsOpen((o) => !o)}
+        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer ${
+          isOpen
+            ? "bg-neutral-700 text-neutral-300"
+            : "bg-accent-500 text-black hover:bg-accent-400"
+        }`}
+        aria-label={isOpen ? "Close chat" : "Open AI chat"}
+      >
+        {isOpen ? (
+          <span className="text-sm">✕</span>
+        ) : (
+          <span className="text-lg">💬</span>
+        )}
+      </button>
     </div>
   );
 }
