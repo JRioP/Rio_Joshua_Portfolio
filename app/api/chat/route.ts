@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
+    
     const RAG_API_URL = process.env.RAG_API_URL;
+    
     const { question } = await req.json();
 
     if (!question || question.trim().length === 0) {
