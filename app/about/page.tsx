@@ -117,7 +117,7 @@ export default function AboutPage() {
       <div className="grid grid-col-1 mt-10 space-y-5 md:grid-cols-2 md:space-y-none">
         {/* Render a carousel for each certificate category */}
         {Object.entries(groupedCert).map(([category, items]) => (
-        <div key={category} className="mb-8">
+        <div key={category} className="mb-8 mr-10">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
               {category}
             </p> 
