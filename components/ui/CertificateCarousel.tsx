@@ -30,7 +30,7 @@ export default function CertificateCarousel({ certificates }: CertificateCarouse
   return (
     <div className="relative w-full select-none">
 
-      {/* Image container — fixed height, no layout shift */}
+      {/* Image container */}
       <div className="relative w-full h-128 bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
         <Image
           src={cert.icon}
@@ -86,7 +86,6 @@ export default function CertificateCarousel({ certificates }: CertificateCarouse
           ))}
         </div>
       )}
-
     </div>
   );
 }
