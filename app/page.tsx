@@ -238,7 +238,7 @@ export default function Home() {
           {/* Text */}
           <div className="flex-1 min-w-0">
             <p className="text-neutral-400 text-2xl leading-relaxed mb-5 md:text-4xl">
-             I'm a BSIT graduate from STI College Tanauan, based in Laguna. 
+             I'm a BSIT graduate from STI College Tanauan, based in Talisay City, Batangas. 
              I like building things that solve real problems — a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
               I'm currently looking for a professional role, open to Metro Manila or remote.
             </p>
@@ -251,7 +251,7 @@ export default function Home() {
           <div className="min-h-screen pt-32 pb-20 px-6 max-w-2xl mx-auto">
             <h1 className="font-display text-4xl font-bold mb-4 md:text-6xl">Get in touch<span className="text-accent-500">.</span></h1>
             <p className="text-neutral-400 mb-12">
-              Open to full-time roles and interesting projects. Based in Laguna — available remotely.
+              Open to full-time roles and interesting projects. Based in Talisay City, Batangas — available remotely.
               </p>
             <ContactForm />
             </div>
