@@ -1,6 +1,8 @@
 // app/resume/page.tsx
 import type { Metadata } from "next";
+import dynamic from 'next/dynamic';
 import Link from "next/link";
+import ResumeViewerClient from "@/components/resumeviewer/ResumeViewerClient";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -26,8 +28,10 @@ export default function ResumePage() {
         <object
           data="/resume/Joshua_Rio_Resume.pdf"
           type="application/pdf"
-          className="w-full h-[80vh]"
+          className="w-full h-[75vh]"
         >
+          <ResumeViewerClient fileUrl="/resume/Joshua_Rio_Resume.pdf" />
+          
           {/* Fallback for mobile browsers that block inline PDFs */}
           <div className="flex flex-col items-center justify-center h-full p-8 text-center bg-neutral-900 w-full">
             <p className="mb-4 text-neutral-400">Your browser doesn't support inline PDFs.</p>

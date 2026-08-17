@@ -84,7 +84,7 @@ export default function Home() {
             </div>
             <div className="flex justify-between items-center">
               <span className="font-mono text-xs text-neutral-600">Location</span>
-              <span className="font-mono text-xs text-neutral-300">Laguna, PH</span>
+              <span className="font-mono text-xs text-neutral-300">Batangas, PH</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="font-mono text-xs text-neutral-600">Available</span>

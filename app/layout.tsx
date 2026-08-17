@@ -39,14 +39,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_PH",
     url: "https://joshuario.vercel.app", // TODO: update to your domain
-    title: "Joshua Rio — Aspiring Full-Stack Developer",
-    description: "Aspiring full-stack developer from Laguna. I build Android apps, production websites, and AI-powered tools.",
+    title: "Joshua Rio — Full-Stack Developer",
+    description: "Full-stack developer from Batangas. I build Android apps, production websites, and AI-powered tools.",
     siteName: "Joshua Rio",
   },
   twitter: {
     card: "summary_large_image",
     title: "Joshua Rio — Full-Stack Developer",
-    description: "Aspiring Full-stack developer from Laguna .",
+    description: "Full-stack developer from Batangas.",
   },
   robots: {
     index: true,

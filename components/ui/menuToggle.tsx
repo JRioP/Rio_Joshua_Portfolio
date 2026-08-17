@@ -71,7 +71,7 @@ export default function MenuToggle() {
               Email
             </a>
             <span className="font-mono text-xs text-neutral-100 uppercase tracking-widest ml-auto">
-              Laguna, PH · Open to work
+              Batangas, PH · Open to work
             </span>
           </div>
         </div>

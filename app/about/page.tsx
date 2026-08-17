@@ -51,7 +51,7 @@ export default function AboutPage() {
             I build real things that get deployed.
           </h2>
           <p className="text-neutral-400 text-lg leading-relaxed mb-4 max-w-2xl">
-            I'm a BSIT graduate from STI College Tanauan, based in Laguna, Philippines.
+            I'm a BSIT graduate from STI College Tanauan, based in Batangas, Philippines.
             My work includes a real-time Android roadside assistance app, a production corporate website,
             and a local AI document chatbot.
           </p>
@@ -62,7 +62,7 @@ export default function AboutPage() {
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-2 text-sm text-neutral-500">
               <span className="text-accent-500">📍</span>
-              Laguna, Philippines
+              Batangas, Philippines
             </div>
             <div className="flex items-center gap-2 text-sm text-neutral-500">
               <span className="text-accent-500">🎓</span>
