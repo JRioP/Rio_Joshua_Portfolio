@@ -24,7 +24,7 @@ export default function AboutPage() {
   
 
     {/* Photo + bio section */}
-    <FadeIn as="section" className="w-full relative mt-20 overflow-visible" direction="up" delay={0.1}>
+    <FadeIn as="section" className="w-full relative mt-20 overflow-visible" direction="up" delay={100}>
       <div className="flex flex-col md:flex-row gap-10 items-start">
 
         {/* Photo */}
@@ -84,7 +84,7 @@ export default function AboutPage() {
 
 
       {/* Tech Stack Section */}
-      <FadeIn as ="section" className="w-full relative mt-20 overflow-visible" direction="left" delay={0.1}>
+      <FadeIn as ="section" className="w-full relative mt-20 overflow-visible" direction="left" delay={100}>
           <h2 className="text-3xl font-bold tracking-tight">Tech Stack <span className="text-accent-400">.</span></h2>
             <p className="text-neutral-400 text-lg leading-relaxed pb-10 max-w-2xl md:pb-0">
               I worked across these stack, but I specialize in Android development and backend APIs. 
@@ -110,7 +110,7 @@ export default function AboutPage() {
       </FadeIn>
 
       {/* Certification Section */}
-      <FadeIn as ="section" className="w-full relative mt-20 overflow-visible" direction="right" delay={0.1}>
+      <FadeIn as ="section" className="w-full relative mt-20 overflow-visible" direction="right" delay={100}>
       <h1 className="text-3xl font-bold tracking-tight">
         Certifications<span className="text-accent-400">.</span>
       </h1>
@@ -128,7 +128,7 @@ export default function AboutPage() {
       </FadeIn>
 
       {/* Education Section */}
-     <FadeIn as="section" className="w-full relative mt-20 overflow-visible" direction="up" delay={0.15}>
+     <FadeIn as="section" className="w-full relative mt-20 overflow-visible" direction="up" delay={100}>
       <div className="flex flex-col gap-6">
       <h1 className="text-3xl font-bold tracking-tight">
        Education timeline<span className="text-accent-400">.</span>

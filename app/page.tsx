@@ -202,12 +202,12 @@ export default function Home() {
         </FadeIn>
 
         {/* Experience Section */}
-        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="left" delay={.1}>
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="left" delay={100}>
         <ExperienceSection/>
         </FadeIn>
 
         {/* About Me Section */}
-        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="right" delay={.1}>
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="right" delay={100}>
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="font-display text-4xl font-bold tracking-tight mb-12 md:text-6xl">
@@ -247,7 +247,7 @@ export default function Home() {
         </FadeIn>
       
         {/* Contact Section */}
-        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="up" delay={.2}>
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="up" delay={100}>
           <div className="min-h-screen pt-32 pb-20 px-6 max-w-2xl mx-auto">
             <h1 className="font-display text-4xl font-bold mb-4 md:text-6xl">Get in touch<span className="text-accent-500">.</span></h1>
             <p className="text-neutral-400 mb-12">
