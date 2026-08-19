@@ -79,8 +79,7 @@ export function FloatingChat() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-
+    <div className="fixed bottom-10 right-10 z-50 flex flex-col items-end gap-3 md:bottom-20 md:right-20">
       {/* Chat panel */}
       {isOpen && (
         <div

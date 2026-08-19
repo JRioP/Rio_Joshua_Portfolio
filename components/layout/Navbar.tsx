@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { clsx } from "clsx";
 import MenuToggle from "@/components/ui/menuToggle";
+import { FloatingChat } from "../FloatingChat";
 
 const NAV_LINKS = [
   { href: "/",         label: "Home" },
@@ -42,6 +43,7 @@ export default function Navbar() {
   }, []);
 
   return (
+    <>
     <nav
       className={clsx(
         "fixed top-0 left-0 right-0 z-50 py-3 flex items-center transition-all duration-300",
@@ -95,5 +97,8 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
+     {/* -------------  Floating chat  ------------- */}
+      <FloatingChat />
+    </>
   );
 }

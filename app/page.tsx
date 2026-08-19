@@ -104,8 +104,6 @@ export default function Home() {
            </div>
           </div>
         </div>
-        {/* floating chat component */}
-        <FloatingChat/>
       </div>
 
       {/* Scroll indicator */}

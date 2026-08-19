@@ -52,6 +52,7 @@ export default function AboutPage() {
           </h2>
           <p className="text-neutral-400 text-lg leading-relaxed mb-4 max-w-2xl">
             I'm a BSIT graduate from STI College Tanauan, based in Batangas, Philippines.
+            <br></br>
             My work includes a real-time Android roadside assistance app, a production corporate website,
             and a local AI document chatbot.
           </p>
@@ -86,8 +87,11 @@ export default function AboutPage() {
       {/* Tech Stack Section */}
       <FadeIn as ="section" className="w-full relative mt-20 overflow-visible" direction="left" delay={100}>
           <h2 className="text-3xl font-bold tracking-tight">Tech Stack <span className="text-accent-400">.</span></h2>
+            <p className="text-neutral-400 text-lg leading-relaxed mt-4">
+              I am a full-stack developer specializing in end-to-end web applications and AI-integrated systems. My focus is on building seamless user experiences with Next.js and TypeScript on the frontend, supported by robust Python and PHP backends, and deployed efficiently using platforms like Vercel and Cloudflare.
+            </p>
+            <br></br>
             <p className="text-neutral-400 text-lg leading-relaxed pb-10 max-w-2xl md:pb-0">
-              I worked across these stack, but I specialize in Android development and backend APIs. 
               Here are some of the technologies I use:
             </p>
           <div className="flex flex-col mt-10 space-y-10 md:flex-row md:space-y-5">
