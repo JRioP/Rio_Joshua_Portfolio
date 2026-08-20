@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { clsx } from "clsx";
 import MenuToggle from "@/components/ui/menuToggle";
 import { FloatingChat } from "../FloatingChat";
+import { Suspense } from "react";
 
 const NAV_LINKS = [
   { href: "/",         label: "Home" },
@@ -97,8 +98,10 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-     {/* -------------  Floating chat  ------------- */}
-      <FloatingChat />
+     {/* Floating chat */}
+      <Suspense fallback={null}>
+        <FloatingChat/>
+      </Suspense>
     </>
   );
 }

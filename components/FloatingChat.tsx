@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
+
 type Message = { role: "user" | "assistant"; content: string };
 
 const SUGGESTED = [
