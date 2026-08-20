@@ -5,6 +5,8 @@
   --font-sans: var(--font-dm-sans), sans-serif;
   --font-display: var(--font-syne), sans-serif;
   --font-mono: var(--font-dm-mono), monospace;
+  --color-muted: hsl(240 4.8% 95.9%);
+  --color-muted-foreground: hsl(240 3.8% 46.1%);
   --color-accent-400: #60a5fa;
   --color-accent-500: #3b82f6;
   --color-accent-hover: #60a5fa;

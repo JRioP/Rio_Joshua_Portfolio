@@ -6,7 +6,7 @@ type Status = "idle" | "loading" | "success" | "error";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({company:"", name: "", email: "", message: "" });
   const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -33,7 +33,7 @@ export default function ContactForm() {
       }
 
       setStatus("success");
-      setForm({ name: "", email: "", message: "" });
+      setForm({company:"", name: "", email: "", message: "" });
     } catch {
       setError("Failed to send. Please try emailing me directly.");
       setStatus("error");
@@ -51,6 +51,20 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      {/* Honeypot — real users never see or fill this. Bots that auto-fill every field will. */}
+      <div className="absolute left-[-9999px] w-px h-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="company">Company</label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          value={form.company}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div>
         <label className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
           Name

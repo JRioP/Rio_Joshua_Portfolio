@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getProjectBySlug, getAllProjectSlugs } from "@/lib/mdx";
 import type { Metadata } from "next";
+import { ProjectLiveLink } from "@/components/ui/ProjectLiveLink";
 
 export function generateStaticParams() {
   return getAllProjectSlugs().map((slug) => ({ slug }));
@@ -68,9 +69,12 @@ export default async function CaseStudyPage({
           </a>
         )}
         {project.liveUrl && (
-          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 bg-neutral-800 text-neutral-100 font-semibold rounded-lg text-sm hover:bg-neutral-700 transition-colors border border-neutral-700">
-            Live site
-          </a>
+          <ProjectLiveLink
+          href={project.liveUrl}
+          className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors"
+          >
+           Live Site
+          </ProjectLiveLink>
         )}
       </div>
     </article>
