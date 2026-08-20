@@ -15,6 +15,9 @@ export interface ProjectFrontmatter {
   githubUrl?: string;
   liveUrl?: string;
   coverImage?: string;
+  date: string;
+  status?: string;
+  role?: string; 
 }
 
 export interface ProjectWithContent extends ProjectFrontmatter {

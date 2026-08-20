@@ -15,9 +15,22 @@ coverImage: "/images/projects/porfolio_website.png"
 
 ## Overview
 
-A modern, high-performance personal portfolio designed from the ground up to serve as a central hub for active job hunting and project documentation. Built entirely with Next.js and deployed on Vercel, the architecture leverages static site generation for speed while maintaining dynamic API routes for backend functionality.
+A modern, high-performance personal portfolio built from the ground up as a
+central hub for active job hunting and project documentation. Built entirely
+with Next.js and deployed on Vercel, the architecture leans on static site
+generation for speed while still keeping dynamic API routes for backend
+functionality like the contact form.
 
-## Tech stack
+## Problem
+
+A static resume PDF and scattered project links don't hold up well in a job
+search — recruiters can't dig into implementation details, and updating one
+means re-exporting and re-sending a file. This needed to be a living site:
+easy to add a new project write-up to without redeploying the whole codebase,
+fast enough to not lose a recruiter's attention on load, and able to receive
+inquiries directly without routing through a third-party form service.
+
+## Tech Stack
 
 - **Framework:** Next.js (App Router)
 - **Language:** TypeScript
@@ -27,43 +40,60 @@ A modern, high-performance personal portfolio designed from the ground up to ser
 - **Deployment & Hosting:** Vercel
 - **Version Control:** Git / GitHub
 
-## What was built
+## What Was Built
 
 A fully responsive, statically generated web application featuring:
 
-- **Dynamic Project Showcase:** A scalable project architecture using local MDX files, allowing for rich text, code blocks, and custom components within project case studies (like the MaYo Holdings deployment).
-- **Responsive UI/UX:** Clean, accessible design built with Tailwind CSS, optimized for both desktop and mobile viewing.
-- **Serverless Contact Form:** A custom-built, secure API endpoint that processes user inquiries and handles automated email delivery without requiring a dedicated backend server.
+- **Dynamic project showcase** — a scalable architecture using local MDX
+  files, so each case study (like the MaYo Holdings write-up) supports rich
+  text, code blocks, and custom components without touching the site's core
+  code.
+- **Responsive UI/UX** — clean, accessible design built with Tailwind CSS,
+  tuned for both desktop and mobile.
+- **Serverless contact form** — a custom API endpoint that validates and
+  delivers inquiries by email without a dedicated backend server.
 
-## Key engineering achievement — Serverless Email API Route
+## Technically Interesting: Serverless Email API Route
 
-The most technically complex feature is the custom Next.js API route (`app/api/contact/route.ts`) built to handle contact form submissions securely.
+The most technically involved piece is the custom Next.js API route
+(`app/api/contact/route.ts`) that handles contact form submissions securely,
+end to end:
 
-When a visitor submits a message, the system:
-1. Intercepts the payload and runs strict server-side validation (checking name length, email regex, and message boundaries).
-2. Prevents empty or malicious submissions before they hit the email service.
-3. Securely authenticates with the **Resend API** using environment variables (`RESEND_API_KEY`) to ensure credentials are never exposed to the client.
-4. Routes the validated data, formatting it into a clean, readable text email delivered directly to the primary developer inbox, utilizing the visitor's email as the `reply_to` address for seamless communication.
+1. Intercepts the payload and runs strict server-side validation (name
+   length, email regex, message boundaries) — never trusting client-side
+   validation alone.
+2. Rejects empty or malicious submissions before they ever reach the email
+   service.
+3. Authenticates with the **Resend API** via environment variables
+   (`RESEND_API_KEY`), so credentials never touch the client bundle.
+4. Formats the validated data into a clean text email delivered to the
+   primary inbox, setting the visitor's address as `reply_to` so replying
+   works like a normal email thread — no separate inbox or dashboard needed.
 
-## Performance & security results
+Combined with MDX being parsed and compiled at build time, the site needs
+zero database queries to render any project page — the only runtime backend
+work is the contact form itself.
 
-- **Speed:** Near-instant page loads achieved through Next.js static site generation (SSG) and Vercel's Edge Network caching.
-- **Security:** API keys and environment variables are strictly contained on the server-side. The contact API includes robust input validation and error handling (HTTP 400/500 status codes) to prevent malformed requests.
-- **Content Delivery:** MDX files are parsed and transformed at build time, meaning zero database queries are required to render project pages, eliminating a major performance bottleneck.
+## Result
 
-## Deployment process
+The site is live in production at
+[joshuario.vercel.app](https://joshuario.vercel.app), serving as the primary
+link in active job applications:
 
-Continuous integration and continuous deployment (CI/CD) handled via Vercel:
+- **Speed:** near-instant page loads via Next.js static generation and
+  Vercel's Edge Network caching.
+- **Security:** API keys stay server-side only; the contact route returns
+  proper HTTP 400/500 responses on invalid or failed requests instead of
+  failing silently.
+- **Zero-database rendering:** all project pages are pre-compiled from MDX
+  at build time, removing a major performance bottleneck before it exists.
+- **CI/CD:** every push to GitHub triggers a Vercel build — TypeScript
+  type-checked, MDX compiled, assets optimized, and deployed live with SSL
+  auto-provisioned, with no manual deploy step.
 
-1. Code is pushed to the primary GitHub repository.
-2. Vercel automatically detects the push and triggers a new build.
-3. MDX files are compiled, TypeScript is type-checked, and Next.js optimizes the assets.
-4. The site is deployed live to `joshuario.vercel.app` with an automatically provisioned SSL certificate.
-
-## What I'd improve
+## What I'd Improve
 
 - Integrate the GitHub REST API to dynamically fetch and display live star counts and recent commit activity.
 - Build a custom local GraphQL server to allow advanced filtering of MDX projects by tech stack.
 - Implement a PostgreSQL-backed view counter to track traffic on individual project pages.
 - Add a custom domain and verify it within Resend to enable automated, branded HTML confirmation emails for users who submit the contact form.
-"""

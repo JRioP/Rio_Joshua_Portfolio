@@ -9,68 +9,32 @@ featured: false
 status: personal
 role: "Solo Developer"
 githubUrl: "https://github.com/JRioP/Python_Rag"
-liveUrl: "https://pythonrag-production.up.railway.app/docs"
+liveUrl: "https://joshuario.vercel.app/projects/?chat=open"
 coverImage: "/images/projects/rag-cover.png"
 ---
 
 ## Overview
+
 Python RAG Chatbot is a document Q&A system built on
-**Retrieval-Augmented Generation (RAG)** — it answers questions about
-your own documents by retrieving semantically relevant chunks and
-passing them as context to an LLM.
+**Retrieval-Augmented Generation (RAG)** — it answers questions about a set
+of documents by retrieving the semantically relevant chunks and passing
+them to an LLM as context, rather than letting the model answer from
+memory. What started as a fully local tool has evolved into a live
+deployed microservice: a FastAPI backend on Railway, wired directly into
+my portfolio as a floating AI assistant.
 
-What started as a fully local tool using Ollama has evolved into a
-**live deployed microservice** — a FastAPI backend running on Railway,
-integrated directly into my portfolio as a floating AI assistant.
+## Problem
 
-- **Deployed at:** pythonrag-production.up.railway.app
-- **Integrated into:** joshuario.vercel.app (floating chat widget)
-- **Supports:** PDF, DOCX, TXT, XLSX
-- **LLM:** Llama 3.2 via Groq API (cloud inference, free tier)
+A portfolio site is read-only by default — a recruiter has to manually dig
+through project pages to find the answer to a specific question ("did this
+use SQL or NoSQL?", "what was the biggest technical challenge?"). Generic
+chatbots don't solve this either, since a plain LLM will confidently
+hallucinate details it was never given. This project solves both: it lets
+a visitor ask a direct question and get an answer grounded specifically in
+my actual project documents, with the retrieval step making sure the model
+can't just make things up.
 
-## The evolution — local to production
-
-The original version ran entirely offline using Ollama + Llama 3.2 on
-local hardware. This was intentional for privacy — documents never
-left the machine.
-
-The production version replaces Ollama with **Groq's inference API**,
-which serves the same Llama 3.2 model from the cloud at significantly
-faster speeds. The tradeoff is that queries now go through Groq's
-servers — acceptable for a portfolio use case where the documents are
-my own project descriptions.
-
-## Architecture
-Visitor (portfolio) → Next.js /api/chat proxy
-↓ REST API call
-FastAPI server (Railway)
-↓
-LangChain RAG pipeline
-↙ ↘
-ChromaDB Groq API
-(vector store) (Llama 3.2 inference)
-↘ ↙
-streamed answer
-↓
-Next.js → Visitor
-
-The Next.js proxy route (`/api/chat`) sits between the visitor and the
-Railway server — it hides the Railway URL from the client and keeps
-all external API calls server-side.
-
-## How RAG works
-
-1. **Ingestion** — documents are split into overlapping chunks using
-   LangChain's text splitter (chunk size 500, overlap 50)
-2. **Embedding** — each chunk is embedded using HuggingFace's
-   `all-MiniLM-L6-v2` model into a 384-dimensional vector
-3. **Storage** — vectors stored in ChromaDB (persistent, on-disk)
-4. **Retrieval** — user query is embedded and cosine-similarity matched
-   against stored vectors; top-k chunks retrieved
-5. **Generation** — retrieved chunks injected into Llama 3.2 prompt as
-   context via Groq API; model answers from context, not training data
-
-## Tech stack
+## Tech Stack
 
 - **API framework:** FastAPI + Uvicorn
 - **RAG pipeline:** LangChain
@@ -80,29 +44,68 @@ all external API calls server-side.
 - **Deployment:** Railway (Python service, auto-deploy from GitHub)
 - **Integration:** Next.js API route proxy → portfolio chat widget
 
-## Why FastAPI?
+## Technically Interesting
 
-FastAPI was the natural choice for wrapping the RAG pipeline into a
-REST API — it's Python-native, generates automatic Swagger docs at
-`/docs`, handles async requests cleanly, and deploys easily on Railway
-with a single `Procfile`. The `/chat` endpoint accepts a `POST` request
-with a `question` field and returns the LLM's answer as JSON.
+**The RAG pipeline itself:**
 
-## Why Groq over OpenAI?
+1. **Ingestion** — documents are split into overlapping chunks using
+   LangChain's text splitter (chunk size 500, overlap 50), so context
+   isn't lost at chunk boundaries.
+2. **Embedding** — each chunk is embedded with HuggingFace's
+   `all-MiniLM-L6-v2` into a 384-dimensional vector.
+3. **Storage** — vectors are persisted on-disk in ChromaDB.
+4. **Retrieval** — the user's query is embedded and cosine-similarity
+   matched against stored vectors to pull the top-k relevant chunks.
+5. **Generation** — those chunks are injected into the Llama 3.2 prompt as
+   context via Groq, so the model answers from the retrieved text, not its
+   training data.
 
-Groq serves open-source models (Llama 3.2) at inference speeds
-significantly faster than OpenAI's API — responses typically come back
-in under 2 seconds. The free tier is generous enough for a portfolio
-use case. More importantly, using an open-source model demonstrates
-that AI features don't require expensive proprietary APIs.
+**The architecture:** the visitor's browser never talks to Railway
+directly. A Next.js `/api/chat` proxy route sits in between, so the
+Railway URL and all external API calls stay server-side:
 
-## What I'd improve
+```
+Visitor → Next.js /api/chat proxy → FastAPI (Railway) → LangChain RAG pipeline
+                                                          ↙              ↘
+                                                     ChromaDB          Groq API
+                                                   (vector store)   (Llama 3.2)
+                                                          ↘              ↙
+                                                        streamed answer back
+```
 
-- Add streaming responses so the answer types out character by character
-  instead of arriving all at once
-- Add conversation memory so follow-up questions have context from
-  previous turns
-- Add document upload via the API so users can query their own files,
-  not just my pre-loaded project descriptions
-- Move ChromaDB to a persistent cloud store (Pinecone or Qdrant) so
-  the vector index survives Railway restarts
+**Local-to-production tradeoff:** the original version ran fully offline
+via Ollama, by design — documents never left the machine. Moving to
+production meant swapping Ollama for Groq's cloud inference, trading that
+local-only privacy guarantee for meaningfully faster response times. For a
+portfolio use case where the documents are just my own project
+descriptions, that tradeoff was the right call.
+
+**Why FastAPI:** Python-native, async-friendly, ships automatic Swagger
+docs at `/docs`, and deploys to Railway with a single `Procfile` — the
+`/chat` endpoint takes a `POST` with a `question` field and returns the
+LLM's answer as JSON.
+
+**Why Groq over OpenAI:** Groq serves the same open-source Llama 3.2 model
+at meaningfully faster inference speeds, with a free tier generous enough
+for portfolio traffic — and it demonstrates that a working AI feature
+doesn't require an expensive proprietary API.
+
+## Result
+
+A live, deployed RAG microservice, not just a local script:
+
+- **Deployed at:** `pythonrag-production.up.railway.app`, integrated into
+  [joshuario.vercel.app](https://joshuario.vercel.app) as a floating chat
+  widget
+- **Response time:** typically under 2 seconds per query via Groq
+- **Format support:** PDF, DOCX, TXT, and XLSX ingestion
+- A visitor can open the chat widget on the live portfolio and ask direct
+  questions about any project, getting answers grounded in the actual
+  project write-ups instead of generic LLM guesses
+
+## What I'd Improve
+
+- Add streaming responses so the answer types out character by character instead of arriving all at once
+- Add conversation memory so follow-up questions have context from previous turns
+- Add document upload via the API so users can query their own files, not just my pre-loaded project descriptions
+- Move ChromaDB to a persistent cloud store (Pinecone or Qdrant) so the vector index survives Railway restarts

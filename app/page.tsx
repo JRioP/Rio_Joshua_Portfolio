@@ -5,7 +5,7 @@ import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
 import FadeIn from "@/components/ui/animations/fadeIn";
 import { TechStackCard } from "@/components/TechStackCard";
-import { FloatingChat } from "@/components/FloatingChat";
+import { ProjectLiveLink } from "@/components/ui/ProjectLiveLink";
 
 export default function Home() {
   const projects = getProjects();
@@ -84,7 +84,7 @@ export default function Home() {
             </div>
             <div className="flex justify-between items-center">
               <span className="font-mono text-xs text-neutral-600">Location</span>
-              <span className="font-mono text-xs text-neutral-300">Batangas, PH</span>
+              <span className="font-mono text-xs text-neutral-300">Laguna, PH</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="font-mono text-xs text-neutral-600">Available</span>
@@ -104,8 +104,6 @@ export default function Home() {
            </div>
           </div>
         </div>
-        {/* floating chat component */}
-        <FloatingChat/>
       </div>
 
       {/* Scroll indicator */}
@@ -185,9 +183,12 @@ export default function Home() {
           
           {/* buttons for live url or github*/}
             {project.liveUrl ? (
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
-              Live site
-            </a>
+            <ProjectLiveLink
+             href={project.liveUrl}
+              className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors"
+              >
+            Live Site
+            </ProjectLiveLink>
             ) : project.githubUrl ? (
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
               GitHub
@@ -202,12 +203,12 @@ export default function Home() {
         </FadeIn>
 
         {/* Experience Section */}
-        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="left" delay={.1}>
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="left" delay={100}>
         <ExperienceSection/>
         </FadeIn>
 
         {/* About Me Section */}
-        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="right" delay={.1}>
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="right" delay={100}>
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="font-display text-4xl font-bold tracking-tight mb-12 md:text-6xl">
@@ -238,7 +239,7 @@ export default function Home() {
           {/* Text */}
           <div className="flex-1 min-w-0">
             <p className="text-neutral-400 text-2xl leading-relaxed mb-5 md:text-4xl">
-             I'm a BSIT graduate from STI College Tanauan, based in Talisay City, Batangas. 
+             I'm a BSIT graduate from STI College Tanauan, based in Talisay City, Laguna. 
              I like building things that solve real problems — a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
               I'm currently looking for a professional role, open to Metro Manila or remote.
             </p>
@@ -247,11 +248,11 @@ export default function Home() {
         </FadeIn>
       
         {/* Contact Section */}
-        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="up" delay={.2}>
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="up" delay={100}>
           <div className="min-h-screen pt-32 pb-20 px-6 max-w-2xl mx-auto">
             <h1 className="font-display text-4xl font-bold mb-4 md:text-6xl">Get in touch<span className="text-accent-500">.</span></h1>
             <p className="text-neutral-400 mb-12">
-              Open to full-time roles and interesting projects. Based in Talisay City, Batangas — available remotely.
+              Open to full-time roles and interesting projects. Based in Talisay City, Laguna — available remotely.
               </p>
             <ContactForm />
             </div>

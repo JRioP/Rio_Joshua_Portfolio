@@ -14,27 +14,45 @@ coverImage: "/images/projects/dentavault-cover.png"
 
 ## Overview
 
-DentaVault is a desktop application built for dental clinic management.
-It handles patient records, appointment scheduling, service billing,
-and inventory tracking — replacing paper-based systems with a structured
-local database.
+DentaVault is a desktop application for dental clinic management, built end-to-end
+as a solo project. It handles patient records, appointment scheduling, service
+billing, and inventory tracking through a structured local database — a full
+clinic workflow, not just a CRUD demo.
 
 ## Problem
 
-Small dental clinics in the Philippines typically rely on paper records —
-slow to retrieve, prone to errors, and hard to track historically.
-DentaVault replaces that with a proper desktop system built on SQL Server.
+Small dental clinics in the Philippines still run largely on paper records: slow
+to retrieve, easy to lose, and impossible to search or audit historically. There's
+no easy way to pull up a patient's treatment history, track supply stock levels,
+or generate an itemized bill without digging through folders. DentaVault replaces
+that with a single desktop system backed by a proper relational database.
 
-## Features
+## Tech Stack
 
-- Patient record management with full history
-- Appointment scheduling and calendar view
-- Service billing with itemized costs per procedure
-- Inventory tracking for dental supplies
-- Secure login with session management
+C# (.NET WinForms) for the desktop UI and application logic, SQL Server for
+persistent storage, built in Visual Studio — the standard enterprise desktop
+stack used by clinics and SMEs in the Philippines.
 
-## Tech decisions
+## Technically Interesting
 
-Built with C# WinForms and SQL Server — the standard enterprise desktop
-stack in the Philippines. Demonstrates OOP principles, relational database
-design, and CRUD operations outside of web development.
+- **Relational schema design**: patients, appointments, services, billing, and
+  inventory are modeled as separate related tables rather than flattened into a
+  single form-backed structure, so a patient's appointment and billing history
+  stays queryable and consistent as records grow.
+- **Transactional billing**: itemized service billing pulls live prices and
+  deducts used inventory in the same operation, so a completed procedure keeps
+  stock counts and charges in sync instead of updating them separately.
+- **Session-based access control**: login and session management gate access to
+  patient data, applying basic authentication principles outside the typical
+  web-app context.
+- **Layered WinForms architecture**: UI forms, business logic, and data access
+  are kept in separate layers rather than wiring SQL directly into event
+  handlers, making the CRUD operations easier to test and extend.
+
+## Result
+
+A complete, fully functional desktop system covering the entire clinic workflow —
+patient records, scheduling, billing, and inventory — built solo from schema
+design through UI. It's a personal project rather than a deployed clinic system,
+but it demonstrates OOP design, relational database modeling, and building CRUD
+applications outside the typical web stack.

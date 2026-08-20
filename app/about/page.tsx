@@ -8,8 +8,9 @@ import CertificateCarousel from "@/components/ui/CertificateCarousel";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "BSIT graduate and full-stack developer from Batangas, Philippines.",
+  description: "BSIT graduate and full-stack developer from Laguna, Philippines.",
 };
+
 
 export default function AboutPage() {
 
@@ -24,7 +25,7 @@ export default function AboutPage() {
   
 
     {/* Photo + bio section */}
-    <FadeIn as="section" className="w-full relative mt-20 overflow-visible" direction="up" delay={0.1}>
+    <FadeIn as="section" className="w-full relative mt-20 overflow-visible" direction="up" delay={100}>
       <div className="flex flex-col md:flex-row gap-10 items-start">
 
         {/* Photo */}
@@ -51,7 +52,8 @@ export default function AboutPage() {
             I build real things that get deployed.
           </h2>
           <p className="text-neutral-400 text-lg leading-relaxed mb-4 max-w-2xl">
-            I'm a BSIT graduate from STI College Tanauan, based in Batangas, Philippines.
+            I'm a BSIT graduate from STI College Tanauan, based in Laguna, Philippines.
+            <br></br>
             My work includes a real-time Android roadside assistance app, a production corporate website,
             and a local AI document chatbot.
           </p>
@@ -62,7 +64,7 @@ export default function AboutPage() {
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-2 text-sm text-neutral-500">
               <span className="text-accent-500">📍</span>
-              Batangas, Philippines
+              Laguna, Philippines
             </div>
             <div className="flex items-center gap-2 text-sm text-neutral-500">
               <span className="text-accent-500">🎓</span>
@@ -84,10 +86,13 @@ export default function AboutPage() {
 
 
       {/* Tech Stack Section */}
-      <FadeIn as ="section" className="w-full relative mt-20 overflow-visible" direction="left" delay={0.1}>
+      <FadeIn as ="section" className="w-full relative mt-20 overflow-visible" direction="left" delay={100}>
           <h2 className="text-3xl font-bold tracking-tight">Tech Stack <span className="text-accent-400">.</span></h2>
+            <p className="text-neutral-400 text-lg leading-relaxed mt-4">
+              I am a full-stack developer specializing in end-to-end web applications and AI-integrated systems. My focus is on building seamless user experiences with Next.js and TypeScript on the frontend, supported by robust Python and PHP backends, and deployed efficiently using platforms like Vercel and Cloudflare.
+            </p>
+            <br></br>
             <p className="text-neutral-400 text-lg leading-relaxed pb-10 max-w-2xl md:pb-0">
-              I worked across these stack, but I specialize in Android development and backend APIs. 
               Here are some of the technologies I use:
             </p>
           <div className="flex flex-col mt-10 space-y-10 md:flex-row md:space-y-5">
@@ -110,7 +115,7 @@ export default function AboutPage() {
       </FadeIn>
 
       {/* Certification Section */}
-      <FadeIn as ="section" className="w-full relative mt-20 overflow-visible" direction="right" delay={0.1}>
+      <FadeIn as ="section" className="w-full relative mt-20 overflow-visible" direction="right" delay={100}>
       <h1 className="text-3xl font-bold tracking-tight">
         Certifications<span className="text-accent-400">.</span>
       </h1>
@@ -128,7 +133,7 @@ export default function AboutPage() {
       </FadeIn>
 
       {/* Education Section */}
-     <FadeIn as="section" className="w-full relative mt-20 overflow-visible" direction="up" delay={0.15}>
+     <FadeIn as="section" className="w-full relative mt-20 overflow-visible" direction="up" delay={100}>
       <div className="flex flex-col gap-6">
       <h1 className="text-3xl font-bold tracking-tight">
        Education timeline<span className="text-accent-400">.</span>
@@ -176,3 +181,4 @@ export default function AboutPage() {
     </div>
   );
 }
+
