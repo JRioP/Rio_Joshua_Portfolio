@@ -18,11 +18,19 @@ coverImage: "/images/projects/mayo-cover.png"
 Full corporate website for MaYo Holdings and Construction, Inc. — built
 end-to-end during OJT, from local NAS staging to live Namecheap cPanel
 hosting. The project spanned 6 pages, 8 department email routing targets,
-and a full production deployment with Cloudflare CDN.
+and a full production deployment behind Cloudflare CDN.
 
-**Final audit score trajectory:** 61 → 66 → 70 → 74 → 76 → 78 → 80 → **87/100 (B+)**
+## Problem
 
-## Tech stack
+MaYo Holdings, a construction and mechanical contracting company with 8
+distinct service departments (HVAC, ducting, kitchen exhaust, fabrication,
+electrical, general contracting, and more), had no website at all — no
+professional web presence, and no digital channel for inquiries. Every
+prospective client had to know who to call. This was the company's first
+website, built to establish an online presence and give each department a
+direct, structured way to receive leads.
+
+## Tech Stack
 
 - **CMS:** WordPress 6.8
 - **PHP:** 8.2.21
@@ -35,7 +43,7 @@ and a full production deployment with Cloudflare CDN.
 - **SEO:** SureRank SEO 1.7.1
 - **CDN / SSL:** Cloudflare
 
-## What was built
+## What Was Built
 
 Six fully live pages, all SureRank SEO optimized:
 
@@ -46,56 +54,70 @@ Six fully live pages, all SureRank SEO optimized:
 - **Work With Us** — Benefits section (13th Month, HMO Philcare, Maternity/Paternity leave, etc.), job postings
 - **Contact** — Google Maps embed, tap-to-call phone numbers, routed contact form
 
-## Key engineering achievement — PHP email routing system
+## Technically Interesting: PHP Email Routing System
 
-The most technically complex feature. When a visitor submits the contact
-form, the system:
+The core engineering problem was routing a single contact form to 8
+different departments reliably, with no lead ever silently dropped. When a
+visitor submits the form, the system:
 
-1. Assigns a unique ticket number (e.g. `MaYo-1007: Juan Cruz`)
-2. Uses **Double-Lock routing** — URL parameter first, then Field 6 keyword match fallback
-3. Routes to the correct department email automatically
-4. Sends an independent plain-text audit backup to the IT email via `wp_mail()` — Phantom Drop protection
-5. Falls back to the default WPForms recipient if no service is matched
+1. Assigns a unique ticket number (e.g. `MaYo-1007: Juan Cruz`) via an
+   atomic database increment, avoiding race conditions on concurrent
+   submissions.
+2. Applies **Double-Lock routing**: matches a URL parameter first, then
+   falls back to a Field 6 keyword match if the parameter is missing.
+3. Routes to the correct department email automatically:
 
-This was built using a custom PHP filter hooked into `wpforms_entry_email_to`,
-with an atomic database increment for ticket numbers to prevent race conditions.
-All 3 WPCode snippets must remain active for routing to function.
+   | Service | Routes to |
+   |---|---|
+   | HVAC & Air Handling | hvac.dept@mayoholdings.com |
+   | Custom Air Ducting | ducting.dept@mayoholdings.com |
+   | Kitchen Exhaust (KES) | kitchen.dept@mayoholdings.com |
+   | Metal & Steel Fabrication | msf.dept@mayoholdings.com |
+   | Mechanical Equipment | mech.dept@mayoholdings.com |
+   | Electrical & Fire Safety | efs.dept@mayoholdings.com |
+   | General Contracting | gc.dept@mayoholdings.com |
+   | Piping & Sanitary Systems | pss.dept@mayoholdings.com |
+   | No selection | WPForms default recipient (null-state fallback) |
 
-Each service type routes to a dedicated department email automatically:
+4. Sends an independent plain-text audit backup to the IT email via
+   `wp_mail()` — a "Phantom Drop" safeguard so a lead is never lost even if
+   department routing fails silently.
 
-- **HVAC & Air Handling** → hvac.dept@mayoholdings.com
-- **Custom Air Ducting** → ducting.dept@mayoholdings.com
-- **Kitchen Exhaust (KES)** → kitchen.dept@mayoholdings.com
-- **Metal & Steel Fabrication** → msf.dept@mayoholdings.com
-- **Mechanical Equipment** → mech.dept@mayoholdings.com
-- **Electrical & Fire Safety** → efs.dept@mayoholdings.com
-- **General Contracting** → gc.dept@mayoholdings.com
-- **Piping & Sanitary Systems** → pss.dept@mayoholdings.com
-- **No selection** → WPForms default recipient (null-state fallback)
+Built as a custom PHP filter hooked into `wpforms_entry_email_to`, with all
+3 WPCode snippets required to remain active for routing to function —
+essentially a lightweight, self-hosted lead-routing layer built entirely
+on top of WordPress hooks rather than a third-party CRM.
 
-## Performance & security results
+## Deployment Process
 
-- **Audit score:** 87/100 (B+) — up from 61 at project start
-- **SEO:** 100/100 via seoptimer.com — all 6 pages optimized
-- **Security:** A+ via securityheaders.com — all 6 headers confirmed (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, CSP)
-- **SSL/CDN:** Cloudflare — DMARC/SPF confirmed
-- **Caching:** WP Super Cache — page + browser + CDN caching configured
-- **Images:** WebP sitewide via Elementor Image Optimizer
-- **Wordfence:** 0 issues across 19,279 files
-
-## Deployment process
-
-Migrated from local XAMPP to live Namecheap cPanel hosting:
+Migrated from local XAMPP staging to live Namecheap cPanel hosting:
 
 1. Full site export via All-in-One WP Migration
-2. Database search-replace to update all localhost URLs to live domain
-3. WP Mail SMTP Gmail OAuth re-authenticated on live domain
+2. Database search-replace to update all localhost URLs to the live domain
+3. WP Mail SMTP Gmail OAuth re-authenticated on the live domain
 4. Cloudflare SSL and all 6 security headers configured
-5. Elementor CSS & Data regenerated post-migration
+5. Elementor CSS & data regenerated post-migration
 6. WP Super Cache configured for production caching
 7. All email routing tested end-to-end across all 8 departments
 
-## What I'd improve
+## Result
+
+**Audit score climbed from 61 to 87/100 (B+)** over the course of the
+project (61 → 66 → 70 → 74 → 76 → 78 → 80 → 87), through iterative
+performance, security, and SEO passes:
+
+- **SEO:** 100/100 via seoptimer.com — all 6 pages optimized
+- **Security:** A+ via securityheaders.com — all 6 headers confirmed (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, CSP)
+- **SSL/CDN:** Cloudflare — DMARC/SPF confirmed
+- **Caching:** Page + browser + CDN caching configured via WP Super Cache
+- **Images:** WebP sitewide via Elementor Image Optimizer
+- **Wordfence scan:** 0 issues across 19,279 files
+
+The site shipped to production and is live at
+[landing.mayogroup.biz](https://landing.mayogroup.biz), giving the company
+its first web presence and a working department-routed lead pipeline.
+
+## What I'd Improve
 
 - Replace WP Super Cache with LiteSpeed Cache if moved to a LiteSpeed server
 - Add LocalBusiness JSON-LD schema markup for richer Google search results
