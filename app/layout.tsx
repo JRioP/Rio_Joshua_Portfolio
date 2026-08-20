@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     template: "%s · Joshua Rio",
   },
   description:
-    "Full-stack developer from Batangas. I build Android apps, production websites, and AI-powered tools.",
-  keywords: ["Joshua Rio", "full-stack developer", "Android", "Next.js", "Philippines", "Batangas"],
+    "Full-stack developer from Laguna. I build Android apps, production websites, and AI-powered tools.",
+  keywords: ["Joshua Rio", "full-stack developer", "Android", "Next.js", "Philippines", "Laguna"],
   authors: [{ name: "Joshua Rio", url: "https://github.com/JRioP" }],
   creator: "Joshua Rio",
   openGraph: {
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     locale: "en_PH",
     url: "https://joshuario.vercel.app", // TODO: update to your domain
     title: "Joshua Rio — Full-Stack Developer",
-    description: "Full-stack developer from Batangas. I build Android apps, production websites, and AI-powered tools.",
+    description: "Full-stack developer from Laguna. I build Android apps, production websites, and AI-powered tools.",
     siteName: "Joshua Rio",
     images: [
       {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Joshua Rio — Full-Stack Developer",
-    description: "Full-stack developer from Batangas.",
+    description: "Full-stack developer from Laguna.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -81,7 +81,7 @@ export default function RootLayout({
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Talisay City",
-        "addressRegion": "Batangas",
+        "addressRegion": "Laguna",
         "addressCountry": "PH"
         },
       "alumniOf": {
@@ -112,3 +112,4 @@ export default function RootLayout({
     </html>
   );
 }
+
