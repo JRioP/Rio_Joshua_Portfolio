@@ -17,7 +17,7 @@ export default function ResumeViewer({ fileUrl }: ResumeViewerProps) {
 
   // Configure the PDF.js worker only on the client
   useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+    pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
   }, []);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
