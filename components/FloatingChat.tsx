@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -19,6 +20,7 @@ export function FloatingChat() {
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const searchParams = useSearchParams();
 
   // Close on outside click
   useEffect(() => {
@@ -77,6 +79,12 @@ export function FloatingChat() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+  if (searchParams.get("chat") === "open") {
+    setIsOpen(true);
+  }
+}, [searchParams]);
 
   return (
     <div className="fixed bottom-10 right-10 z-50 flex flex-col items-end gap-3 md:bottom-20 md:right-20">

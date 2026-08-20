@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: "BSIT graduate and full-stack developer from Batangas, Philippines.",
 };
 
+
 export default function AboutPage() {
 
   const groupedTech = GROUPED_TECH_STACK;

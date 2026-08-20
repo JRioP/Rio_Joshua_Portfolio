@@ -1,6 +1,7 @@
 import FadeIn from "@/components/ui/animations/fadeIn";
 import { getProjects } from "@/lib/projects";
 import Image from "next/image";
+import { ProjectLiveLink } from "@/components/ui/ProjectLiveLink";
 
 
 
@@ -50,9 +51,12 @@ export default function ProjectsPage() {
                           Case study
                         </a>
                         {project.liveUrl ? (
-                          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow uppercase text-center font-mono text-xs px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
-                            Live site
-                          </a>
+                          <ProjectLiveLink
+                          href={project.liveUrl}
+                          className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors"
+                          >
+                          Live Site
+                        </ProjectLiveLink>
                         ) : project.githubUrl ? (
                           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow uppercase text-center font-mono text-xs px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
                             GitHub
