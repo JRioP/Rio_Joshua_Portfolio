@@ -1,8 +1,7 @@
 // app/sitemap.ts
 import { MetadataRoute } from "next";
 import { getProjects } from "@/lib/projects";
-
-const BASE_URL = "https://joshuario.vercel.app";
+const BASE_URL = "https://joshuario.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const projects = getProjects();

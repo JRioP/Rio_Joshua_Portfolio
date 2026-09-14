@@ -30,7 +30,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://joshuario.vercel.app"),
+  metadataBase: new URL("https://joshuario.com"),
   title: {
     default: "Joshua Rio — Full-Stack Developer",
     template: "%s · Joshua Rio",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_PH",
-    url: "https://joshuario.vercel.app", // TODO: update to your domain
+    url: "https://joshuario.com",
     title: "Joshua Rio — Full-Stack Developer",
     description: "Full-stack developer from Laguna. I build Android apps, production websites, and AI-powered tools.",
     siteName: "Joshua Rio",
@@ -78,7 +78,7 @@ export default function RootLayout({
       "@type": "Person",
       "name": "Joshua Alnie Padilla Rio",
       "alternateName": "Joshua Rio",
-      "url": "https://joshuario.vercel.app",
+      "url": "https://joshuario.com",
       "email": "riojoshuadev@gmail.com",
       "jobTitle": "Junior Full-Stack Developer",
       "description": "Cum Laude BSIT graduate, Programmer of the Year. Ships production-ready web, mobile, and AI applications.",

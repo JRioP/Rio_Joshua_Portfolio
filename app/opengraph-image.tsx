@@ -22,7 +22,7 @@ export default async function Image() {
       >
         <h1 style={{ margin: 0, fontSize: 64 }}>Joshua Rio</h1>
         <h2 style={{ margin: 0, fontSize: 32 }}>Full‑Stack Developer</h2>
-        <p style={{ marginTop: 16, fontSize: 24 }}>joshuario.vercel.app</p>
+        <p style={{ marginTop: 16, fontSize: 24 }}>joshuario.com</p>
       </div>
     ),
     { ...size }
