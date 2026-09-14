@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"], // don't let crawlers index your API routes
     },
-    sitemap: "https://joshuario.vercel.app/sitemap.xml",
+    sitemap: "https://joshuario.com/sitemap.xml",
   };
 }

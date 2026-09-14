@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
       from:    "<No Reply> Joshua Rio <onboarding@resend.dev>",
       to:      email,
       subject: `Got your message, ${name}!`,
-      text:    `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nHere's a copy of what you sent:\n\n"${message}"\n\nBest,\nJoshua Rio\nhttps://joshuario.vercel.app`,
+      text:    `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nHere's a copy of what you sent:\n\n"${message}"\n\nBest,\nJoshua Rio\nhttps://joshuario.com`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px">
           <h1 style="font-size:24px;font-weight:700;margin-bottom:4px">Got your message, ${safeName}! 👋</h1>
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
           <hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>
           <p style="color:#444;font-size:14px">Best,</p>
           <p style="font-weight:700;margin-top:4px">Joshua Rio</p>
-          <a href="https://joshuario.vercel.app" style="color:#3b82f6;font-size:12px">joshuario.vercel.app</a>
+          <a href="https://joshuario.com" style="color:#3b82f6;font-size:12px">joshuario.com</a>
         </div>
       `,
     });

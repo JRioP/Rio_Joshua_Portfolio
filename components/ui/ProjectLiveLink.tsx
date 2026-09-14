@@ -10,11 +10,16 @@ export function ProjectLiveLink({
   className: string;
   children: React.ReactNode;
 }) {
-  const isInternal = href.startsWith("https://joshuario.vercel.app") || href.startsWith("/");
+  const isInternal =
+    href.startsWith("https://joshuario.com") ||
+    href.startsWith("https://joshuario.vercel.app") ||
+    href.startsWith("/");
 
   if (isInternal) {
     // Strip the domain so Link treats it as an internal route
-    const path = href.replace("https://joshuario.vercel.app", "");
+    const path = href
+      .replace("https://joshuario.com", "")
+      .replace("https://joshuario.vercel.app", "");
     return (
       <Link href={path} className={className}>
         {children}
