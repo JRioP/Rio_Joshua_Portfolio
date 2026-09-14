@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/themes/ThemeProvider";
-import { ThemeScript } from "@/components/themes/ThemeScript";
+import { THEME_SCRIPT } from "@/components/themes/ThemeScript";
 import { CookieConsentProvider } from "@/components/CookieConsentProvider";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { ConditionalAnalytics } from "@/components/ConditionalAnalytics";
@@ -107,7 +107,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <ThemeScript />
+        <script
+          id="theme-script"
+          dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }}
+        />
       </head>
       <body className="bg-neutral-950 text-neutral-100 antialiased" suppressHydrationWarning>
         <ThemeProvider>
