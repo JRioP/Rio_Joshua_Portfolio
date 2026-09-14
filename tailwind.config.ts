@@ -11,8 +11,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans:    ["var(--font-dm-sans)", "sans-serif"],
-        display: ["var(--font-syne)", "sans-serif"],
+        sans:    ["var(--font-plus-jakarta-sans)", "sans-serif"],
+        display: ["var(--font-gibed)", "sans-serif"],
         mono:    ["var(--font-dm-mono)", "monospace"],
       },
       colors: {

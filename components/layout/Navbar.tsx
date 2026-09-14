@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { clsx } from "clsx";
 import MenuToggle from "@/components/ui/menuToggle";
-import { FloatingChat } from "../FloatingChat";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { FloatingChat } from "../chatFunctions/FloatingChat";
 import { Suspense } from "react";
 
 const NAV_LINKS = [
@@ -89,11 +90,13 @@ export default function Navbar() {
             >
               RESUME
             </a>
+            <ThemeToggle />
           </ul>
         </div>
 
-        {/* Mobile nav menu */}
-        <div className="min-[1550px]:hidden relative z-50">
+        {/* Mobile nav menu & Theme Toggle */}
+        <div className="min-[1550px]:hidden relative z-50 flex items-center gap-3">
+          <ThemeToggle />
           <MenuToggle />
         </div>
       </div>

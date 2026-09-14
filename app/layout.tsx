@@ -1,20 +1,24 @@
 import type { Metadata } from "next";
-import { DM_Sans, Syne, DM_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Plus_Jakarta_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { ThemeProvider } from "@/components/themes/ThemeProvider";
+import { ThemeScript } from "@/components/themes/ThemeScript";
+import { CookieConsentProvider } from "@/components/CookieConsentProvider";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { ConditionalAnalytics } from "@/components/ConditionalAnalytics";
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
+const gibed = localFont({
+  src: "../public/fonts/gibed.otf",
+  variable: "--font-gibed",
   display: "swap",
 });
 
-const syne = Syne({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-plus-jakarta-sans",
   display: "swap",
 });
 
@@ -99,15 +103,22 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${dmSans.variable} ${syne.variable} ${dmMono.variable}`}
+      className={`${gibed.variable} ${plusJakartaSans.variable} ${dmMono.variable}`}
       suppressHydrationWarning
     >
-      <SpeedInsights/>
-      <Analytics/>
+      <head>
+        <ThemeScript />
+      </head>
       <body className="bg-neutral-950 text-neutral-100 antialiased" suppressHydrationWarning>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <CookieConsentProvider>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+            <CookieConsentBanner />
+            <ConditionalAnalytics />
+          </CookieConsentProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -4,7 +4,7 @@ import { RotatingText } from "@/components/RotatingText";
 import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
 import FadeIn from "@/components/ui/animations/fadeIn";
-import { TechStackCard } from "@/components/TechStackCard";
+import { TechStackCard } from "@/components/techStackCard/TechStackCard";
 import { ProjectLiveLink } from "@/components/ui/ProjectLiveLink";
 
 export default function Home() {
@@ -116,7 +116,7 @@ export default function Home() {
         </section>
 
         {/* FEATURED PROJECTS */}
-        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="up">   
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-6 sm:px-10 md:px-15 lg:px-50" direction="up">   
           <Image
             src="/images/bg/doodles.2f5849cf.svg"
             alt="Background doodles"

@@ -2,8 +2,8 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: var(--font-dm-sans), sans-serif;
-  --font-display: var(--font-syne), sans-serif;
+  --font-sans: var(--font-plus-jakarta-sans), sans-serif;
+  --font-display: var(--font-gibed), sans-serif;
   --font-mono: var(--font-dm-mono), monospace;
   --color-muted: hsl(240 4.8% 95.9%);
   --color-muted-foreground: hsl(240 3.8% 46.1%);
@@ -12,19 +12,46 @@
   --color-accent-hover: #60a5fa;
 }
 
+:root {
+  --color-neutral-950: #f8fafc;
+  --color-neutral-900: #ffffff;
+  --color-neutral-800: #e2e8f0;
+  --color-neutral-700: #cbd5e1;
+  --color-neutral-600: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-400: #475569;
+  --color-neutral-300: #334155;
+  --color-neutral-200: #1e293b;
+  --color-neutral-100: #0f172a;
+}
+
+html.dark {
+  --color-neutral-950: #0a0a0a;
+  --color-neutral-900: #171717;
+  --color-neutral-800: #262626;
+  --color-neutral-700: #404040;
+  --color-neutral-600: #525252;
+  --color-neutral-500: #737373;
+  --color-neutral-400: #a1a1a1;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-100: #f5f5f5;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  background: #0d0d10;
-  color: #f0ede8;
+  background-color: var(--color-neutral-950);
+  color: var(--color-neutral-100);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::selection {
-  background: rgba(249, 115, 22, 0.25);
-  color: #fff;
+  background: rgba(59, 130, 246, 0.25);
+  color: inherit;
 }
 
 @layer utilities {
@@ -42,6 +69,11 @@ body {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
+    opacity: 0.12;
+    transition: opacity 0.3s ease;
+  }
+
+  html.dark .blob {
     opacity: 0.25;
   }
 
@@ -111,6 +143,16 @@ body {
 .push-up.is-visible {
   opacity: 1;
   transform: translate(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .push-left,
+  .push-right,
+  .push-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* MDX prose table styles */

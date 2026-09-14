@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "./ThemeToggle";
 
 const NAV_LINKS = [
   { href:   "/",        label: "Home"},
@@ -61,6 +62,7 @@ export default function MenuToggle() {
           </nav>
 
           <div className={`flex flex-wrap items-center gap-6 transition-all duration-300 ${open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: open ? "280ms" : "0ms" }}>
+            <ThemeToggle />
             <a href="https://github.com/JRioP" target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-neutral-400 hover:text-neutral-100 uppercase tracking-widest transition-colors">
               GitHub
             </a>
