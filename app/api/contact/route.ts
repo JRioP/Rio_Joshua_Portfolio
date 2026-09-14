@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
     const safeMessage = escapeHtml(message);
 
     const { data, error: resendError } = await resend.emails.send({
-      from:    "Portfolio Contact <onboarding@resend.dev>",
+      from:    "Joshua Rio Portfolio <contact@joshuario.com>",
       to:      "riojoshuadev@gmail.com",
       reply_to: email,
       subject: `New message from ${name} — Portfolio`,
@@ -87,8 +87,9 @@ export async function POST(req: NextRequest) {
     }
 
     const { error: confirmError } = await resend.emails.send({
-      from:    "<No Reply> Joshua Rio <onboarding@resend.dev>",
+      from:    "Joshua Rio <contact@joshuario.com>",
       to:      email,
+      reply_to: "riojoshuadev@gmail.com",
       subject: `Got your message, ${name}!`,
       text:    `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nHere's a copy of what you sent:\n\n"${message}"\n\nBest,\nJoshua Rio\nhttps://joshuario.com`,
       html: `
