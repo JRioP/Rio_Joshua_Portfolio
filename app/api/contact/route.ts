@@ -91,20 +91,31 @@ export async function POST(req: NextRequest) {
       to:      email,
       reply_to: "riojoshuadev@gmail.com",
       subject: `Got your message, ${name}!`,
-      text:    `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nHere's a copy of what you sent:\n\n"${message}"\n\nBest,\nJoshua Rio\nhttps://joshuario.com`,
+      text:    `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nHere's a copy of what you sent:\n\n"${message}"\n\nBest regards,\nJoshua Alnie Rio\nJunior Full-Stack Developer · Laguna, Philippines\nEmail: riojoshuadev@gmail.com\nMobile: 09270849508\nLinkedIn: https://linkedin.com/in/japrdev\nPortfolio: https://joshuario.com`,
       html: `
-        <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px">
-          <h1 style="font-size:24px;font-weight:700;margin-bottom:4px">Got your message, ${safeName}! 👋</h1>
-          <p style="color:#666;margin-top:0">Thanks for reaching out — I'll get back to you within 24 hours.</p>
-          <hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>
-          <p style="color:#444;font-size:14px;margin-bottom:8px">Here's a copy of your message:</p>
-          <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:16px;border-radius:8px;margin-bottom:24px">
-            <p style="margin:0;color:#555;font-size:14px;white-space:pre-wrap">${safeMessage}</p>
+        <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:580px;margin:0 auto;padding:24px;color:#1e293b;line-height:1.6">
+          <h1 style="font-size:22px;font-weight:700;margin-bottom:6px;color:#0f172a">Got your message, ${safeName}!</h1>
+          <p style="color:#64748b;margin:0 0 18px 0;font-size:14px">Thanks for reaching out — I've received your note and will get back to you within 24 hours.</p>
+          
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-left:3px solid #3b82f6;padding:16px;border-radius:6px;margin:20px 0">
+            <p style="margin:0 0 6px 0;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#64748b">Your Message</p>
+            <p style="margin:0;color:#334155;font-size:14px;white-space:pre-wrap">${safeMessage}</p>
           </div>
-          <hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>
-          <p style="color:#444;font-size:14px">Best,</p>
-          <p style="font-weight:700;margin-top:4px">Joshua Rio</p>
-          <a href="https://joshuario.com" style="color:#3b82f6;font-size:12px">joshuario.com</a>
+
+          <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0 20px 0"/>
+          
+          <div style="margin-top:16px">
+            <p style="color:#64748b;font-size:13px;margin:0 0 4px 0">Best regards,</p>
+            <p style="font-size:16px;font-weight:700;margin:0;color:#0f172a">Joshua Alnie Rio</p>
+            <p style="font-size:13px;color:#64748b;margin:2px 0 12px 0">Junior Full-Stack Developer · Laguna, Philippines</p>
+            
+            <div style="font-size:13px;color:#475569;line-height:1.8">
+              <div>Email: <a href="mailto:riojoshuadev@gmail.com" style="color:#3b82f6;text-decoration:none">riojoshuadev@gmail.com</a></div>
+              <div>Mobile: <a href="tel:09270849508" style="color:#3b82f6;text-decoration:none">0927-084-9508</a></div>
+              <div>LinkedIn: <a href="https://linkedin.com/in/japrdev" target="_blank" style="color:#3b82f6;text-decoration:none">linkedin.com/in/japrdev</a></div>
+              <div>Portfolio: <a href="https://joshuario.com" target="_blank" style="color:#3b82f6;text-decoration:none">joshuario.com</a></div>
+            </div>
+          </div>
         </div>
       `,
     });
