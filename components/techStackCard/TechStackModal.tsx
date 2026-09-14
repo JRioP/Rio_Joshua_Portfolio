@@ -10,6 +10,7 @@ export const TechStackModal = forwardRef(
     const [open, setOpen] = useState(false);
     const closeBtnRef = useRef<HTMLButtonElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
 
     /* ----- same focus & escape‑key handling (unchanged) ----- */
     useEffect(() => {
@@ -27,6 +28,34 @@ export const TechStackModal = forwardRef(
       };
       if (open) window.addEventListener("keydown", handler);
       return () => window.removeEventListener("keydown", handler);
+    }, [open]);
+
+    // Trap focus inside modal
+    useEffect(() => {
+      if (!open) return;
+      const handleTab = (e: KeyboardEvent) => {
+        if (e.key !== "Tab" || !modalRef.current) return;
+        const focusables = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      };
+      window.addEventListener("keydown", handleTab);
+      return () => window.removeEventListener("keydown", handleTab);
     }, [open]);
 
     useEffect(() => {
@@ -57,16 +86,15 @@ export const TechStackModal = forwardRef(
 
             {/* Modal panel */}
             <div
+              ref={modalRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="tech-stack-modal-title"
               className="relative z-10 w-full max-w-lg max-h-[80vh] overflow-y-auto rounded-2xl border border-neutral-800 bg-neutral-900 p-6 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="tech-stack-modal-title"
-                className="flex items-center justify-between mb-6 pb-4 border-b border-neutral-800"
-              >
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-neutral-800">
                 <h2
                   id="tech-stack-modal-title"
                   className="text-3xl font-display font-bold text-neutral-100"
@@ -76,7 +104,7 @@ export const TechStackModal = forwardRef(
                 <button
                   ref={closeBtnRef}
                   onClick={() => setOpen(false)}
-                  className="text-neutral-400 hover:text-neutral-100 transition-colors text-xl leading-none cursor-pointer p-1"
+                  className="text-neutral-400 hover:text-neutral-100 transition-colors text-xl leading-none cursor-pointer p-1.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
                   aria-label="Close tech stack modal"
                 >
                   ✕

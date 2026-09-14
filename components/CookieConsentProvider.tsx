@@ -7,6 +7,7 @@ export type ConsentStatus = "accepted" | "declined" | null;
 interface CookieConsentContextType {
   consent: ConsentStatus;
   hasMounted: boolean;
+  isBannerVisible: boolean;
   accept: () => void;
   decline: () => void;
   resetConsent: () => void;
@@ -15,6 +16,7 @@ interface CookieConsentContextType {
 const CookieConsentContext = createContext<CookieConsentContextType>({
   consent: null,
   hasMounted: false,
+  isBannerVisible: false,
   accept: () => {},
   decline: () => {},
   resetConsent: () => {},
@@ -59,11 +61,14 @@ export function CookieConsentProvider({ children }: { children: React.ReactNode 
     setConsent(null);
   };
 
+  const isBannerVisible = hasMounted && consent === null;
+
   return (
     <CookieConsentContext.Provider
       value={{
         consent,
         hasMounted,
+        isBannerVisible,
         accept,
         decline,
         resetConsent,

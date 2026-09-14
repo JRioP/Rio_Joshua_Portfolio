@@ -60,42 +60,46 @@ export default function Navbar() {
         <Link
           href="/"
           prefetch={false}
-          className="font-display font-black text-2xl tracking-tight text-neutral-100 px-8 md:px-12 lg:px-20"
+          className="font-display font-black text-2xl tracking-tight text-neutral-100 px-2 sm:px-4 md:px-8 lg:px-12"
         >
           J<span className="text-accent-500">.</span>Rio
         </Link>
 
-        {/* Desktop nav — centered */}
-        <div className="hidden min-[1550px]:flex flex-1 justify-left">
-          <ul className="flex items-center gap-47 ml-4">
+        {/* Desktop nav — balanced for laptop/desktop */}
+        <div className="hidden lg:flex flex-1 justify-end items-center">
+          <ul className="flex items-center gap-6 xl:gap-8">
             {NAV_LINKS.map(({ href, label }) => (
               <li key={href}>
                 <Link
                   href={href}
                   prefetch={false}
                   className={clsx(
-                    "font-mono uppercase tracking-widest transition-colors",
+                    "font-mono text-xs uppercase tracking-widest transition-colors py-1 hover:text-accent-500",
                     pathname === href
-                      ? "text-accent-500"
-                      : "text-neutral-100 hover:text-neutral-400"
+                      ? "text-accent-500 font-semibold"
+                      : "text-neutral-200"
                   )}
                 >
                   {label}
                 </Link>
               </li>
             ))}
-            <a
-              href="/resume"
-              className="px-6 py-3 bg-accent-500 text-neutral-950 font-semibold rounded-lg text-sm hover:bg-accent-400 transition-colors"
-            >
-              RESUME
-            </a>
-            <ThemeToggle />
+            <li>
+              <a
+                href="/resume"
+                className="px-5 py-2.5 bg-accent-500 text-neutral-950 font-bold rounded-lg text-xs hover:bg-accent-hover transition-colors tracking-wider inline-block"
+              >
+                RESUME
+              </a>
+            </li>
+            <li>
+              <ThemeToggle />
+            </li>
           </ul>
         </div>
 
         {/* Mobile nav menu & Theme Toggle */}
-        <div className="min-[1550px]:hidden relative z-50 flex items-center gap-3">
+        <div className="lg:hidden relative z-50 flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
           <MenuToggle />
         </div>

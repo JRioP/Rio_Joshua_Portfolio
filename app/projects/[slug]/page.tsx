@@ -62,16 +62,16 @@ export default async function CaseStudyPage({
         <MDXRemote source={project.content} />
       </div>
 
-      <div className="mt-16 pt-8 border-t border-neutral-800 flex gap-4">
+      <div className="mt-16 pt-8 border-t border-neutral-800 flex flex-col sm:flex-row gap-3 sm:gap-4">
         {project.githubUrl && (
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 bg-accent-500 text-black font-semibold rounded-lg text-sm hover:bg-accent-400 transition-colors">
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-none px-5 py-3 min-h-[44px] bg-accent-500 text-neutral-950 font-bold rounded-lg text-sm hover:bg-accent-hover transition-all active:scale-[0.98] flex items-center justify-center text-center">
             View on GitHub
           </a>
         )}
         {project.liveUrl && (
           <ProjectLiveLink
-          href={project.liveUrl}
-          className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors"
+            href={project.liveUrl}
+            className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-3 min-h-[44px] rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-neutral-100 hover:bg-neutral-800/40 transition-all active:scale-[0.98] flex items-center justify-center"
           >
            Live Site
           </ProjectLiveLink>

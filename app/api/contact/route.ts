@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
           <p style="color:#666;margin-top:0">Thanks for reaching out — I'll get back to you within 24 hours.</p>
           <hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>
           <p style="color:#444;font-size:14px;margin-bottom:8px">Here's a copy of your message:</p>
-          <div style="background:#f9f9f9;border-left:3px solid #3b82f6;padding:16px;border-radius:0 8px 8px 0;margin-bottom:24px">
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:16px;border-radius:8px;margin-bottom:24px">
             <p style="margin:0;color:#555;font-size:14px;white-space:pre-wrap">${safeMessage}</p>
           </div>
           <hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>

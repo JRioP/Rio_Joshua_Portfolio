@@ -13,7 +13,7 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <main className="min-h-screen relative w-full overflow-hidden">
-        <section className="min-h-screen w-full flex items-center relative py-12 md:py-0 px-[50px] overflow-hidden">
+        <section className="min-h-screen w-full flex items-center relative py-12 md:py-0 px-6 sm:px-10 md:px-[50px] overflow-hidden">
           {/* Animated background blobs */}
           <div className="min-h-screen hero-blobs pointer-events-none">
             <div className="blob blob-1" />
@@ -50,18 +50,18 @@ export default function Home() {
           </ul>
         
         {/* CTA buttons */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
               <a
-              href="/projects"
-              className="px-6 py-3 bg-accent-500 text-neutral-300 font-bold rounded-lg hover:bg-accent-400 hover:text-amber-50 transition-colors"
-                >
-              See my work
+                href="/projects"
+                className="px-6 py-3.5 bg-accent-500 text-neutral-950 font-bold rounded-lg hover:bg-accent-hover transition-all active:scale-[0.98] text-center text-sm shadow-sm flex items-center justify-center min-h-[44px]"
+              >
+                See my work
               </a>
               <a
                 href="/contact"
-                className="px-6 py-3 border border-neutral-700 text-neutral-300 font-bold rounded-lg hover:border-neutral-500 hover:text-white transition-colors"
-                >
-               Contact me
+                className="px-6 py-3.5 border border-neutral-700 text-neutral-200 hover:text-neutral-100 hover:border-neutral-500 hover:bg-neutral-800/40 font-bold rounded-lg transition-all active:scale-[0.98] text-center text-sm flex items-center justify-center min-h-[44px]"
+              >
+                Contact me
               </a>
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function Home() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-neutral-600 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-neutral-600 scroll-indicator">
         <span className="font-mono text-xs tracking-widest uppercase">scroll</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-neutral-600">
           <path d="M8 3v10M8 13l-4-4M8 13l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -121,7 +121,7 @@ export default function Home() {
             src="/images/bg/doodles.2f5849cf.svg"
             alt="Background doodles"
             fill
-            className="object-cover object-center pointer-events-none select-none opacity-100 overflow-visible"
+            className="object-cover object-center pointer-events-none select-none opacity-30 overflow-visible"
             priority={false}
           />
         
@@ -176,21 +176,21 @@ export default function Home() {
             </div>
       
           {/* buttons */}
-            <div className="flex gap-3 mt-auto pt-4 border-t border-neutral-800">
-            <a href={`/projects/${project.slug}`} className="flex-1 text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg bg-accent-500 text-neutral-300 font-bold hover:bg-accent-400 hover:text-white transition-colors">
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mt-auto pt-4 border-t border-neutral-800">
+            <a href={`/projects/${project.slug}`} className="flex-1 text-center font-mono text-xs uppercase px-4 py-2.5 min-h-[42px] rounded-lg bg-accent-500 text-neutral-950 font-bold hover:bg-accent-hover transition-colors flex items-center justify-center">
               Case study
             </a>
           
           {/* buttons for live url or github*/}
             {project.liveUrl ? (
             <ProjectLiveLink
-             href={project.liveUrl}
-              className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors"
+              href={project.liveUrl}
+              className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 min-h-[42px] rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-neutral-100 hover:bg-neutral-800/40 transition-colors flex items-center justify-center"
               >
             Live Site
             </ProjectLiveLink>
             ) : project.githubUrl ? (
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 min-h-[42px] rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-neutral-100 hover:bg-neutral-800/40 transition-colors flex items-center justify-center">
               GitHub
             </a>
             ) : null}

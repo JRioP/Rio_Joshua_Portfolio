@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 
 interface Certificate {
@@ -23,12 +23,22 @@ export default function CertificateCarousel({ certificates }: CertificateCarouse
     setCurrent((c) => (c + 1) % total);
   }, [total]);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [prev, next]);
+
   if (total === 0) return null;
 
   const cert = certificates[current];
 
   return (
-    <div className="relative w-full select-none">
+    <div className="relative w-full select-none" tabIndex={0} role="region" aria-label="Certificate carousel" aria-roledescription="carousel">
 
       {/* Image container */}
       <div className="relative w-full h-128 bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
@@ -42,7 +52,7 @@ export default function CertificateCarousel({ certificates }: CertificateCarouse
         />
 
         {/* Name overlay */}
-        <div className="absolute bottom-0 inset-x-0 bg-black/60 backdrop-blur-sm py-2 px-3 text-center">
+        <div className="absolute bottom-0 inset-x-0 bg-neutral-950/80 backdrop-blur-sm py-2 px-3 text-center border-t border-neutral-800/50">
           <p className="font-mono text-xs text-neutral-300 truncate">{cert.name}</p>
         </div>
 
@@ -50,7 +60,7 @@ export default function CertificateCarousel({ certificates }: CertificateCarouse
         {total > 1 && (
           <button
             onClick={prev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-neutral-900/80 border border-neutral-700 text-neutral-300 hover:text-white hover:border-neutral-500 transition-all flex items-center justify-center cursor-pointer backdrop-blur-sm"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-neutral-900/90 border border-neutral-700 text-neutral-200 hover:text-neutral-100 hover:border-neutral-500 hover:bg-neutral-800 transition-all flex items-center justify-center cursor-pointer backdrop-blur-sm active:scale-95 text-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 shadow-md"
             aria-label="Previous certificate"
           >
             ‹
@@ -61,7 +71,7 @@ export default function CertificateCarousel({ certificates }: CertificateCarouse
         {total > 1 && (
           <button
             onClick={next}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-neutral-900/80 border border-neutral-700 text-neutral-300 hover:text-white hover:border-neutral-500 transition-all flex items-center justify-center cursor-pointer backdrop-blur-sm"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-neutral-900/90 border border-neutral-700 text-neutral-200 hover:text-neutral-100 hover:border-neutral-500 hover:bg-neutral-800 transition-all flex items-center justify-center cursor-pointer backdrop-blur-sm active:scale-95 text-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 shadow-md"
             aria-label="Next certificate"
           >
             ›
@@ -71,18 +81,24 @@ export default function CertificateCarousel({ certificates }: CertificateCarouse
 
       {/* Dot indicators */}
       {total > 1 && (
-        <div className="flex justify-center gap-1.5 mt-3">
+        <div className="flex justify-center items-center gap-1 mt-3" role="tablist" aria-label="Certificate slides">
           {certificates.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`rounded-full transition-all cursor-pointer ${
-                i === current
-                  ? "w-4 h-1.5 bg-accent-500"
-                  : "w-1.5 h-1.5 bg-neutral-700 hover:bg-neutral-500"
-              }`}
+              className="p-2 flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 rounded"
               aria-label={`Go to slide ${i + 1}`}
-            />
+              aria-selected={i === current}
+              role="tab"
+            >
+              <span
+                className={`block rounded-full transition-all ${
+                  i === current
+                    ? "w-5 h-1.5 bg-accent-500"
+                    : "w-2 h-1.5 bg-neutral-700 hover:bg-neutral-500"
+                }`}
+              />
+            </button>
           ))}
         </div>
       )}

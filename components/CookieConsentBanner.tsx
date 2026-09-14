@@ -36,18 +36,18 @@ export function CookieConsentBanner() {
         This site uses cookies and telemetry to monitor page speed and analyze traffic caching via Vercel Speed Insights and Analytics. Do you accept these cookies?
       </p>
 
-      <div className="flex items-center gap-2.5">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
         <button
           type="button"
           onClick={accept}
-          className="flex-1 py-2 px-3.5 bg-accent-500 hover:bg-accent-400 text-neutral-950 font-bold text-xs rounded-lg transition-colors cursor-pointer text-center"
+          className="flex-1 min-h-[44px] py-2.5 px-4 bg-accent-500 hover:bg-accent-hover active:scale-[0.98] text-neutral-950 font-bold text-xs sm:text-sm rounded-lg transition-all cursor-pointer text-center flex items-center justify-center shadow-sm"
         >
           Accept
         </button>
         <button
           type="button"
           onClick={decline}
-          className="flex-1 py-2 px-3.5 border border-neutral-700 hover:border-neutral-500 hover:text-white text-neutral-300 font-medium text-xs rounded-lg transition-colors cursor-pointer text-center"
+          className="flex-1 min-h-[44px] py-2.5 px-4 border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800/40 active:scale-[0.98] text-neutral-200 hover:text-neutral-100 font-semibold text-xs sm:text-sm rounded-lg transition-all cursor-pointer text-center flex items-center justify-center"
         >
           Decline
         </button>

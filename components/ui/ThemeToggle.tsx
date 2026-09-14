@@ -32,7 +32,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       className={`relative w-15 h-8 rounded-full p-1 transition-all duration-500 cursor-pointer overflow-hidden border shrink-0 select-none shadow-inner focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 ${
         isDark
           ? "bg-gradient-to-r from-slate-900 via-indigo-950 to-neutral-900 border-indigo-900/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
-          : "bg-gradient-to-r from-sky-400 via-sky-300 to-blue-400 border-sky-300/80 shadow-[inset_0_2px_4px_rgba(0,0,0,0.15)]"
+          : "bg-gradient-to-r from-[#6D8EC5] via-[#8AA9DE] to-[#DCE5F2] border-[#6D8EC5]/60 shadow-[inset_0_2px_4px_rgba(211,98,44,0.12)]"
       } ${className}`}
     >
       {/* BACKGROUND SCENERY */}
@@ -95,10 +95,10 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 
       {/* SLIDING KNOB (Sun morphing into Moon) */}
       <div
-        className={`relative z-10 w-6 h-6 rounded-full transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex items-center justify-center ${
+        className={`relative z-10 w-6 h-6 rounded-full transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center ${
           isDark
             ? "translate-x-7 bg-slate-100 shadow-[0_0_8px_rgba(255,255,255,0.4)]"
-            : "translate-x-0 bg-gradient-to-tr from-amber-400 to-yellow-300 shadow-[0_0_10px_rgba(251,191,36,0.8)]"
+            : "translate-x-0 bg-gradient-to-tr from-[#D3622C] to-[#F0C845] shadow-[0_0_10px_rgba(240,200,69,0.8)]"
         }`}
       >
         {/* Moon Craters (Fade in only in dark mode) */}

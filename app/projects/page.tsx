@@ -70,17 +70,17 @@ export default function ProjectsPage() {
                   ))}
                 </div>
 
-                <div className="flex gap-3 mt-auto pt-4 border-t border-neutral-800">
+                <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mt-auto pt-4 border-t border-neutral-800">
                   <a
                     href={`/projects/${project.slug}`}
-                    className="flex-1 uppercase text-center font-mono text-xs px-4 py-2.5 rounded-lg bg-accent-500 text-neutral-950 font-bold hover:bg-accent-400 transition-colors"
+                    className="flex-1 uppercase text-center font-mono text-xs px-4 py-2.5 min-h-[44px] rounded-lg bg-accent-500 text-neutral-950 font-bold hover:bg-accent-hover transition-colors flex items-center justify-center"
                   >
                     Case study
                   </a>
                   {project.liveUrl ? (
                     <ProjectLiveLink
                       href={project.liveUrl}
-                      className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors"
+                      className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 min-h-[42px] rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-neutral-100 hover:bg-neutral-800/40 transition-colors flex items-center justify-center"
                     >
                       Live Site
                     </ProjectLiveLink>
@@ -89,7 +89,7 @@ export default function ProjectsPage() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 grow uppercase text-center font-mono text-xs px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors"
+                      className="flex-1 grow uppercase text-center font-mono text-xs px-4 py-2.5 min-h-[42px] rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-neutral-100 hover:bg-neutral-800/40 transition-colors flex items-center justify-center"
                     >
                       GitHub
                     </a>
@@ -146,17 +146,17 @@ export default function ProjectsPage() {
                     ))}
                   </div>
 
-                  <div className="flex gap-3 mt-auto pt-4 border-t border-neutral-800">
+                  <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mt-auto pt-4 border-t border-neutral-800">
                     <a
                       href={`/projects/${project.slug}`}
-                      className="flex-1 uppercase text-center font-mono text-xs px-4 py-2.5 rounded-lg bg-accent-500 text-neutral-950 font-bold hover:bg-accent-400 transition-colors"
+                      className="flex-1 uppercase text-center font-mono text-xs px-4 py-2.5 min-h-[44px] rounded-lg bg-accent-500 text-neutral-950 font-bold hover:bg-accent-hover transition-colors flex items-center justify-center"
                     >
                       Case study
                     </a>
                     {project.liveUrl ? (
                       <ProjectLiveLink
                         href={project.liveUrl}
-                        className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors"
+                        className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 min-h-[42px] rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-neutral-100 hover:bg-neutral-800/40 transition-colors flex items-center justify-center"
                       >
                         Live Site
                       </ProjectLiveLink>
@@ -165,7 +165,7 @@ export default function ProjectsPage() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 grow uppercase text-center font-mono text-xs px-4 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors"
+                        className="flex-1 grow uppercase text-center font-mono text-xs px-4 py-2.5 min-h-[42px] rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-neutral-100 hover:bg-neutral-800/40 transition-colors flex items-center justify-center"
                       >
                         GitHub
                       </a>
