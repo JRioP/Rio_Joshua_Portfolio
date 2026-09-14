@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
       to:      email,
       reply_to: "riojoshuadev@gmail.com",
       subject: `Got your message, ${name}!`,
-      text:    `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nHere's a copy of what you sent:\n\n"${message}"\n\nBest regards,\nJoshua Alnie Rio\nJunior Full-Stack Developer · Laguna, Philippines\nEmail: riojoshuadev@gmail.com\nMobile: 09270849508\nLinkedIn: https://linkedin.com/in/japrdev\nPortfolio: https://joshuario.com`,
+      text:    `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nHere's a copy of what you sent:\n\n"${message}"\n\nBest regards,\nJoshua Alnie Rio\nJunior Full-Stack Developer · Batangas, Philippines\nEmail: riojoshuadev@gmail.com\nMobile: 09270849508\nLinkedIn: https://linkedin.com/in/japrdev\nPortfolio: https://joshuario.com`,
       html: `
         <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:580px;margin:0 auto;padding:24px;color:#1e293b;line-height:1.6">
           <h1 style="font-size:22px;font-weight:700;margin-bottom:6px;color:#0f172a">Got your message, ${safeName}!</h1>
@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
           <div style="margin-top:16px">
             <p style="color:#64748b;font-size:13px;margin:0 0 4px 0">Best regards,</p>
             <p style="font-size:16px;font-weight:700;margin:0;color:#0f172a">Joshua Alnie Rio</p>
-            <p style="font-size:13px;color:#64748b;margin:2px 0 12px 0">Junior Full-Stack Developer · Laguna, Philippines</p>
+            <p style="font-size:13px;color:#64748b;margin:2px 0 12px 0">Junior Full-Stack Developer · Batangas, Philippines</p>
             
             <div style="font-size:13px;color:#475569;line-height:1.8">
               <div>Email: <a href="mailto:riojoshuadev@gmail.com" style="color:#3b82f6;text-decoration:none">riojoshuadev@gmail.com</a></div>

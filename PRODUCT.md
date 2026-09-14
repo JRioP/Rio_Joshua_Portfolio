@@ -27,7 +27,7 @@ Evaluated primarily on desktop browsers (during recruiter desk reviews) and mobi
 - Fast page load performance, responsive mobile layout (min 44px touch targets), and accessible navigation.
 
 ## Brand Commitments
-- Identity: Joshua Rio (@JRioP), Laguna, Philippines.
+- Identity: Joshua Rio (@JRioP), Batangas, Philippines.
 - Voice: Pragmatic, confident, approachable, and craft-conscious. Emphasizes tangible outcomes, real stacks, and shipped software.
 - Typography: Display headings in `Gibed` (`--font-display`), body in `Plus Jakarta Sans` (`--font-sans`), technical details and code in `DM Mono` (`--font-mono`).
 - Palette: Light mode utilizes Lake Blue (`#6D8EC5`), Flame (`#D3622C`), and Saffron (`#F0C845`) over crisp canvas `#F4F7FC`/`#FFFFFF`. Dark mode utilizes deep midnight neutrals (`#0a0a0a`/`#171717`) with electric blue (`#3b82f6`) accents.
