@@ -66,63 +66,69 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
+        <label htmlFor="name" className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
           Name
         </label>
         <input
           type="text"
+          id="name"
           name="name"
           value={form.name}
           onChange={handleChange}
           required
           placeholder="Your name"
-          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent transition-colors"
+          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all"
         />
       </div>
       <div>
-        <label className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
+        <label htmlFor="email" className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
           Email
         </label>
         <input
           type="email"
+          id="email"
           name="email"
           value={form.email}
           onChange={handleChange}
           required
           placeholder="your@email.com"
-          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent transition-colors"
+          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all"
         />
       </div>
       <div>
-        <label className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
+        <label htmlFor="message" className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
           Message
         </label>
         <textarea
+          id="message"
           name="message"
           value={form.message}
           onChange={handleChange}
           required
           rows={6}
           placeholder="Tell me what you're working on..."
-          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent transition-colors resize-none"
+          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all resize-none"
         />
       </div>
 
       {error && (
-        <p className="text-red-400 font-mono text-xs">{error}</p>
+        <p role="alert" aria-live="polite" className="text-red-500 font-mono text-xs">
+          {error}
+        </p>
       )}
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full py-3.5 bg-accent-500 hover:bg-accent-hover text-black font-bold rounded-lg transition-colors disabled:opacity-50 font-display tracking-tight"
+        aria-busy={status === "loading"}
+        className="w-full py-3.5 bg-accent-500 hover:bg-accent-hover text-neutral-950 font-bold rounded-lg transition-colors disabled:opacity-50 font-display tracking-tight cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/30"
       >
         {status === "loading" ? "Sending..." : "Send message →"}
       </button>
 
       <p className="text-neutral-600 text-xs text-center font-mono">
         Or email me directly at{" "}
-        <a href="mailto:riojoshuadev@gmail.com" className="text-accent hover:underline">
+        <a href="mailto:riojoshuadev@gmail.com" className="text-accent-500 hover:underline">
           riojoshuadev@gmail.com
         </a>
       </p>

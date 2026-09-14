@@ -26,7 +26,12 @@ function getSharedObserver(): IntersectionObserver | null {
     sharedObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          const isVisible =
+            entry.isIntersecting ||
+            entry.intersectionRatio > 0 ||
+            (entry.boundingClientRect.top < window.innerHeight && entry.boundingClientRect.bottom > 0);
+
+          if (isVisible) {
             const cb = callbackMap.get(entry.target);
             if (cb) {
               cb();
@@ -35,7 +40,7 @@ function getSharedObserver(): IntersectionObserver | null {
           }
         });
       },
-      { threshold: 0.3, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -20px 0px" }
     );
   }
   return sharedObserver;

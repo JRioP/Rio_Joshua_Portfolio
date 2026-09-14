@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { useCookieConsent } from "@/components/CookieConsentProvider";
 
 
 type Message = { role: "user" | "assistant"; content: string };
@@ -13,6 +14,7 @@ const SUGGESTED = [
 ];
 
 export function FloatingChat() {
+  const { isBannerVisible } = useCookieConsent();
   const [isOpen, setIsOpen] = useState(false);
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -34,6 +36,19 @@ export function FloatingChat() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  // Close on Escape key
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
 
   // Auto-scroll to latest message
   useEffect(() => {
@@ -82,19 +97,26 @@ export function FloatingChat() {
   };
 
   useEffect(() => {
-  if (searchParams.get("chat") === "open") {
-    setIsOpen(true);
+    if (searchParams.get("chat") === "open") {
+      setIsOpen(true);
+    }
+  }, [searchParams]);
+
+  // Hide the floating chat icon while the consent banner is present
+  if (isBannerVisible) {
+    return null;
   }
-}, [searchParams]);
 
   return (
-    <div className="fixed bottom-10 right-10 z-50 flex flex-col items-end gap-3 md:bottom-20 md:right-20">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-3">
       {/* Chat panel */}
       {isOpen && (
         <div
           ref={chatRef}
-          className="w-80 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
-          style={{ height: "420px" }}
+          role="region"
+          aria-label="Ask Josh AI Chat Assistant"
+          className="w-[calc(100vw-2rem)] sm:w-80 max-w-sm bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+          style={{ height: "420px", maxHeight: "calc(100dvh - 5.5rem)" }}
         >
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800 bg-neutral-950">
@@ -106,7 +128,7 @@ export function FloatingChat() {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-neutral-600 hover:text-neutral-300 transition-colors font-mono text-xs cursor-pointer"
+              className="text-neutral-600 hover:text-neutral-300 transition-colors font-mono text-xs cursor-pointer p-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
               aria-label="Close chat"
             >
               ✕
@@ -142,9 +164,9 @@ export function FloatingChat() {
                 className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] px-3 py-2 rounded-xl text-xs leading-relaxed whitespace-pre-wrap ${
+                  className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed ${
                     msg.role === "user"
-                      ? "bg-accent-500 text-black font-medium"
+                      ? "bg-accent-500 text-neutral-950 font-medium"
                       : "bg-neutral-800 text-neutral-200 border border-neutral-700"
                   }`}
                 >
@@ -157,9 +179,9 @@ export function FloatingChat() {
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-neutral-800 border border-neutral-700 px-3 py-2 rounded-xl flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 typing-dot" style={{ animationDelay: "0ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 typing-dot" style={{ animationDelay: "180ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 typing-dot" style={{ animationDelay: "360ms" }} />
                 </div>
               </div>
             )}
@@ -175,14 +197,14 @@ export function FloatingChat() {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendQuestion()}
-              placeholder="Ask something…"
+              placeholder="Ask a question..."
               disabled={isLoading}
               className="flex-1 bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-xs text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent-500 transition-colors disabled:opacity-50"
             />
             <button
               onClick={() => sendQuestion()}
               disabled={isLoading || !question.trim()}
-              className="px-3 py-2 bg-accent-500 text-black rounded-lg text-xs font-bold hover:bg-accent-400 transition-colors disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+              className="px-3 py-2 bg-accent-500 text-neutral-950 rounded-lg text-xs font-bold hover:bg-accent-hover transition-colors disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
             >
               →
             </button>
@@ -194,12 +216,14 @@ export function FloatingChat() {
       <button
         ref={toggleRef}
         onClick={() => setIsOpen((o) => !o)}
-        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer ${
+        aria-label={isOpen ? "Close chat" : "Open AI chat"}
+        aria-expanded={isOpen}
+        aria-haspopup="dialog"
+        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 ${
           isOpen
             ? "bg-neutral-700 text-neutral-300"
-            : "bg-accent-500 text-black hover:bg-accent-400"
+            : "bg-accent-500 text-neutral-950 hover:bg-accent-hover"
         }`}
-        aria-label={isOpen ? "Close chat" : "Open AI chat"}
       >
         {isOpen ? (
           <span className="text-sm">✕</span>

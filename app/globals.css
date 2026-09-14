@@ -2,14 +2,64 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: var(--font-dm-sans), sans-serif;
-  --font-display: var(--font-syne), sans-serif;
+  --font-sans: var(--font-plus-jakarta-sans), sans-serif;
+  --font-display: var(--font-gibed), sans-serif;
   --font-mono: var(--font-dm-mono), monospace;
   --color-muted: hsl(240 4.8% 95.9%);
   --color-muted-foreground: hsl(240 3.8% 46.1%);
-  --color-accent-400: #60a5fa;
-  --color-accent-500: #3b82f6;
-  --color-accent-hover: #60a5fa;
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-hover: var(--accent-hover);
+  --color-lake-blue: #6D8EC5;
+  --color-flame: #D3622C;
+  --color-saffron: #F0C845;
+}
+
+:root {
+  /* Lake Blue (#6D8EC5), Flame (#D3622C), Saffron (#F0C845) Palette for Light Mode */
+  --accent-500: #BD4F1B;       /* Deep Flame: Meets WCAG AA 4.55:1 on #F4F7FC, 4.88:1 on #FFFFFF */
+  --accent-400: #8A5F00;       /* Rich Amber Saffron: Meets WCAG AA 5.26:1 on #F4F7FC, 5.65:1 on #FFFFFF */
+  --accent-hover: #9E3D12;     /* Deep Flame Hover */
+
+  /* Surfaces & Canvas */
+  --color-neutral-950: #F4F7FC; /* Crisp Canvas with soft Lake Blue wash */
+  --color-neutral-900: #FFFFFF; /* Pure White: Cards, modal, and elevated panels */
+  --color-neutral-800: #DCE5F2; /* Soft Lake Blue border & chip background */
+  --color-neutral-700: #6D8EC5; /* Lake Blue: Accent borders, tabs & pill accents */
+
+  /* Text Hierarchy (All >= 5.0:1 on canvas) */
+  --color-neutral-600: #4267A3; /* Deep Lake Blue: Metadata, dates & subtle links (5.28:1) */
+  --color-neutral-500: #385582; /* Slate-blue secondary text (6.7:1) */
+  --color-neutral-400: #294063; /* Slate-blue body text & descriptions (9.8:1) */
+  --color-neutral-300: #1D2E49; /* Subheadings (12.2:1) */
+  --color-neutral-200: #142135; /* Headings (14.5:1) */
+  --color-neutral-100: #0F172A; /* Midnight Slate: Primary display headings (16.6:1) */
+
+  /* Ambient Hero Blobs (Authentic visual swatches) */
+  --blob-1: #6D8EC5;           /* Lake Blue */
+  --blob-2: #D3622C;           /* Flame */
+  --blob-3: #F0C845;           /* Saffron */
+}
+
+html.dark {
+  --accent-500: #3b82f6;
+  --accent-400: #60a5fa;
+  --accent-hover: #60a5fa;
+
+  --color-neutral-950: #0a0a0a;
+  --color-neutral-900: #171717;
+  --color-neutral-800: #262626;
+  --color-neutral-700: #404040;
+  --color-neutral-600: #525252;
+  --color-neutral-500: #737373;
+  --color-neutral-400: #a1a1a1;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-100: #f5f5f5;
+
+  --blob-1: #3b82f6;
+  --blob-2: #60a5fa;
+  --blob-3: #2563eb;
 }
 
 * {
@@ -17,14 +67,20 @@
 }
 
 body {
-  background: #0d0d10;
-  color: #f0ede8;
+  background-color: var(--color-neutral-950);
+  color: var(--color-neutral-100);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::selection {
-  background: rgba(249, 115, 22, 0.25);
-  color: #fff;
+  background: #F0C845;
+  color: #141C2B;
+}
+
+html.dark ::selection {
+  background: rgba(59, 130, 246, 0.25);
+  color: inherit;
 }
 
 @layer utilities {
@@ -41,32 +97,37 @@ body {
   .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
+    filter: blur(85px);
+    opacity: 0.22;
+    transition: opacity 0.3s ease;
+  }
+
+  html.dark .blob {
     opacity: 0.25;
   }
 
   .blob-1 {
-    width: 400px;
-    height: 400px;
-    background: #3b82f6;
+    width: 420px;
+    height: 420px;
+    background: var(--blob-1, #6D8EC5);
     top: -100px;
     left: 10%;
     animation: float-1 18s ease-in-out infinite;
   }
 
   .blob-2 {
-    width: 350px;
-    height: 350px;
-    background: #60a5fa;
+    width: 360px;
+    height: 360px;
+    background: var(--blob-2, #D3622C);
     top: 20%;
     right: 5%;
     animation: float-2 22s ease-in-out infinite;
   }
 
   .blob-3 {
-    width: 300px;
-    height: 300px;
-    background: #2563eb;
+    width: 320px;
+    height: 320px;
+    background: var(--blob-3, #F0C845);
     bottom: 15%;
     left: 30%;
     animation: float-3 20s ease-in-out infinite;
@@ -111,6 +172,60 @@ body {
 .push-up.is-visible {
   opacity: 1;
   transform: translate(0);
+}
+
+@keyframes scroll-pulse {
+  0% {
+    transform: translateY(0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0.85;
+  }
+}
+
+.scroll-indicator {
+  animation: scroll-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes typing-wave {
+  0%, 100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2.5px);
+  }
+}
+
+.typing-dot {
+  animation: typing-wave 1.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .push-left,
+  .push-right,
+  .push-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .blob,
+  .blob-1,
+  .blob-2,
+  .blob-3,
+  .scroll-indicator,
+  .typing-dot {
+    animation: none !important;
+    transform: none !important;
+  }
 }
 
 /* MDX prose table styles */

@@ -4,7 +4,7 @@
 import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { GROUPED_TECH_STACK } from "@/lib/tech-stack";
-import TechStackModal from "@/components/TechStackModal";
+import TechStackModal from "@/components/techStackCard/TechStackModal";
 
 
 export function TechStackCard() {

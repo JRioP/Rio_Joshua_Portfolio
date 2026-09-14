@@ -28,7 +28,7 @@ const EXPERIENCES = [
   {
     company: "Smplfy Creative Labs",
     role: "WordPress Developer",
-    period: "2023 – 2024",
+    period: "2023",
     bullets: [
       "Built and launched a full LGU website from scratch using WordPress and Elementor, enabling online access to government services for thousands of community residents.",
       "Conducted stakeholder interviews with LGU staff to define requirements, translating community needs into functional website features through iterative feedback cycles.",
