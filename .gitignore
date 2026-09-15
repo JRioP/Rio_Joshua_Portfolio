@@ -31,3 +31,12 @@ Thumbs.db
 *.sln
 *.sw?
 .env
+
+# AI agent configs & skills
+.agent/
+.agents/
+.claude/
+.codex/
+.gemini/
+.impeccable/
+.qodo/
