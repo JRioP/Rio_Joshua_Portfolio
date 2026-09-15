@@ -1,6 +1,6 @@
 "use client";
 
-import { useCookieConsent } from "@/components/CookieConsentProvider";
+import { useCookieConsent } from "@/components/consentBanner/CookieConsentProvider";
 
 // components/layout/Footer.tsx
 export default function Footer() {

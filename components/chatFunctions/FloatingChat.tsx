@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useCookieConsent } from "@/components/CookieConsentProvider";
+import { useCookieConsent } from "@/components/consentBanner/CookieConsentProvider";
 
 
 type Message = { role: "user" | "assistant"; content: string };

@@ -2,7 +2,7 @@
 
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { useCookieConsent } from "./CookieConsentProvider";
+import { useCookieConsent } from "./consentBanner/CookieConsentProvider";
 
 export function ConditionalAnalytics() {
   const { consent } = useCookieConsent();
