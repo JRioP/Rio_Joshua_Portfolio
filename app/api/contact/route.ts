@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
     const { data, error: resendError } = await resend.emails.send({
       from:    "Joshua Rio Portfolio <contact@joshuario.com>",
       to:      "riojoshuadev@gmail.com",
-      reply_to: email,
+      replyTo: email,
       subject: `New message from ${name} — Portfolio`,
       text:    `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
     const { error: confirmError } = await resend.emails.send({
       from:    "Joshua Alnie Rio <contact@joshuario.com>",
       to:      email,
-      reply_to: "riojoshuadev@gmail.com",
+      replyTo: "riojoshuadev@gmail.com",
       subject: `Got your message, ${name}!`,
       text:    `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nHere's a copy of what you sent:\n\n"${message}"\n\nBest regards,\nJoshua Alnie Rio\nJunior Full-Stack Developer · Batangas, Philippines\nEmail: riojoshuadev@gmail.com\nMobile: 09270849508\nLinkedIn: https://linkedin.com/in/japrdev\nPortfolio: https://joshuario.com`,
       html: `
