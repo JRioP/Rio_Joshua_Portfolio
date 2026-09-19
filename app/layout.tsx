@@ -6,8 +6,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/themes/ThemeProvider";
 import { THEME_SCRIPT } from "@/components/themes/ThemeScript";
-import { CookieConsentProvider } from "@/components/CookieConsentProvider";
-import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { CookieConsentProvider } from "@/components/consentBanner/CookieConsentProvider";
+import { CookieConsentBanner } from "@/components/consentBanner/CookieConsentBanner";
 import { ConditionalAnalytics } from "@/components/ConditionalAnalytics";
 
 const gibed = localFont({
