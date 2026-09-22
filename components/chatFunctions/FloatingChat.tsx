@@ -128,7 +128,7 @@ export function FloatingChat() {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-neutral-600 hover:text-neutral-300 transition-colors font-mono text-xs cursor-pointer p-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
+              className="text-neutral-400 hover:text-neutral-100 transition-colors font-mono text-xs cursor-pointer p-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
               aria-label="Close chat"
             >
               ✕

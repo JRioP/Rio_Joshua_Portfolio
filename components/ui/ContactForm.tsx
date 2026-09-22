@@ -66,7 +66,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="name" className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
+        <label htmlFor="name" className="font-mono text-xs text-neutral-300 uppercase tracking-widest block mb-2 font-medium">
           Name
         </label>
         <input
@@ -77,11 +77,11 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           placeholder="Your name"
-          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all"
+          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all"
         />
       </div>
       <div>
-        <label htmlFor="email" className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
+        <label htmlFor="email" className="font-mono text-xs text-neutral-300 uppercase tracking-widest block mb-2 font-medium">
           Email
         </label>
         <input
@@ -92,11 +92,11 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           placeholder="your@email.com"
-          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all"
+          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all"
         />
       </div>
       <div>
-        <label htmlFor="message" className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
+        <label htmlFor="message" className="font-mono text-xs text-neutral-300 uppercase tracking-widest block mb-2 font-medium">
           Message
         </label>
         <textarea
@@ -126,7 +126,7 @@ export default function ContactForm() {
         {status === "loading" ? "Sending..." : "Send message →"}
       </button>
 
-      <p className="text-neutral-600 text-xs text-center font-mono">
+      <p className="text-neutral-400 text-xs text-center font-mono">
         Or email me directly at{" "}
         <a href="mailto:riojoshuadev@gmail.com" className="text-accent-500 hover:underline">
           riojoshuadev@gmail.com

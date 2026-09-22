@@ -35,7 +35,7 @@ export function TechStackCard() {
           <button
             type="button"
             onClick={openModal}
-            className="font-mono text-xs px-3 py-1 rounded-full bg-neutral-800 text-neutral-500 border border-neutral-700 hover:text-accent-500 hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 transition-colors cursor-pointer"
+            className="font-mono text-xs px-3 py-1 rounded-full bg-neutral-800 text-neutral-300 font-medium border border-neutral-700 hover:text-accent-500 hover:border-neutral-600 hover:bg-neutral-750 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 transition-colors cursor-pointer"
             aria-label={`Show ${remaining} more tech stack items`}
           >
             +{remaining} more
