@@ -55,13 +55,27 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
               <a
                 href="/projects"
-                className="px-6 py-3.5 bg-accent-500 hover:bg-accent-hover text-white font-bold rounded-xl transition-all active:scale-[0.98] text-center text-sm shadow-[0_2px_12px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.45)] border border-blue-400/30 flex items-center justify-center min-h-[44px]"
+                className="px-6 py-3.5 bg-accent-500 hover:bg-accent-hover text-white font-sans font-semibold rounded-xl transition-all duration-200 active:scale-[0.98] text-center text-sm shadow-[0_2px_12px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.45)] border border-blue-400/30 flex items-center justify-center gap-2 min-h-[44px] group"
               >
-                See my work
+                <span>See my work</span>
+                <svg
+                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 text-blue-100"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 3.5L10.5 8L6 12.5"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </a>
               <a
                 href="/contact"
-                className="px-6 py-3.5 border border-neutral-700 text-neutral-200 hover:text-neutral-100 hover:border-neutral-500 hover:bg-neutral-800/40 font-bold rounded-lg transition-all active:scale-[0.98] text-center text-sm flex items-center justify-center min-h-[44px]"
+                className="px-6 py-3.5 border border-neutral-700/80 bg-neutral-800/70 hover:bg-neutral-800 text-neutral-200 hover:text-white hover:border-neutral-600 font-sans font-semibold rounded-xl transition-all duration-200 active:scale-[0.98] text-center text-sm shadow-sm flex items-center justify-center min-h-[44px]"
               >
                 Contact me
               </a>
