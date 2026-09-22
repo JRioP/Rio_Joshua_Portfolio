@@ -65,7 +65,7 @@ export function RotatingText() {
   }, [mounted]);
 
   return (
-    <span className="block whitespace-nowrap overflow-hidden">
+    <span className="block whitespace-nowrap overflow-hidden" suppressHydrationWarning>
       <span className="text-accent-400">
         {displayed}
         <span className={mounted ? "animate-pulse" : ""}>|</span>
