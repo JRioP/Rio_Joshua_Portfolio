@@ -77,7 +77,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           placeholder="Your name"
-          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all"
+          className="w-full bg-neutral-900 border border-neutral-750 rounded-xl px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/25 transition-all"
         />
       </div>
       <div>
@@ -92,7 +92,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           placeholder="your@email.com"
-          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all"
+          className="w-full bg-neutral-900 border border-neutral-750 rounded-xl px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/25 transition-all"
         />
       </div>
       <div>
@@ -107,7 +107,7 @@ export default function ContactForm() {
           required
           rows={6}
           placeholder="Tell me what you're working on..."
-          className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/20 transition-all resize-none"
+          className="w-full bg-neutral-900 border border-neutral-750 rounded-xl px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/25 transition-all resize-none"
         />
       </div>
 
@@ -121,9 +121,25 @@ export default function ContactForm() {
         type="submit"
         disabled={status === "loading"}
         aria-busy={status === "loading"}
-        className="w-full py-3.5 bg-accent-500 hover:bg-accent-hover text-neutral-950 font-bold rounded-lg transition-colors disabled:opacity-50 font-display tracking-tight cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/30"
+        className="w-full py-3.5 px-6 bg-accent-500 hover:bg-accent-hover text-white font-sans font-semibold text-sm sm:text-base rounded-xl transition-all duration-200 active:scale-[0.98] disabled:opacity-50 shadow-[0_2px_12px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.45)] border border-blue-400/30 flex items-center justify-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/50 min-h-[48px] group"
       >
-        {status === "loading" ? "Sending..." : "Send message →"}
+        <span>{status === "loading" ? "Sending..." : "Send message"}</span>
+        {status !== "loading" && (
+          <svg
+            className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 text-blue-100"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M6 3.5L10.5 8L6 12.5"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
       </button>
 
       <p className="text-neutral-400 text-xs text-center font-mono">
