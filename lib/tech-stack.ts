@@ -14,7 +14,7 @@ export const ALL_TECH_STACK: TechItem[] = [
   { name: "HTML",         icon: iconPath("html.svg"),         category: "Frontend" },
   { name: "CSS",          icon: iconPath("css.svg"),          category: "Frontend" },
   { name: "Tailwind CSS", icon: iconPath("tailwindcss.svg"), category: "Frontend" },
-  { name: "Elementor",    icon: iconPath("elementor.svg"),    category: "Frontend" },
+  
 
   { name: "PHP",          icon: iconPath("php.svg"),          category: "Backend" },
   { name: "Python",       icon: iconPath("python.svg"),       category: "Backend" },
@@ -25,7 +25,9 @@ export const ALL_TECH_STACK: TechItem[] = [
   { name: "SQL",          icon: iconPath("sql.svg"),          category: "Database" },
   { name: "MySQL",        icon: iconPath("mysql.svg"),        category: "Database" },
   { name: "Firestore",    icon: iconPath("firestore.svg"),    category: "Database" },
-
+  
+  { name: "Gutenberg",    icon: iconPath("elementor.svg"),    category: "CMS & Web" },
+  { name: "Elementor",    icon: iconPath("elementor.svg"),    category: "CMS & Web" },
   { name: "WordPress",    icon: iconPath("wordpress.svg"),    category: "CMS & Web" },
   { name: "MDX",          icon: iconPath("mdx.svg"),          category: "CMS & Web" },
 

@@ -1,0 +1,131 @@
+---
+slug: "marci-metzger-revamp"
+title: "Marci Metzger Homes — Real Estate Site Revamp"
+description: "A single-page redesign of a real estate agent's homepage — rebuilt from the ground up in Next.js with a live-style property search, an interactive gallery, and a mobile-first layout."
+date: 2026-09-16
+badge: "Latest"
+tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"]
+category: web
+featured: false
+status: completed
+role: "Sole Developer"
+liveUrl: "https://marci-metzger-revamp-rho.vercel.app/"
+originalUrl: "https://marcimetzger.com/"
+coverImage: "/images/projects/marcihome.png"
+---
+
+## Overview
+
+**Marci Metzger Homes** is a single-page redesign of a real estate agent's
+homepage, built as a take-home assignment for a Junior Web Builder role. The
+brief: rebuild the existing homepage for Marci Metzger — a Pahrump, NV
+realtor with nearly three decades of experience — using the same content and
+imagery, but with a stronger design and modern build, without simply
+copy-pasting the original markup.
+
+## Problem
+
+The original site suffered from a few common real-estate-site issues:
+
+- **Visual hierarchy was flat** — hero, listings, and about sections carried
+  similar visual weight, giving the visitor no clear sense of what to look at
+  first
+- **No sense of place** — despite being a hyper-local Pahrump/Nevada
+  business, the design didn't lean into the community imagery it had
+  available
+- **Search and lead capture weren't front-and-center** — the two things a
+  real estate visitor actually wants to do (search homes, contact the agent)
+  were buried rather than surfaced early
+
+## Tech Stack
+
+- **Framework:** Next.js (App Router), React, TypeScript
+- **Styling:** Tailwind CSS
+- **Deployment:** Vercel
+- **Assets:** Original photography and copy from marcimetzger.com, reused as
+  provided per the assignment brief
+
+## Key Features
+
+- **Hero with immediate dual CTA** — "Find a home" and "Sell your home" as
+  the two primary paths, matching the two actual visitor intents on a real
+  estate site
+- **Stats strip** — years of experience, clients served, and sales volume
+  surfaced directly under the hero as scannable trust signals
+- **Property search module** — location, property type, bedrooms, baths, and
+  price range filters, styled as a live MLS search experience
+- **Interactive photo gallery** — a captioned carousel of the Pahrump/Mountain
+  Falls community with thumbnail navigation, replacing a static image grid
+- **Services section** — numbered breakdown of the three core services
+  (selling, buying/investment, financing guidance)
+- **Client testimonial and about section** — social proof paired with an
+  agent bio and a pull quote
+- **Office location with embedded map** — address, hours, and a Google Maps
+  embed with direct "Get Directions" and "Open in Google Maps" links
+- **Contact form** — name, email/phone, and message, positioned as the final
+  conversion point on the page
+
+## Design Approach
+
+1. **Audit** — walked the original site section by section, noting what
+   content and images existed, and where the visual hierarchy broke down
+2. **Restructure, don't rewrite** — kept every real piece of content and
+   imagery from the original, but re-sequenced sections around a clearer
+   narrative: hero → sell → buy → search → gallery → services → testimonial
+   → about → location → contact
+3. **Build** — implemented the new structure in Next.js with Tailwind,
+   componentizing each section (hero, stats, search filters, gallery
+   carousel, services, testimonial, map, contact form) for maintainability
+4. **Polish** — added interaction details like the gallery carousel and
+   filter states that the original static site didn't have
+
+## Technically Interesting
+
+**Why a componentized single-page layout instead of a page-per-section
+site:** the brief asked for a single-page homepage revamp, so the real
+engineering challenge wasn't routing — it was information density. Building
+each section (search filters, gallery, testimonial, map, contact) as an
+isolated component made it possible to reorder sections during design
+iteration without untangling shared state or layout code.
+
+**Why keep the search filters even though the data is mock:** the brief
+explicitly allowed dummy data for the property search, but building the full
+filter UI (location, type, beds, baths, price range) rather than a
+placeholder box demonstrates the actual UX the client would get with a real
+MLS integration — the goal was to show what "live search" should feel like,
+not just claim it exists.
+
+## Result
+
+A fully redesigned, deployed single-page site that reuses 100% of the
+original content and photography while restructuring it around a clearer
+visitor journey:
+
+- Deployed live on Vercel within the assignment's time window
+- Rebuilt entirely with a modern stack (Next.js/TypeScript/Tailwind) in place
+  of the original site's builder-based markup
+- Submitted as part of a Junior Web Builder application
+
+## My Role
+
+Sole developer and designer on the project:
+
+- Audited the original site's content, imagery, and structure
+- Designed the new section hierarchy and page flow
+- Built every section as a standalone React component
+- Implemented the property search filter UI, photo gallery carousel, and
+  embedded map/contact section
+- Deployed and tested the final build on Vercel
+
+## What I'd Change
+
+- **Wire up a real MLS or listings API** — the current search UI is dummy
+  data; a production version would need a real backend behind it
+- **Add form handling** — the contact form isn't currently wired to an email
+  or CRM endpoint
+- **Add automated visual regression tests** — for a client-facing redesign,
+  screenshot diffing against the original would help catch unintended layout
+  regressions during future edits
+- **Accessibility pass** — a full WCAG contrast and keyboard-navigation audit
+  on the gallery carousel and filter dropdowns specifically, since custom
+  interactive components are the most common place accessibility gets missed

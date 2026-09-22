@@ -1,0 +1,91 @@
+---
+slug: "maillaunch"
+title: "MailLaunch — Resilient CLI Cold Email Engine"
+description: "A production-grade CLI cold email sender with SQLite ACID persistence, atomic multi-process rate limiting, OS Keyring token security, and native Gmail & Microsoft 365 OAuth integrations."
+date: 2026-09-17
+badge: "Latest"
+tags: ["Python", "SQLite", "OAuth 2.0", "Security", "CLI", "Cryptography", "Gmail API", "Microsoft Graph"]
+category: backend
+featured: false
+status: completed
+role: "Lead Developer"
+liveUrl: "https://github.com/JRioP/MailLaunch"
+originalUrl: "https://github.com/JRioP/MailLaunch"
+coverImage: "/images/projects/maillaunch.png"
+---
+
+## Overview
+
+**MailLaunch** is a developer-first, resilient CLI cold email sending engine engineered in Python. It provides persistent campaign state, atomic multi-process rate limiting, crash-recovery guarantees, and native OAuth 2.0 integration for both Google Gmail and Microsoft 365 / Graph APIs. 
+
+Built with SQLite ACID transactions to eliminate duplicate sends, handle mid-flight crashes, and survive rate-limit halts, MailLaunch transforms fragile mass-email scripts into an enterprise-grade, security-hardened tool.
+
+## Problem
+
+Command-line email automation tools and outreach scripts frequently suffer from critical architectural vulnerabilities and operational pitfalls:
+
+- **Duplicate sends on crash or interruption** — when a script crashes, receives a `Ctrl+C` interrupt, or hits an API timeout, the in-memory state is lost. Restarting the script re-emails the entire list or risks sending duplicate messages to the same recipient.
+- **Race conditions in rate limiting** — running multiple CLI processes or multi-threaded background workers often breaches provider limits (e.g. Gmail's 100–500 emails/day quota) due to classic "check-then-act" race conditions.
+- **Insecure plaintext credential storage** — typical automation scripts store API keys, client secrets, and OAuth access tokens in unencrypted JSON or YAML files on disk.
+- **Brittle error handling** — transient network glitches, HTTP 429 rate-limit responses, or expired access tokens cause entire campaigns to fail abruptly without exponential backoff or inline token refresh.
+- **Malformed recipient data** — lack of strict RFC 5322 validation leads to silent delivery failures, high bounce rates, and damaged sender domain reputation.
+
+## Tech Stack
+
+- **Language & Runtime:** Python 3.10 – 3.13
+- **Persistence & State:** SQLite3 (ACID transactions with `BEGIN IMMEDIATE` serialization)
+- **Authentication & Security:** OAuth 2.0 with RFC 7636 PKCE & CSRF `state` validation, Cryptography (`Fernet` AES-128), Python `keyring` (Windows Credential Manager / macOS Keychain / Linux Secret Service)
+- **Email Providers:** Google Gmail API (RFC 2822 MIME `text/plain` & `text/html`), Microsoft Graph API (`/sendMail` REST endpoint)
+- **Validation & Parsing:** RFC 5322 regex validation, standard CSV parsing with UTF-8 BOM handling and deduplication
+- **Testing & Tooling:** Pytest (80 isolated sandbox unit/integration tests with `pytest-cov`), Ruff (linter & formatter), GitHub Actions CI
+
+## Key Features
+
+- **ACID Campaign State & Resume** — tracks recipient statuses (`PENDING`, `SENDING`, `SENT`, `FAILED`, `LIMIT_REACHED`) in SQLite. Resuming an interrupted or paused campaign automatically skips already-sent recipients with zero duplicate sends.
+- **Atomic Multi-Process Quota Reservation** — uses SQLite `BEGIN IMMEDIATE` locks to reserve and release daily quota slots atomically, preventing concurrent CLI instances from exceeding daily provider limits.
+- **In-Flight Crash Mitigation** — recipients transition to a `SENDING` state before external API dispatch, injecting deterministic RFC 2822 `Message-ID` headers (`<id@maillaunch.local>`) and Microsoft `Client-Request-Id` headers so upstream mail servers drop duplicates on retry.
+- **OS Keyring & Protected Credential Vault** — token storage encrypts credentials at rest using Fernet AES-128, storing the master encryption key in the OS Credential Manager, with a `CorruptedCredentialsError` guard that refuses to overwrite damaged vaults.
+- **Gmail OAuth with PKCE & CSRF State** — loopback callback server implements RFC 7636 PKCE S256 challenges and 32-byte cryptographic state verification, rejecting unauthorized callbacks with HTTP 400 and guaranteeing socket teardown.
+- **HTML & Plain-Text Dual MIME Support** — auto-detects HTML templates or accepts `--content-type text|html`, generating standards-compliant multipart/alternative and raw RFC 2822 messages.
+- **CSV Validation & Deduplication** — validates email syntax per RFC 5322, outputs exact 1-based row numbers on syntax errors, and automatically suppresses duplicate recipient addresses.
+- **Interactive Console & CLI Subcommands** — features full argument parsing (`send`, `resume`, `status`, `log`, `auth`, `logout`) and an interactive developer REPL when executed without arguments.
+
+## Design Approach
+
+1. **Audit & Threat Modeling** — analyzed failure modes in cold email automation—specifically race conditions in quota reservation, duplicate sends during network timeouts, and token vault exposure.
+2. **State Machine Architecture** — designed a strict database-backed state machine for campaigns (`ACTIVE`, `PAUSED`, `INTERRUPTED`, `COMPLETED`) and recipients (`PENDING` → `SENDING` → `SENT` / `FAILED` / `LIMIT_REACHED`).
+3. **Defense-in-Depth Security** — decoupled secrets from configuration files; implemented OS Keyring storage; added PKCE and CSRF validation to OAuth flows.
+4. **Resilient Retry & Backoff Engine** — implemented jittered exponential backoff for transient 429/5xx errors, inline token refresh for 401s, and an optional `retry_failed` policy for campaign restarts.
+5. **Comprehensive Automated Verification** — built an 80-test regression suite covering every edge case in temporary sandbox directories (`tmp_path`) with 0 external dependencies.
+
+## Technically Interesting
+
+**Eliminating the Check-Then-Act Race Condition in SQLite:** Standard SQLite operations can suffer from read-then-write race conditions when multiple processes execute simultaneously. If Process A checks the daily count and sees 99/100, and Process B simultaneously checks and sees 99/100, both processes would proceed, breaching the 100/day limit. By utilizing `BEGIN IMMEDIATE` transactions in `reserve_daily_quota()`, MailLaunch acquires a reserved database lock before evaluating the count. If the quota is exhausted, the transaction immediately rolls back; if granted, the count increments atomically.
+
+**Solving the In-Flight Crash Window (The Two-Generals Problem):** When sending emails over HTTP/REST APIs, a process could crash or lose power in the exact millisecond after the email provider accepts the send but before the local client receives the response. If the recipient remained in `PENDING`, a resume would re-send the email. By transitioning the recipient to an intermediate `SENDING` state prior to dispatch and injecting a deterministic RFC 2822 `Message-ID` (`<campaign_id_recipient_id@maillaunch.local>`), resuming after a crash handles in-flight records safely without duplicate deliveries.
+
+## Result
+
+A production-ready, security-hardened CLI application with:
+
+- **80 automated tests** passing in ~3 seconds with 70% project-wide coverage (89–93% on core business logic).
+- Zero lint or formatting warnings under Ruff.
+- Multi-platform GitHub Actions CI passing across Windows, macOS, and Linux on Python 3.10–3.13.
+- Proven real-world delivery through live Gmail and Microsoft OAuth integrations.
+
+## My Role
+
+Sole backend architect, developer, and tester:
+
+- Designed the SQLite schema, transaction semantics, and atomic quota reservation algorithms.
+- Implemented OAuth 2.0 PKCE authentication flows for Gmail and Microsoft Graph.
+- Built the Fernet-encrypted `TokenStore` with OS Keyring integration.
+- Developed the core sending engine with jitter, retries, and in-flight crash mitigation.
+- Authored the 80-test regression and isolation test suite.
+
+## What I'd Change
+
+- **Webhook / Asynchronous Bounce Listener** — in standard email infrastructure, non-existent mailboxes bounce asynchronously hours later via mailer-daemon DSN. Adding an optional IMAP/Gmail API bounce-parsing daemon could reconcile bounced addresses directly back to the database.
+- **PostgreSQL / Distributed Backend Option** — add an abstraction layer to swap SQLite for PostgreSQL to support multi-server distributed sender clusters beyond a single host.
+- **Domain Reputation & Warm-Up Scheduler** — add automated ramp-up algorithms that gradually increment the `daily_limit` over weeks to warm up newly registered sender domains.
+
