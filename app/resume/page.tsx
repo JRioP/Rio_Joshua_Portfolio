@@ -18,9 +18,23 @@ export default function ResumePage() {
         <a 
           href="/resume/Joshua_Rio_Resume.pdf" 
           download 
-          className="bg-neutral-100 text-neutral-950 px-4 py-2 rounded-md font-medium hover:bg-neutral-300 transition"
+          className="px-5 py-2.5 bg-accent-500 hover:bg-accent-hover text-white font-sans font-semibold rounded-xl text-sm transition-all duration-200 active:scale-[0.98] shadow-[0_2px_10px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_18px_rgba(59,130,246,0.4)] border border-blue-400/30 flex items-center gap-2"
         >
-          Download PDF
+          <svg
+            className="w-4 h-4 text-blue-100"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span>Download PDF</span>
         </a>
       </div>
       
