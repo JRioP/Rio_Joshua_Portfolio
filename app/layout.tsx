@@ -9,6 +9,7 @@ import { THEME_SCRIPT } from "@/components/themes/ThemeScript";
 import { CookieConsentProvider } from "@/components/consentBanner/CookieConsentProvider";
 import { CookieConsentBanner } from "@/components/consentBanner/CookieConsentBanner";
 import { ConditionalAnalytics } from "@/components/ConditionalAnalytics";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 const gibed = localFont({
   src: "../public/fonts/gibed.otf",
@@ -115,6 +116,7 @@ export default function RootLayout({
       <body className="bg-neutral-950 text-neutral-100 antialiased" suppressHydrationWarning>
         <ThemeProvider>
           <CookieConsentProvider>
+            <CustomCursor />
             <Navbar />
             <main>{children}</main>
             <Footer />
