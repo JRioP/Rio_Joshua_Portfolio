@@ -115,10 +115,11 @@ export default function MenuToggle() {
             <Link
               prefetch={false}
               href="/resume"
-              className={`mt-4 inline-flex items-center justify-center w-fit px-6 py-3 bg-accent-500 hover:bg-accent-hover text-white font-bold rounded-lg text-sm transition-all active:scale-95 shadow-sm ${open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+              className={`mt-4 inline-flex items-center justify-center w-fit px-6 py-3 bg-accent-500 hover:bg-accent-hover text-white font-sans font-semibold rounded-xl text-sm transition-all active:scale-[0.98] shadow-[0_2px_12px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.45)] border border-blue-400/30 gap-2 ${open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
               style={{ transitionDelay: open ? `${NAV_LINKS.length * 60}ms` : "0ms" }}
             >
-              VIEW RESUME →
+              <span>VIEW RESUME</span>
+              <span aria-hidden="true">→</span>
             </Link>
           </nav>
 
