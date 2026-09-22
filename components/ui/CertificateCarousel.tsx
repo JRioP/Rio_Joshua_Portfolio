@@ -60,10 +60,12 @@ export default function CertificateCarousel({ certificates }: CertificateCarouse
         {total > 1 && (
           <button
             onClick={prev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-neutral-900/90 border border-neutral-700 text-neutral-200 hover:text-neutral-100 hover:border-neutral-500 hover:bg-neutral-800 transition-all flex items-center justify-center cursor-pointer backdrop-blur-sm active:scale-95 text-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 shadow-md"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-neutral-900/90 border border-neutral-700/80 text-neutral-200 hover:text-white hover:border-accent-500/60 hover:bg-neutral-800 transition-all flex items-center justify-center cursor-pointer backdrop-blur-sm active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 shadow-md"
             aria-label="Previous certificate"
           >
-            ‹
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
           </button>
         )}
 
@@ -71,10 +73,12 @@ export default function CertificateCarousel({ certificates }: CertificateCarouse
         {total > 1 && (
           <button
             onClick={next}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-neutral-900/90 border border-neutral-700 text-neutral-200 hover:text-neutral-100 hover:border-neutral-500 hover:bg-neutral-800 transition-all flex items-center justify-center cursor-pointer backdrop-blur-sm active:scale-95 text-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 shadow-md"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-neutral-900/90 border border-neutral-700/80 text-neutral-200 hover:text-white hover:border-accent-500/60 hover:bg-neutral-800 transition-all flex items-center justify-center cursor-pointer backdrop-blur-sm active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 shadow-md"
             aria-label="Next certificate"
           >
-            ›
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
           </button>
         )}
       </div>

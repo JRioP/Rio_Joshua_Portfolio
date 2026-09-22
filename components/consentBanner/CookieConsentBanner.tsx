@@ -40,14 +40,14 @@ export function CookieConsentBanner() {
         <button
           type="button"
           onClick={accept}
-          className="flex-1 min-h-[44px] py-2.5 px-4 bg-accent-500 hover:bg-accent-hover active:scale-[0.98] text-neutral-950 font-bold text-xs sm:text-sm rounded-lg transition-all cursor-pointer text-center flex items-center justify-center shadow-sm"
+          className="flex-1 min-h-[44px] py-2.5 px-5 bg-accent-500 hover:bg-accent-hover active:scale-[0.98] text-white font-sans font-semibold text-sm rounded-xl transition-all duration-200 cursor-pointer text-center flex items-center justify-center shadow-[0_2px_10px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_18px_rgba(59,130,246,0.4)] border border-blue-400/30"
         >
           Accept
         </button>
         <button
           type="button"
           onClick={decline}
-          className="flex-1 min-h-[44px] py-2.5 px-4 border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800/40 active:scale-[0.98] text-neutral-200 hover:text-neutral-100 font-semibold text-xs sm:text-sm rounded-lg transition-all cursor-pointer text-center flex items-center justify-center"
+          className="flex-1 min-h-[44px] py-2.5 px-5 border border-neutral-700/80 bg-neutral-800/70 hover:bg-neutral-800 active:scale-[0.98] text-neutral-200 hover:text-white hover:border-neutral-600 font-sans font-semibold text-sm rounded-xl transition-all duration-200 cursor-pointer text-center flex items-center justify-center shadow-sm"
         >
           Decline
         </button>

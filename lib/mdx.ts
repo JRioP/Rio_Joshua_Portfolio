@@ -18,6 +18,8 @@ export interface ProjectFrontmatter {
   date: string;
   status?: string;
   role?: string; 
+  badge?: string;
+  currentFocus?: string;
 }
 
 export interface ProjectWithContent extends ProjectFrontmatter {

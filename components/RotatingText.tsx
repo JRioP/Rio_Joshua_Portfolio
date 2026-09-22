@@ -14,10 +14,10 @@ const ROTATING_TEXTS = [
 
 export function RotatingText() {
   const [mounted, setMounted] = useState(false);
-  const [displayed, setDisplayed] = useState("");
+  const [displayed, setDisplayed] = useState(ROTATING_TEXTS[0]);
   const indexRef = useRef(0);
   const isDeletingRef = useRef(false);
-  const posRef = useRef(0);
+  const posRef = useRef(ROTATING_TEXTS[0].length);
 
   useEffect(() => {
     setMounted(true);
@@ -25,6 +25,8 @@ export function RotatingText() {
 
   useEffect(() => {
     if (!mounted) return;
+
+    let timeoutId: NodeJS.Timeout;
 
     const tick = () => {
       const current = ROTATING_TEXTS[indexRef.current];
@@ -35,10 +37,10 @@ export function RotatingText() {
 
         if (posRef.current === current.length) {
           isDeletingRef.current = true;
-          setTimeout(tick, 1800);
+          timeoutId = setTimeout(tick, 2000);
           return;
         }
-        setTimeout(tick, 80);
+        timeoutId = setTimeout(tick, 80);
       } else {
         posRef.current -= 1;
         setDisplayed(current.slice(0, posRef.current));
@@ -46,33 +48,27 @@ export function RotatingText() {
         if (posRef.current === 0) {
           isDeletingRef.current = false;
           indexRef.current = (indexRef.current + 1) % ROTATING_TEXTS.length;
-          setTimeout(tick, 300);
+          timeoutId = setTimeout(tick, 300);
           return;
         }
-        setTimeout(tick, 40);
+        timeoutId = setTimeout(tick, 40);
       }
     };
 
-    const timer = setTimeout(tick, 500);
-    return () => clearTimeout(timer);
+    // First rotation starts after a 2-second pause displaying the initial text
+    timeoutId = setTimeout(() => {
+      isDeletingRef.current = true;
+      tick();
+    }, 2000);
+
+    return () => clearTimeout(timeoutId);
   }, [mounted]);
 
-  if (!mounted) {
-    return (
-      <span className="block whitespace-nowrap overflow-hidden">
-        <span className="text-accent-400">
-          a Full-Stack Developer.
-          <span>|</span>
-        </span>
-      </span>
-    );
-  }
-
   return (
-    <span className="block whitespace-nowrap overflow-hidden">
+    <span className="block whitespace-nowrap overflow-hidden" suppressHydrationWarning>
       <span className="text-accent-400">
         {displayed}
-        <span className="animate-pulse">|</span>
+        <span className={mounted ? "animate-pulse" : ""}>|</span>
       </span>
     </span>
   );

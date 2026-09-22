@@ -263,3 +263,11 @@ html.dark ::selection {
 .prose :where(tbody tr:last-child td) {
   border-bottom: none;
 }
+
+/* Hide native cursor when custom cursor is active on desktop */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: none !important;
+  }
+}

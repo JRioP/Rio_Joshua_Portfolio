@@ -128,7 +128,7 @@ export function FloatingChat() {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-neutral-600 hover:text-neutral-300 transition-colors font-mono text-xs cursor-pointer p-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
+              className="text-neutral-400 hover:text-neutral-100 transition-colors font-mono text-xs cursor-pointer p-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
               aria-label="Close chat"
             >
               ✕
@@ -148,7 +148,7 @@ export function FloatingChat() {
                     <button
                       key={s}
                       onClick={() => sendQuestion(s)}
-                      className="text-left font-mono text-xs px-3 py-2 rounded-lg border border-neutral-700 text-neutral-400 hover:border-accent-500 hover:text-accent-500 transition-colors cursor-pointer"
+                      className="text-left font-sans font-medium text-xs px-3.5 py-2.5 rounded-xl border border-neutral-750 bg-neutral-900/60 text-neutral-300 hover:border-accent-500/70 hover:text-white hover:bg-neutral-800 transition-all cursor-pointer shadow-sm"
                     >
                       {s}
                     </button>
@@ -166,7 +166,7 @@ export function FloatingChat() {
                 <div
                   className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed ${
                     msg.role === "user"
-                      ? "bg-accent-500 text-neutral-950 font-medium"
+                      ? "bg-accent-500 text-white font-medium shadow-sm"
                       : "bg-neutral-800 text-neutral-200 border border-neutral-700"
                   }`}
                 >
@@ -204,9 +204,12 @@ export function FloatingChat() {
             <button
               onClick={() => sendQuestion()}
               disabled={isLoading || !question.trim()}
-              className="px-3 py-2 bg-accent-500 text-neutral-950 rounded-lg text-xs font-bold hover:bg-accent-hover transition-colors disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+              aria-label="Send message"
+              className="px-3.5 py-2 bg-accent-500 text-white rounded-lg text-xs font-semibold hover:bg-accent-hover transition-all active:scale-95 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed border border-blue-400/30 shadow-[0_2px_8px_rgba(59,130,246,0.3)] flex items-center justify-center"
             >
-              →
+              <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </button>
           </div>
         </div>
@@ -219,10 +222,10 @@ export function FloatingChat() {
         aria-label={isOpen ? "Close chat" : "Open AI chat"}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
-        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 ${
+        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 active:scale-95 ${
           isOpen
-            ? "bg-neutral-700 text-neutral-300"
-            : "bg-accent-500 text-neutral-950 hover:bg-accent-hover"
+            ? "bg-neutral-800 text-neutral-200 border border-neutral-700"
+            : "bg-accent-500 text-white hover:bg-accent-hover shadow-[0_4px_16px_rgba(59,130,246,0.35)] border border-blue-400/30"
         }`}
       >
         {isOpen ? (

@@ -62,19 +62,19 @@ export default function AboutPage() {
             I'm currently looking for a professional role — open to Metro Manila or remote.
           </p>
           <div className="flex flex-wrap gap-4">
-            <div className="flex items-center gap-2 text-sm text-neutral-500">
+            <div className="flex items-center gap-2 text-sm text-neutral-400">
               <span className="text-accent-500">📍</span>
               Batangas, Philippines
             </div>
-            <div className="flex items-center gap-2 text-sm text-neutral-500">
+            <div className="flex items-center gap-2 text-sm text-neutral-400">
               <span className="text-accent-500">🎓</span>
               BSIT — STI College Tanauan
             </div>
-            <div className="flex items-center gap-2 text-sm text-neutral-500">
+            <div className="flex items-center gap-2 text-sm text-neutral-400">
               <span className="text-accent-500">💼</span>
               Available for full-time roles
             </div>
-            <div className="flex items-center gap-2 text-sm text-neutral-500">
+            <div className="flex items-center gap-2 text-sm text-neutral-400">
               <span className="text-accent-500">🌐</span>
               Remote / Metro Manila
             </div>
@@ -165,7 +165,7 @@ export default function AboutPage() {
       <li className="relative flex gap-5 items-start pb-10">
         <div className="w-4 h-4 rounded-full bg-neutral-950 border-2 border-neutral-700 shrink-0 mt-1 z-10" />
         <div>
-          <time className="font-mono text-xs text-neutral-500 tracking-widest">2014 – 2016</time>
+          <time className="font-mono text-xs text-neutral-400 tracking-widest">2014 – 2016</time>
           <h3 className="text-lg font-semibold text-neutral-100 mt-1 mb-1">
             Associate in Information Technology — Second Philippine International School
           </h3>
