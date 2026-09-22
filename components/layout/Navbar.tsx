@@ -87,7 +87,7 @@ export default function Navbar() {
             <li>
               <a
                 href="/resume"
-                className="px-5 py-2.5 bg-accent-500 text-neutral-950 font-bold rounded-lg text-xs hover:bg-accent-hover transition-colors tracking-wider inline-block"
+                className="px-5 py-2.5 bg-accent-500 hover:bg-accent-hover text-white font-bold rounded-lg text-xs transition-all active:scale-95 shadow-[0_2px_8px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_16px_rgba(59,130,246,0.45)] border border-blue-400/30 tracking-wider inline-block"
               >
                 RESUME
               </a>

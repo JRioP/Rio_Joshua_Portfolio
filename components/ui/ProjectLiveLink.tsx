@@ -5,10 +5,12 @@ export function ProjectLiveLink({
   href,
   className,
   children,
+  "aria-label": ariaLabel,
 }: {
   href: string;
-  className: string;
+  className?: string;
   children: React.ReactNode;
+  "aria-label"?: string;
 }) {
   const isInternal =
     href.startsWith("https://joshuario.com") ||
@@ -21,14 +23,14 @@ export function ProjectLiveLink({
       .replace("https://joshuario.com", "")
       .replace("https://joshuario.vercel.app", "");
     return (
-      <Link href={path} className={className}>
+      <Link href={path} className={className} aria-label={ariaLabel}>
         {children}
       </Link>
     );
   }
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+    <a href={href} target="_blank" rel="noopener noreferrer" className={className} aria-label={ariaLabel}>
       {children}
     </a>
   );

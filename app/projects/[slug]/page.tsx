@@ -115,7 +115,7 @@ export default async function CaseStudyPage({
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 sm:flex-none px-6 py-3.5 min-h-[44px] bg-accent-500 text-neutral-950 font-bold rounded-lg text-sm hover:bg-accent-hover transition-all active:scale-[0.98] flex items-center justify-center text-center shadow-sm"
+            className="flex-1 sm:flex-none px-6 py-3.5 min-h-[44px] bg-accent-500 hover:bg-accent-hover text-white font-semibold rounded-xl text-sm transition-all active:scale-[0.98] flex items-center justify-center text-center shadow-[0_2px_12px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.45)] border border-blue-400/30"
           >
             View on GitHub
           </a>

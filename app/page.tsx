@@ -1,14 +1,16 @@
 import Image from "next/image";
-import { getProjects } from "@/lib/projects";
+import { getProjects, getInProgressProjects } from "@/lib/projects";
 import { RotatingText } from "@/components/RotatingText";
 import ContactForm from "@/components/ui/ContactForm";
 import ExperienceSection from "@/components/ui/ExperienceSection";
+import CurrentProjectsSection from "@/components/ui/CurrentProjectsSection";
+import ProjectCard from "@/components/projects/ProjectCard";
 import FadeIn from "@/components/ui/animations/fadeIn";
 import { TechStackCard } from "@/components/techStackCard/TechStackCard";
-import { ProjectLiveLink } from "@/components/ui/ProjectLiveLink";
 
 export default function Home() {
   const projects = getProjects();
+  const inProgressProjects = getInProgressProjects();
   return (
     <>
       {/* Hero Section */}
@@ -53,7 +55,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
               <a
                 href="/projects"
-                className="px-6 py-3.5 bg-accent-500 text-neutral-950 font-bold rounded-lg hover:bg-accent-hover transition-all active:scale-[0.98] text-center text-sm shadow-sm flex items-center justify-center min-h-[44px]"
+                className="px-6 py-3.5 bg-accent-500 hover:bg-accent-hover text-white font-bold rounded-xl transition-all active:scale-[0.98] text-center text-sm shadow-[0_2px_12px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.45)] border border-blue-400/30 flex items-center justify-center min-h-[44px]"
               >
                 See my work
               </a>
@@ -76,22 +78,22 @@ export default function Home() {
           {/* Status, Location, Available, GitHub */}
           <div className="mt-6 pt-6 border-t border-neutral-800 flex flex-col gap-3">
             <div className="flex justify-between items-center">
-              <span className="font-mono text-xs text-neutral-600">Status</span>
+              <span className="font-mono text-xs text-neutral-400">Status</span>
               <span className="flex items-center gap-2 font-mono text-xs text-green-400">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 Open to work
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="font-mono text-xs text-neutral-600">Location</span>
+              <span className="font-mono text-xs text-neutral-400">Location</span>
               <span className="font-mono text-xs text-neutral-300">Batangas, PH</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="font-mono text-xs text-neutral-600">Available</span>
+              <span className="font-mono text-xs text-neutral-400">Available</span>
               <span className="font-mono text-xs text-neutral-300">Remote / Metro Manila</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="font-mono text-xs text-neutral-600">GitHub</span>
+              <span className="font-mono text-xs text-neutral-400">GitHub</span>
               <a
                 href="https://github.com/JRioP"
                 target="_blank"
@@ -107,9 +109,9 @@ export default function Home() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-neutral-600 scroll-indicator">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-neutral-400 scroll-indicator">
         <span className="font-mono text-xs tracking-widest uppercase">scroll</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-neutral-600">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-neutral-400" aria-hidden="true">
           <path d="M8 3v10M8 13l-4-4M8 13l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
@@ -139,76 +141,24 @@ export default function Home() {
           </div>
   
           {/* Project Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.filter((p) => p.featured).map((project) => (
-            <div key={project.slug} className="group bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden hover:border-neutral-600 transition-all duration-200 flex flex-col">
-            
-          {/* Project grid image*/}
-            {project.coverImage && (
-            <div className="relative w-full h-48 bg-neutral-800">
-            <Image src={project.coverImage} alt={project.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw" className="object-cover object-top group-hover:scale-105 transition-transform duration-300" />
-            </div>
-            )}
-
-          {/* Project grid category text */}
-            <div className="p-6 flex flex-col flex-1">
-            <p className="font-mono text-xs text-accent-500 uppercase tracking-widest mb-3">
-            {project.category}
-            </p>
-            
-          {/* Project grid category title or heading */}
-            <h3 className="font-display text-xl font-bold tracking-tight mb-2">
-            {project.title}
-            </h3>
-            
-          {/* Project grid short description */}
-            <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-            {project.description}
-            </p>
-            
-          {/* Project grid tags */}
-            <div className="flex flex-wrap gap-1.5 mb-2">
-            {project.tags.map((tag) => (
-            <span key={tag} className="font-mono text-xs px-2 py-0.5 rounded bg-neutral-800 text-neutral-500">
-              {tag}
-            </span>
+              <ProjectCard key={project.slug} project={project} />
             ))}
-            </div>
-      
-          {/* buttons */}
-            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mt-auto pt-4 border-t border-neutral-800">
-            <a href={`/projects/${project.slug}`} className="flex-1 text-center font-mono text-xs uppercase px-4 py-2.5 min-h-[42px] rounded-lg bg-accent-500 text-neutral-950 font-bold hover:bg-accent-hover transition-colors flex items-center justify-center">
-              Case study
-            </a>
-          
-          {/* buttons for live url or github*/}
-            {project.liveUrl ? (
-            <ProjectLiveLink
-              href={project.liveUrl}
-              className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 min-h-[42px] rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-neutral-100 hover:bg-neutral-800/40 transition-colors flex items-center justify-center"
-              >
-            Live Site
-            </ProjectLiveLink>
-            ) : project.githubUrl ? (
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex-1 grow text-center font-mono text-xs uppercase px-4 py-2.5 min-h-[42px] rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-neutral-100 hover:bg-neutral-800/40 transition-colors flex items-center justify-center">
-              GitHub
-            </a>
-            ) : null}
-            </div>
-            </div>
-            </div>
-           ))}
           </div>
-          </div> 
+          </div>  
         </FadeIn>
 
+        {/* Currently Building / In Progress Section */}
+        <CurrentProjectsSection projects={inProgressProjects} />
+
         {/* Experience Section */}
-        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="left" delay={100}>
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-6 sm:px-10 md:px-15 lg:px-50" direction="left" delay={100}>
         <ExperienceSection/>
         </FadeIn>
 
         {/* About Me Section */}
-        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="right" delay={100}>
+        <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-6 sm:px-10 md:px-15 lg:px-50" direction="right" delay={100}>
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="font-display text-4xl font-bold tracking-tight mb-12 md:text-6xl">
