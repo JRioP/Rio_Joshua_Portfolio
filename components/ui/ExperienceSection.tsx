@@ -36,9 +36,9 @@ const EXPERIENCES: ExperienceItem[] = [
     yearLabel: "YEAR",
     yearNumber: "2026",
     pillTag: "486 hrs",
-    locationShort: "Batangas",
+    locationShort: "Calamba",
     duration: "486-Hour Practicum",
-    location: "Batangas, Philippines",
+    location: "Calamba, Laguna",
     badge: "Production Deployment",
     technologies: [
       "WordPress",
