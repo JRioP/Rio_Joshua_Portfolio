@@ -125,7 +125,7 @@ export default function ProjectCard({
             aria-label={`Read case study for ${project.title}`}
             className="flex-1 text-center font-sans font-semibold text-sm px-5 py-3 rounded-xl bg-accent-500 hover:bg-accent-hover text-white active:scale-[0.98] transition-all duration-200 shadow-[0_2px_10px_rgba(59,130,246,0.3)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.45)] border border-blue-400/30 flex items-center justify-center gap-2 min-h-[44px] group/btn"
           >
-            <span>Read Case Study</span>
+            <span>Case Study</span>
             <svg
               className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-1 text-blue-100"
               viewBox="0 0 16 16"
