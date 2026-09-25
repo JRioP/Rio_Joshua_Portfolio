@@ -15,7 +15,7 @@ export function TechStackCard() {
   const openModal = () => triggerRef.current?.click();
 
   return (
-    <div className="w-80 mx-auto rounded-2xl p-6 pb-4 flex flex-col items-center">
+    <div className="w-full flex flex-col items-start">
         <h3 className="font-semibold text-neutral-100 mb-2">
           Tech Stack<span className="text-accent-500">.</span>
         </h3>

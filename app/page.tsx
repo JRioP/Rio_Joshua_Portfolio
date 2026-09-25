@@ -26,11 +26,11 @@ export default function Home() {
         <div className="flex flex-col md:flex-row items-center gap-12 w-full relative z-10 max-w-6xl mx-auto">
         {/* LEFT COLUMN — text content */}
           <div className="flex-1 max-w-xl">
-          <h1 className="text-4xl font-display md:text-6xl font-bold leading-tight tracking-tight">
-          Hi, I'm Josh <br />
-          </h1>
-          <h1 className="text-xl font-display md:text-4xl text-accent-500 font-bold leading-tight tracking-tight mb-6">
-          <RotatingText/>
+          <h1 className="text-4xl font-display md:text-6xl font-bold leading-tight tracking-tight mb-6">
+            Hi, I'm Josh <br />
+            <span className="block text-xl md:text-4xl text-accent-500 font-bold mt-2">
+              <RotatingText />
+            </span>
           </h1>
           <p className="text-neutral-400 text-lg leading-relaxed mb-4">
           Full-stack developer from the Philippines. I've shipped a real-time
@@ -86,9 +86,7 @@ export default function Home() {
       <div className="hidden lg:flex flex-1 justify-end">
         <div className="w-80 bg-neutral-900 border border-neutral-800 rounded-2xl p-6">
           {/* Tech Stack Card */}
-            <div className="flex items-center justify-between">
-            <TechStackCard/>
-            </div>
+          <TechStackCard />
           {/* Status, Location, Available, GitHub */}
           <div className="mt-6 pt-6 border-t border-neutral-800 flex flex-col gap-3">
             <div className="flex justify-between items-center">
@@ -120,14 +118,6 @@ export default function Home() {
            </div>
           </div>
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-neutral-400 scroll-indicator">
-        <span className="font-mono text-xs tracking-widest uppercase">scroll</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-neutral-400" aria-hidden="true">
-          <path d="M8 3v10M8 13l-4-4M8 13l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
       </div>
         </section>
 
@@ -202,9 +192,9 @@ export default function Home() {
           
           {/* Text */}
           <div className="flex-1 min-w-0">
-            <p className="text-neutral-400 text-2xl leading-relaxed mb-5 md:text-4xl">
-             I'm a BSIT graduate from STI College Tanauan, based in Talisay City, Batangas. 
-             I like building things that solve real problems — a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
+             <p className="text-neutral-400 text-2xl leading-relaxed mb-5 md:text-4xl">
+              I'm a BSIT graduate from STI College Tanauan, based in Talisay City, Batangas. 
+              I like building things that solve real problems: a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
               I'm currently looking for a professional role, open to Metro Manila or remote.
             </p>
           </div>
@@ -213,13 +203,13 @@ export default function Home() {
       
         {/* Contact Section */}
         <FadeIn as="section" className="w-full mt-20 relative overflow-visible px-10 md:px-15 lg:px-50" direction="up" delay={100}>
-          <div className="min-h-screen pt-32 pb-20 px-6 max-w-2xl mx-auto">
-            <h1 className="font-display text-4xl font-bold mb-4 md:text-6xl">Get in touch<span className="text-accent-500">.</span></h1>
+          <div className="py-12 pb-24 px-6 max-w-2xl mx-auto">
+            <h2 className="font-display text-4xl font-bold mb-4 md:text-6xl">Get in touch<span className="text-accent-500">.</span></h2>
             <p className="text-neutral-400 mb-12">
-              Open to full-time roles and interesting projects. Based in Talisay City, Batangas — available remotely.
-              </p>
+              Open to full-time roles and interesting projects. Based in Talisay City, Batangas (available remotely).
+            </p>
             <ContactForm />
-            </div>
+          </div>
         </FadeIn>
       
       </main>
