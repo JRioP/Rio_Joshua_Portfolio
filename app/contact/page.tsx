@@ -4,7 +4,7 @@ import ContactForm from "@/components/ui/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with Joshua Rio — open to full-time roles and freelance projects.",
+  description: "Get in touch with Joshua Rio. Open to full-time roles and freelance projects.",
 };
 
 export default function ContactPage() {
@@ -12,7 +12,7 @@ export default function ContactPage() {
     <div className="min-h-screen w-full mt-20 relative overflow-visible py-10 px-10 md:px-15 lg:px-50">
       <h1 className="font-display text-5xl font-bold mb-4">Get in touch.</h1>
       <p className="text-neutral-400 mb-12">
-        Open to full-time roles and interesting projects. Based in Batangas — available remotely.
+        Open to full-time roles and interesting projects. Based in Batangas (available remotely).
       </p>
       <ContactForm />
     </div>
