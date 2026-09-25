@@ -16,9 +16,9 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const isSpotlight = layout === "spotlight";
 
-  // Build category + role line matching user design (e.g. "WEB — FULL STACK DEVELOPER")
+  // Build category + role line matching user design (e.g. "WEB · FULL STACK DEVELOPER")
   const roleText = project.role || (project.category === "web" ? "Full Stack Developer" : "Software Engineer");
-  const categoryRoleString = `${project.category} — ${roleText}`;
+  const categoryRoleString = `${project.category} · ${roleText}`;
 
   return (
     <div
