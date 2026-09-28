@@ -182,7 +182,7 @@ export function FloatingChat() {
                 className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed ${
+                  className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed whitespace-pre-wrap break-words ${
                     msg.role === "user"
                       ? "bg-accent-500 text-white font-medium shadow-sm"
                       : "bg-neutral-800 text-neutral-200 border border-neutral-700"
