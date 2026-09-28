@@ -25,6 +25,14 @@ export function FloatingChat() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const searchParams = useSearchParams();
 
+  const warmedRef = useRef(false);
+  useEffect(() => {
+    if (isOpen && !warmedRef.current) {
+      warmedRef.current = true;
+      fetch("/api/chat").catch(() => {});
+    }
+  }, [isOpen]);
+
   // Close on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -75,7 +83,17 @@ export function FloatingChat() {
         body: JSON.stringify({ question: q }),
       });
 
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) {
+        const errData = await res.json().catch(() => null);
+        if (errData && errData.error) {
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: errData.error },
+          ]);
+          return;
+        }
+        throw new Error(`HTTP ${res.status}`);
+      }
       const data = await res.json();
 
       setMessages((prev) => [
