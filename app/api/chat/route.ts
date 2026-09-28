@@ -4,7 +4,10 @@ export const maxDuration = 60;
 
 export async function GET() {
   try {
-    await fetch(`${process.env.RAG_API_URL}/health`, { cache: "no-store" });
+    const url = process.env.RAG_API_URL;
+    if (url) {
+      await fetch(`${url}/health`, { cache: "no-store" });
+    }
   } catch {
     // warm-up only; ignore failures
   }
@@ -14,6 +17,14 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const RAG_API_URL = process.env.RAG_API_URL;
+
+    if (!RAG_API_URL) {
+      console.error("[Chat API error] Missing RAG_API_URL environment variable");
+      return NextResponse.json(
+        { error: "Backend URL is not configured. Please set RAG_API_URL." },
+        { status: 500 }
+      );
+    }
 
     const { question } = await req.json();
 
@@ -35,8 +46,21 @@ export async function POST(req: NextRequest) {
       });
 
       if (!res.ok) {
-        const error = await res.text();
-        console.error("[RAG API error]", res.status, error);
+        const errorText = await res.text();
+        console.error("[RAG API error]", res.status, errorText);
+
+        if (res.status === 401) {
+          return NextResponse.json(
+            { error: "Unauthorized: RAG_API_KEY is missing or does not match the Render API_KEY." },
+            { status: 401 }
+          );
+        }
+        if (res.status === 404) {
+          return NextResponse.json(
+            { error: "Backend service returned 404 Not Found. Please check RAG_API_URL." },
+            { status: 404 }
+          );
+        }
         return NextResponse.json(
           { error: "The AI is waking up. Please try again in a few seconds." },
           { status: 503 }
@@ -46,7 +70,8 @@ export async function POST(req: NextRequest) {
       const data = await res.json();
       return NextResponse.json(data, { status: 200 });
 
-    } catch {
+    } catch (fetchErr: unknown) {
+      console.error("[Chat fetch error]", fetchErr);
       return NextResponse.json(
         { error: "The AI is waking up. Please try again in a few seconds." },
         { status: 503 }
