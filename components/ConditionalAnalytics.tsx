@@ -7,15 +7,26 @@ import { useCookieConsent } from "./consentBanner/CookieConsentProvider";
 export function ConditionalAnalytics() {
   const { consent } = useCookieConsent();
 
-  // If user hasn't explicitly accepted, do not mount tracking scripts
-  if (consent !== "accepted") {
+  // If user hasn't explicitly accepted, drop analytics and speed insights events
+  const handleAnalyticsBeforeSend = (event: Parameters<NonNullable<React.ComponentProps<typeof Analytics>["beforeSend"]>>[0]) => {
+    if (consent === "accepted") {
+      return event;
+    }
     return null;
-  }
+  };
+
+  const handleSpeedInsightsBeforeSend = (event: Parameters<NonNullable<React.ComponentProps<typeof SpeedInsights>["beforeSend"]>>[0]) => {
+    if (consent === "accepted") {
+      return event;
+    }
+    return null;
+  };
 
   return (
     <>
-      <Analytics />
-      <SpeedInsights />
+      <Analytics beforeSend={handleAnalyticsBeforeSend} />
+      <SpeedInsights beforeSend={handleSpeedInsightsBeforeSend} />
     </>
   );
 }
+

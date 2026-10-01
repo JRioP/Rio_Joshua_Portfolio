@@ -15,3 +15,11 @@ export const THEME_SCRIPT = `
   })();
 `;
 
+export function ThemeScript() {
+  return (
+    <script
+      id="theme-script"
+      dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }}
+    />
+  );
+}
