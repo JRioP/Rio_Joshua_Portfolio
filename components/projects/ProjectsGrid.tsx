@@ -2,7 +2,6 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { clsx } from "clsx";
 import type { Project } from "@/lib/projects";
 
 
@@ -29,12 +28,11 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
           <button
             key={value}
             onClick={() => setActive(value)}
-            className={clsx(
-              "font-mono text-xs uppercase tracking-widest px-4 py-2 rounded-full border transition-all cursor-pointer",
+            className={`font-mono text-xs uppercase tracking-widest px-4 py-2 rounded-full border transition-all cursor-pointer ${
               active === value
                 ? "bg-accent-500 text-white border-blue-400/30 shadow-[0_2px_8px_rgba(59,130,246,0.3)]"
                 : "border-neutral-700 bg-neutral-900/60 text-neutral-400 hover:border-neutral-600 hover:text-neutral-200"
-            )}
+            }`}
           >
             {label}
           </button>

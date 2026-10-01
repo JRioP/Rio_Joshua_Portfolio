@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
-import { clsx } from "clsx";
 import MenuToggle from "@/components/ui/menuToggle";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { FloatingChat } from "../chatFunctions/FloatingChat";
@@ -47,12 +46,11 @@ export default function Navbar() {
   return (
     <>
     <nav
-      className={clsx(
-        "fixed top-0 left-0 right-0 z-50 py-3 flex items-center transition-all duration-300",
-        visible ? "translate-y-0" : "-translate-y-full",
-        scrolled && "bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800",
-        "hide-on-1322"
-      )}
+      className={`fixed top-0 left-0 right-0 z-50 py-3 flex items-center transition-all duration-300 hide-on-1322 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      } ${
+        scrolled ? "bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800" : ""
+      }`}
     >
       {/* Centered container */}
       <div className="container mx-auto flex items-center justify-between px-4">
@@ -73,12 +71,11 @@ export default function Navbar() {
                 <Link
                   href={href}
                   prefetch={false}
-                  className={clsx(
-                    "font-mono text-xs uppercase tracking-widest transition-colors py-1 hover:text-accent-500",
+                  className={`font-mono text-xs uppercase tracking-widest transition-colors py-1 hover:text-accent-500 ${
                     pathname === href
                       ? "text-accent-500 font-semibold"
                       : "text-neutral-200"
-                  )}
+                  }`}
                 >
                   {label}
                 </Link>
