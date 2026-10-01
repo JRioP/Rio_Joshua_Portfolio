@@ -12,16 +12,10 @@ export function ProjectLiveLink({
   children: React.ReactNode;
   "aria-label"?: string;
 }) {
-  const isInternal =
-    href.startsWith("https://joshuario.com") ||
-    href.startsWith("https://joshuario.vercel.app") ||
-    href.startsWith("/");
-
+  const isInternal = href.startsWith("/") || href.startsWith("https://joshuario.com") || href.startsWith("https://joshuario.vercel.app");
+  
   if (isInternal) {
-    // Strip the domain so Link treats it as an internal route
-    const path = href
-      .replace("https://joshuario.com", "")
-      .replace("https://joshuario.vercel.app", "");
+    const path = href.replace(/^https:\/\/(joshuario\.com|joshuario\.vercel\.app)/, "");
     return (
       <Link href={path} className={className} aria-label={ariaLabel}>
         {children}
