@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joshua Rio Portfolio — GitDiagram Architecture Flowchart</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #F1EDF9; /* Authentic GitDiagram Soft Lavender */
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { padding: 0; background: #F1EDF9 !important; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center justify-center">
+
+  <!-- Control Header Bar -->
+  <div class="no-print w-full max-w-[1400px] mb-4 flex items-center justify-between">
+    <div class="flex items-center gap-2.5 text-xs font-mono text-purple-900 font-semibold">
+      <span class="w-2.5 h-2.5 rounded-full bg-purple-600 animate-pulse"></span>
+      <span>GitDiagram Architecture Canvas (Next.js App Router)</span>
+      <span class="text-purple-400">·</span>
+      <span class="text-purple-700">Orthogonal Connectors &amp; Line Jumps</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="window.print()" class="px-3.5 py-1.5 bg-white border border-purple-200 rounded-lg shadow-2xs hover:bg-purple-50 text-purple-900 font-sans font-semibold text-xs transition cursor-pointer flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        </svg>
+        Export PDF / Print
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Canvas Board -->
+  <div class="w-full max-w-[1400px] bg-[#F1EDF9] p-4 md:p-8 rounded-2xl relative overflow-hidden">
+
+    <!-- MASTER VECTOR SVG DIAGRAM -->
+    <svg class="w-full h-auto" viewBox="0 0 1360 1780" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Dark Solid Arrowhead Marker -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b" />
+        </marker>
+        <marker id="arrow-dotted" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b" />
+        </marker>
+      </defs>
+
+      <!-- ========================================================================= -->
+      <!-- GROUP 1: PORTFOLIO PAGES (LIGHT GRAY CONTAINER)                           -->
+      <!-- ========================================================================= -->
+      <g id="group-portfolio-pages">
+        <rect x="30" y="125" width="1300" height="570" rx="10" fill="#F8FAFC" fill-opacity="0.85" stroke="#CBD5E1" stroke-width="1.2" />
+        <text x="680" y="152" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#475569" text-anchor="middle">Portfolio pages</text>
+      </g>
+
+      <!-- ========================================================================= -->
+      <!-- GROUP 2: PROJECT CONTENT (LIGHT GRAY CONTAINER)                           -->
+      <!-- ========================================================================= -->
+      <g id="group-project-content">
+        <rect x="30" y="725" width="530" height="425" rx="10" fill="#F8FAFC" fill-opacity="0.85" stroke="#CBD5E1" stroke-width="1.2" />
+        <text x="295" y="752" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#475569" text-anchor="middle">Project content</text>
+      </g>
+
+      <!-- ========================================================================= -->
+      <!-- GROUP 3: VISITOR INTERACTIONS (LIGHT GRAY CONTAINER)                      -->
+      <!-- ========================================================================= -->
+      <g id="group-visitor-interactions">
+        <rect x="590" y="725" width="740" height="425" rx="10" fill="#F8FAFC" fill-opacity="0.85" stroke="#CBD5E1" stroke-width="1.2" />
+        <text x="960" y="752" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#475569" text-anchor="middle">Visitor interactions</text>
+      </g>
+
+      <!-- ========================================================================= -->
+      <!-- GROUP 4: SHARED UI AND PREFERENCES (LIGHT GRAY CONTAINER)                 -->
+      <!-- ========================================================================= -->
+      <g id="group-shared-ui">
+        <rect x="30" y="1180" width="1300" height="480" rx="10" fill="#F8FAFC" fill-opacity="0.85" stroke="#CBD5E1" stroke-width="1.2" />
+        <text x="680" y="1207" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#475569" text-anchor="middle">Shared UI and preferences</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- CONNECTIONS & ORTHOGONAL PATHS                                            -->
+      <!-- ========================================================================= -->
+
+      <!-- [VISITOR DISTRIBUTION TRUNK] -->
+      <!-- Trunk down from Visitor (680, 75) to y=98 -->
+      <path d="M 680 75 L 680 98" fill="none" stroke="#1e293b" stroke-width="1.6" />
+      <!-- Horizontal distribution bus from x=140 to x=1220 at y=98 -->
+      <path d="M 140 98 L 1220 98" fill="none" stroke="#1e293b" stroke-width="1.6" />
+
+      <!-- Visitor -> Case study page (x=140) -->
+      <path d="M 140 98 L 140 180" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="140" y="145" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">browses</text>
+
+      <!-- Visitor -> Projects page (x=350) -->
+      <path d="M 350 98 L 350 180" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="350" y="145" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">browses</text>
+
+      <!-- Visitor -> Home page (x=560) -->
+      <path d="M 560 98 L 560 180" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="560" y="145" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">browses</text>
+
+      <!-- Visitor -> About page (x=800) -->
+      <path d="M 800 98 L 800 180" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="800" y="145" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">browses</text>
+
+      <!-- Visitor -> Resume page (x=1020) -->
+      <path d="M 1020 98 L 1020 180" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="1020" y="145" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">opens</text>
+
+      <!-- Visitor -> Contact page (x=1220) -->
+      <path d="M 1220 98 L 1220 180" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="1220" y="145" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">opens</text>
+
+
+      <!-- [PORTFOLIO PAGES INTERNAL] -->
+      <!-- Home page -> Tech stack card -->
+      <path d="M 515 235 L 515 285" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="515" y="262" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+      <!-- Home page -> Experience section -->
+      <path d="M 605 235 L 605 255 L 690 255 L 690 285" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="650" y="250" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+      <!-- Tech stack card -> Tech stack modal -->
+      <path d="M 515 340 L 515 390" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="515" y="367" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">opens</text>
+
+      <!-- Tech stack card -> Tech stack data -->
+      <path d="M 430 312 L 405 312 L 405 530 L 515 530" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="405" y="440" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#334155" text-anchor="middle">reads stack</text>
+
+      <!-- Tech stack modal -> Tech stack data -->
+      <path d="M 515 445 L 515 470 L 575 470 L 575 505" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="545" y="465" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#334155" text-anchor="middle">reads stack</text>
+
+      <!-- About page -> Tech stack data -->
+      <path d="M 755 235 L 755 530 L 675 530" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="755" y="400" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#334155" text-anchor="middle">reads stack</text>
+
+      <!-- About page -> Certificate data -->
+      <path d="M 800 235 L 800 285" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="800" y="262" font-family="'Inter', sans-serif" font-size="10" font-weight="500" fill="#334155" text-anchor="middle">reads certificates</text>
+
+      <!-- About page -> Certificate carousel UI -->
+      <path d="M 845 235 L 845 260 L 910 260 L 910 390" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="910" y="335" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+      <!-- Resume page -> Resume viewer loader -->
+      <path d="M 1020 235 L 1020 285" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="1020" y="262" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+      <!-- Resume viewer loader -> PDF resume viewer -->
+      <path d="M 1020 340 L 1020 390" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="1020" y="367" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#334155" text-anchor="middle">loads dynamically</text>
+
+      <!-- Contact page -> Contact form (Across Groups) -->
+      <path d="M 1220 235 L 1220 780" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="1220" y="510" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+
+      <!-- [PAGES TO PROJECT CONTENT CROSS-CONNECTIONS] -->
+      <!-- Case study page -> MDX project loader -->
+      <!-- Route from (90, 235) straight down corridor x=60 to (120, 1030) -->
+      <path d="M 90 235 L 90 250 L 60 250 L 60 1030 L 120 1030" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="60" y="580" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#334155" text-anchor="middle">loads case study</text>
+
+      <!-- Home page -> Current projects -->
+      <path d="M 540 235 L 540 655 L 295 655 L 295 780" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="420" y="650" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+      <!-- Home page -> Project queries -->
+      <path d="M 525 235 L 525 668 L 220 668 L 220 895" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="375" y="663" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">gets projects</text>
+
+      <!-- Projects page -> Project queries -->
+      <path d="M 330 235 L 330 680 L 180 680 L 180 895" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="255" y="675" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">gets projects</text>
+
+      <!-- Projects page -> Project card -->
+      <path d="M 370 235 L 370 690 L 410 690 L 410 895" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="390" y="685" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+
+      <!-- [PROJECT CONTENT INTERNAL] -->
+      <!-- Current projects -> Project queries -->
+      <path d="M 240 835 L 240 855 L 200 855 L 200 895" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="210" y="850" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#334155" text-anchor="middle">uses project data</text>
+
+      <!-- Current projects -> Project card -->
+      <path d="M 350 835 L 350 855 L 410 855 L 410 895" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="385" y="850" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+      <!-- Project queries -> MDX project loader -->
+      <path d="M 200 950 L 200 1005" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="200" y="980" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#334155" text-anchor="middle">gets project content</text>
+
+      <!-- Project card -> Case study page (links to: return corridor) -->
+      <path d="M 460 895 L 460 705 L 140 705 L 140 235" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="140" y="470" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">links to</text>
+
+
+      <!-- [VISITOR INTERACTIONS INTERNAL & CROSS] -->
+      <!-- Floating chat -> Chat API -->
+      <path d="M 760 835 L 760 895" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="760" y="868" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">posts question</text>
+
+      <!-- Contact form -> Contact API (DOTTED LINE) -->
+      <path d="M 1220 835 L 1220 895" fill="none" stroke="#1e293b" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-dotted)" />
+      <text x="1220" y="868" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">submits to</text>
+
+      <!-- Contact API -> Resend email (DOTTED LINE) -->
+      <path d="M 1220 950 L 1220 1005" fill="none" stroke="#1e293b" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-dotted)" />
+      <text x="1220" y="980" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">sends email</text>
+
+      <!-- Floating chat -> Consent provider (Across groups) -->
+      <path d="M 700 810 L 670 810 L 670 1540 L 405 1540" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="670" y="1170" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">checks consent</text>
+
+
+      <!-- [SHARED UI AND PREFERENCES CONNECTIONS] -->
+      <!-- Home page -> Fade-in animation -->
+      <path d="M 580 235 L 580 640 L 1100 640 L 1100 1230" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="840" y="635" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">animates sections</text>
+
+      <!-- Site layout -> Navigation bar -->
+      <path d="M 255 1285 L 255 1315 L 145 1315 L 145 1355" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="200" y="1310" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+      <!-- Site layout -> Conditional analytics -->
+      <path d="M 320 1285 L 320 1355" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="320" y="1325" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+      <!-- Site layout -> Consent banner -->
+      <path d="M 385 1285 L 385 1315 L 495 1315 L 495 1355" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="440" y="1310" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+      <!-- Site layout -> Consent provider -->
+      <path d="M 345 1285 L 345 1475" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="345" y="1430" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#334155" text-anchor="middle">provides context</text>
+
+      <!-- Site layout -> Theme provider -->
+      <path d="M 405 1260 L 730 1260 L 730 1355" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="560" y="1255" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">provides theme</text>
+
+      <!-- Theme toggle -> Theme provider -->
+      <path d="M 800 1285 L 800 1355" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="800" y="1325" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">uses theme</text>
+
+      <!-- Conditional analytics -> Consent provider -->
+      <path d="M 295 1410 L 295 1475" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="295" y="1445" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#334155" text-anchor="middle">checks consent</text>
+
+      <!-- Navigation bar -> Floating chat -->
+      <path d="M 145 1355 L 145 1160 L 720 1160 L 720 835" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+      <text x="430" y="1155" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">renders</text>
+
+
+      <!-- ========================================================================= -->
+      <!-- TOP NODE: VISITOR (CIRCLE: Indigo border, pale blue fill)                 -->
+      <!-- ========================================================================= -->
+      <g id="node-visitor" transform="translate(680, 48)">
+        <circle cx="0" cy="0" r="27" fill="#DBEAFE" stroke="#4F46E5" stroke-width="2.2" />
+        <text x="0" y="5" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#1e293b" text-anchor="middle">Visitor</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- NODES: GROUP 1 (PORTFOLIO PAGES - BLUE NODES)                             -->
+      <!-- ========================================================================= -->
+
+      <!-- Case study page [page.tsx] -->
+      <g transform="translate(60, 180)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Case study page</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">[page.tsx]</text>
+      </g>
+
+      <!-- Projects page [page.tsx] -->
+      <g transform="translate(270, 180)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Projects page</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">[page.tsx]</text>
+      </g>
+
+      <!-- Home page [page.tsx] -->
+      <g transform="translate(480, 180)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Home page</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">[page.tsx]</text>
+      </g>
+
+      <!-- About page [page.tsx] -->
+      <g transform="translate(720, 180)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">About page</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">[page.tsx]</text>
+      </g>
+
+      <!-- Resume page [page.tsx] -->
+      <g transform="translate(940, 180)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Resume page</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">[page.tsx]</text>
+      </g>
+
+      <!-- Contact page [page.tsx] -->
+      <g transform="translate(1140, 180)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Contact page</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">[page.tsx]</text>
+      </g>
+
+      <!-- Tech stack card [TechStackCard.tsx] -->
+      <g transform="translate(430, 285)">
+        <rect x="0" y="0" width="170" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="85" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Tech stack card</text>
+        <text x="85" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#475569" text-anchor="middle">[TechStackCard.tsx]</text>
+      </g>
+
+      <!-- Experience section (no specific file) -->
+      <g transform="translate(620, 285)">
+        <rect x="0" y="0" width="150" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="75" y="33" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Experience section</text>
+      </g>
+
+      <!-- Tech stack modal [TechStackModal.tsx] -->
+      <g transform="translate(430, 390)">
+        <rect x="0" y="0" width="170" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="85" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Tech stack modal</text>
+        <text x="85" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#475569" text-anchor="middle">[TechStackModal.tsx]</text>
+      </g>
+
+      <!-- Tech stack data [tech-stack.ts] -->
+      <g transform="translate(515, 505)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Tech stack data</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#475569" text-anchor="middle">[tech-stack.ts]</text>
+      </g>
+
+      <!-- Certificate data [certications.ts] -->
+      <g transform="translate(720, 285)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Certificate data</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#475569" text-anchor="middle">[certications.ts]</text>
+      </g>
+
+      <!-- Certificate carousel UI (no specific file) -->
+      <g transform="translate(830, 390)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="33" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Certificate carousel UI</text>
+      </g>
+
+      <!-- Certificate carousel (standalone in group) -->
+      <g transform="translate(710, 505)">
+        <rect x="0" y="0" width="150" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="75" y="33" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Certificate carousel</text>
+      </g>
+
+      <!-- Resume viewer loader (no specific file) -->
+      <g transform="translate(940, 285)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="33" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">Resume viewer loader</text>
+      </g>
+
+      <!-- PDF resume viewer [ResumeViewer.tsx] -->
+      <g transform="translate(940, 390)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">PDF resume viewer</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">[ResumeViewer.tsx]</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- NODES: GROUP 2 (PROJECT CONTENT - ORANGE NODES)                           -->
+      <!-- ========================================================================= -->
+
+      <!-- Current projects (no specific file) -->
+      <g transform="translate(215, 780)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FEF9C3" stroke="#F97316" stroke-width="2" />
+        <text x="80" y="33" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#78350F" text-anchor="middle">Current projects</text>
+      </g>
+
+      <!-- Project queries [projects.ts] -->
+      <g transform="translate(120, 895)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FEF9C3" stroke="#F97316" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#78350F" text-anchor="middle">Project queries</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#92400E" text-anchor="middle">[projects.ts]</text>
+      </g>
+
+      <!-- Project card [ProjectCard.tsx] -->
+      <g transform="translate(330, 895)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FEF9C3" stroke="#F97316" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#78350F" text-anchor="middle">Project card</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#92400E" text-anchor="middle">[ProjectCard.tsx]</text>
+      </g>
+
+      <!-- MDX project loader [mdx.ts] -->
+      <g transform="translate(120, 1005)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FEF9C3" stroke="#F97316" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#78350F" text-anchor="middle">MDX project loader</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#92400E" text-anchor="middle">[mdx.ts]</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- NODES: GROUP 3 (VISITOR INTERACTIONS - GREEN NODES)                       -->
+      <!-- ========================================================================= -->
+
+      <!-- Floating chat [FloatingChat.tsx] -->
+      <g transform="translate(700, 780)">
+        <rect x="0" y="0" width="170" height="55" rx="8" fill="#F0FDF4" stroke="#22C55E" stroke-width="2" />
+        <text x="85" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#065F46" text-anchor="middle">Floating chat</text>
+        <text x="85" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#047857" text-anchor="middle">[FloatingChat.tsx]</text>
+      </g>
+
+      <!-- Chat API [route.ts] -->
+      <g transform="translate(700, 895)">
+        <rect x="0" y="0" width="170" height="55" rx="8" fill="#F0FDF4" stroke="#22C55E" stroke-width="2" />
+        <text x="85" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#065F46" text-anchor="middle">Chat API</text>
+        <text x="85" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#047857" text-anchor="middle">[route.ts]</text>
+      </g>
+
+      <!-- Contact form [ContactForm.tsx] -->
+      <g transform="translate(1135, 780)">
+        <rect x="0" y="0" width="170" height="55" rx="8" fill="#F0FDF4" stroke="#22C55E" stroke-width="2" />
+        <text x="85" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#065F46" text-anchor="middle">Contact form</text>
+        <text x="85" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#047857" text-anchor="middle">[ContactForm.tsx]</text>
+      </g>
+
+      <!-- Contact API [route.ts] -->
+      <g transform="translate(1135, 895)">
+        <rect x="0" y="0" width="170" height="55" rx="8" fill="#F0FDF4" stroke="#22C55E" stroke-width="2" />
+        <text x="85" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#065F46" text-anchor="middle">Contact API</text>
+        <text x="85" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#047857" text-anchor="middle">[route.ts]</text>
+      </g>
+
+      <!-- Resend email (no specific file) -->
+      <g transform="translate(1135, 1005)">
+        <rect x="0" y="0" width="170" height="55" rx="8" fill="#F0FDF4" stroke="#22C55E" stroke-width="2" />
+        <text x="85" y="33" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#065F46" text-anchor="middle">Resend email</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- NODES: GROUP 4 (SHARED UI AND PREFERENCES - CRIMSON/PINK NODES)           -->
+      <!-- ========================================================================= -->
+
+      <!-- Site layout [layout.tsx] -->
+      <g transform="translate(255, 1230)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#9F1239" text-anchor="middle">Site layout</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#881337" text-anchor="middle">[layout.tsx]</text>
+      </g>
+
+      <!-- Navigation bar [Navbar.tsx] -->
+      <g transform="translate(65, 1355)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#9F1239" text-anchor="middle">Navigation bar</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#881337" text-anchor="middle">[Navbar.tsx]</text>
+      </g>
+
+      <!-- Conditional analytics (no specific file) -->
+      <g transform="translate(240, 1355)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="2" />
+        <text x="80" y="33" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#9F1239" text-anchor="middle">Conditional analytics</text>
+      </g>
+
+      <!-- Consent banner (no specific file) -->
+      <g transform="translate(415, 1355)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="2" />
+        <text x="80" y="33" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#9F1239" text-anchor="middle">Consent banner</text>
+      </g>
+
+      <!-- Consent provider (no specific file) -->
+      <g transform="translate(240, 1475)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="2" />
+        <text x="80" y="33" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#9F1239" text-anchor="middle">Consent provider</text>
+      </g>
+
+      <!-- Theme toggle [ThemeToggle.tsx] -->
+      <g transform="translate(720, 1230)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#9F1239" text-anchor="middle">Theme toggle</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#881337" text-anchor="middle">[ThemeToggle.tsx]</text>
+      </g>
+
+      <!-- Theme provider [ThemeProvider.tsx] -->
+      <g transform="translate(720, 1355)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#9F1239" text-anchor="middle">Theme provider</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#881337" text-anchor="middle">[ThemeProvider.tsx]</text>
+      </g>
+
+      <!-- Fade-in animation [fadeIn.tsx] -->
+      <g transform="translate(1020, 1230)">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="2" />
+        <text x="80" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#9F1239" text-anchor="middle">Fade-in animation</text>
+        <text x="80" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#881337" text-anchor="middle">[fadeIn.tsx]</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- BOTTOM-RIGHT WATERMARK                                                    -->
+      <!-- ========================================================================= -->
+      <text x="1330" y="1760" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="#94a3b8" text-anchor="end">gitdiagram.com/jriop/rio_joshua_portfolio</text>
+
+    </svg>
+
+  </div>
+
+</body>
+</html>

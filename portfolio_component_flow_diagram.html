@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joshua Rio Portfolio — Component Flow & Architecture Canvas</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Signature Eraser.io Technical Graph Paper */
+    .bg-graph-paper {
+      background-color: #ffffff;
+      background-image: 
+        linear-gradient(to right, #eceef2 1px, transparent 1px),
+        linear-gradient(to bottom, #eceef2 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    /* Smooth Interactive Node Hovers */
+    .node-card {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .node-card:hover {
+      filter: drop-shadow(0 6px 12px rgba(15, 23, 42, 0.12));
+    }
+    .connector-line {
+      transition: stroke-width 0.15s ease, stroke 0.15s ease;
+    }
+    .connector-group:hover .connector-line {
+      stroke-width: 2.4px !important;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { padding: 0; background: white; }
+    }
+  </style>
+</head>
+<body class="bg-graph-paper text-slate-800 min-h-screen p-4 md:p-8 flex flex-col items-center justify-center">
+
+  <!-- Control Header Bar -->
+  <div class="no-print w-full max-w-[1380px] mb-4 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5 text-xs font-mono text-slate-700">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-bold text-slate-900">Rio Joshua Portfolio · System Architecture &amp; Component Flow</span>
+      <span class="text-slate-400">·</span>
+      <span class="text-slate-500">Vector-Locked Orthogonal Corridors</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs font-mono text-slate-500">Redrawn from GitDiagram Spec</span>
+      <button onclick="window.print()" class="px-3.5 py-1.5 bg-white border border-slate-300 rounded-lg shadow-2xs hover:bg-slate-50 text-slate-800 font-sans font-semibold text-xs transition cursor-pointer flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        </svg>
+        Export PDF / Print
+      </button>
+    </div>
+  </div>
+
+  <!-- Legend Header Bar -->
+  <div class="w-full max-w-[1380px] bg-white border border-slate-200 rounded-xl px-5 py-3 mb-4 shadow-2xs flex flex-wrap items-center justify-between gap-4 text-xs">
+    <div class="flex items-center gap-2 font-mono font-bold text-slate-900 uppercase text-[11px] tracking-wider">
+      <span>Architectural Zones:</span>
+    </div>
+    
+    <!-- Zone 1 Legend -->
+    <div class="flex items-center gap-2">
+      <div class="w-3.5 h-3.5 rounded bg-blue-100 border border-blue-400"></div>
+      <span class="font-medium text-slate-700 text-[11px]">Portfolio Pages (<code class="font-mono text-blue-700">app/*</code>)</span>
+    </div>
+
+    <!-- Zone 2 Legend -->
+    <div class="flex items-center gap-2">
+      <div class="w-3.5 h-3.5 rounded bg-amber-100 border border-amber-400"></div>
+      <span class="font-medium text-slate-700 text-[11px]">Project Content (<code class="font-mono text-amber-700">MDX &amp; Queries</code>)</span>
+    </div>
+
+    <!-- Zone 3 Legend -->
+    <div class="flex items-center gap-2">
+      <div class="w-3.5 h-3.5 rounded bg-emerald-100 border border-emerald-400"></div>
+      <span class="font-medium text-slate-700 text-[11px]">Visitor Interactions (<code class="font-mono text-emerald-700">Chat &amp; Contact API</code>)</span>
+    </div>
+
+    <!-- Zone 4 Legend -->
+    <div class="flex items-center gap-2">
+      <div class="w-3.5 h-3.5 rounded bg-rose-100 border border-rose-400"></div>
+      <span class="font-medium text-slate-700 text-[11px]">Shared UI &amp; Preferences (<code class="font-mono text-rose-700">Theme, Layout &amp; Consent</code>)</span>
+    </div>
+
+    <div class="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+      <span>───[ Action Noun ]──►</span>
+    </div>
+  </div>
+
+  <!-- Master Canvas Board -->
+  <div class="w-full max-w-[1380px] bg-white rounded-2xl shadow-sm border border-slate-300 p-6 md:p-8 relative overflow-hidden bg-graph-paper">
+    
+    <!-- Top Metadata Bar -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-3 pb-3 border-b border-slate-200 text-xs font-mono text-slate-700">
+      <div>
+        <span class="font-bold text-slate-900">Application:</span> Next.js 16 (App Router) + Turbopack
+      </div>
+      <div>
+        <span class="font-bold text-slate-900">Target Source:</span> <span class="text-blue-600">JRioP/Rio_Joshua_Portfolio</span>
+      </div>
+      <div>
+        <span class="font-bold text-slate-900">Branch:</span> <span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-800 font-semibold">development_stage</span>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MASTER VECTOR SVG CANVAS (100% Vector-Locked Coordinates)                 -->
+    <!-- ========================================================================= -->
+    <svg class="w-full h-auto" viewBox="0 0 1380 1080" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Standard Arrowhead Markers -->
+        <marker id="arrow-slate" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#334155" />
+        </marker>
+        <marker id="arrow-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563EB" />
+        </marker>
+        <marker id="arrow-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#D97706" />
+        </marker>
+        <marker id="arrow-emerald" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
+        </marker>
+        <marker id="arrow-rose" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#E11D48" />
+        </marker>
+
+        <!-- Drop Shadows for Cards -->
+        <filter id="card-shadow" x="-8%" y="-8%" width="116%" height="116%">
+          <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0f172a" flood-opacity="0.07" />
+        </filter>
+        <filter id="visitor-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#2563EB" flood-opacity="0.15" />
+        </filter>
+      </defs>
+
+      <!-- ========================================================================= -->
+      <!-- 1. ARCHITECTURAL BOUNDARY ZONES (Group Containers)                        -->
+      <!-- ========================================================================= -->
+
+      <!-- ZONE 1: PORTFOLIO PAGES -->
+      <g id="zone-portfolio-pages">
+        <rect x="40" y="150" width="1300" height="355" rx="14" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.6" stroke-dasharray="6 5" />
+        <rect x="55" y="140" width="140" height="20" rx="4" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1" />
+        <text x="125" y="154" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#334155" text-anchor="middle">PORTFOLIO PAGES</text>
+      </g>
+
+      <!-- ZONE 2: PROJECT CONTENT -->
+      <g id="zone-project-content">
+        <rect x="40" y="535" width="460" height="280" rx="14" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.6" stroke-dasharray="6 5" />
+        <rect x="55" y="525" width="135" height="20" rx="4" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1" />
+        <text x="122.5" y="539" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#B45309" text-anchor="middle">PROJECT CONTENT</text>
+      </g>
+
+      <!-- ZONE 3: VISITOR INTERACTIONS -->
+      <g id="zone-visitor-interactions">
+        <rect x="880" y="535" width="460" height="280" rx="14" fill="#F0FDF4" stroke="#10B981" stroke-width="1.6" stroke-dasharray="6 5" />
+        <rect x="895" y="525" width="165" height="20" rx="4" fill="#FFFFFF" stroke="#10B981" stroke-width="1" />
+        <text x="977.5" y="539" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#047857" text-anchor="middle">VISITOR INTERACTIONS</text>
+      </g>
+
+      <!-- ZONE 4: SHARED UI & PREFERENCES -->
+      <g id="zone-shared-ui">
+        <rect x="40" y="845" width="1300" height="195" rx="14" fill="#FFF1F2" stroke="#F43F5E" stroke-width="1.6" stroke-dasharray="6 5" />
+        <rect x="55" y="835" width="190" height="20" rx="4" fill="#FFFFFF" stroke="#F43F5E" stroke-width="1" />
+        <text x="150" y="849" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#BE123C" text-anchor="middle">SHARED UI &amp; PREFERENCES</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 2. ORTHOGONAL CONNECTOR CORRIDORS (Mathematically Aligned)               -->
+      <!-- ========================================================================= -->
+
+      <!-- VISITOR DISTRIBUTION TRUNK -->
+      <!-- Center drop from Visitor (690, 80) down to y=110 -->
+      <path d="M 690 78 L 690 110" fill="none" stroke="#334155" stroke-width="1.8" />
+      <!-- Horizontal Distribution Bus from x=145 to x=1240 at y=110 -->
+      <path d="M 145 110 L 1240 110" fill="none" stroke="#334155" stroke-width="1.8" />
+
+      <!-- Visitor -> Case Study Page Drop (x=145) -->
+      <g class="connector-group">
+        <path d="M 145 110 L 145 175" fill="none" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow-slate)" class="connector-line" />
+        <g transform="translate(145, 138)">
+          <rect x="-30" y="-10" width="60" height="20" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+          <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#475569" text-anchor="middle">browses</text>
+        </g>
+      </g>
+
+      <!-- Visitor -> Projects Page Drop (x=345) -->
+      <g class="connector-group">
+        <path d="M 345 110 L 345 175" fill="none" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow-slate)" class="connector-line" />
+        <g transform="translate(345, 138)">
+          <rect x="-30" y="-10" width="60" height="20" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+          <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#475569" text-anchor="middle">browses</text>
+        </g>
+      </g>
+
+      <!-- Visitor -> Home Page Drop (x=575) -->
+      <g class="connector-group">
+        <path d="M 575 110 L 575 175" fill="none" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow-slate)" class="connector-line" />
+        <g transform="translate(575, 138)">
+          <rect x="-30" y="-10" width="60" height="20" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+          <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#475569" text-anchor="middle">browses</text>
+        </g>
+      </g>
+
+      <!-- Visitor -> About Page Drop (x=875) -->
+      <g class="connector-group">
+        <path d="M 875 110 L 875 175" fill="none" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow-slate)" class="connector-line" />
+        <g transform="translate(875, 138)">
+          <rect x="-30" y="-10" width="60" height="20" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+          <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#475569" text-anchor="middle">browses</text>
+        </g>
+      </g>
+
+      <!-- Visitor -> Resume Page Drop (x=1065) -->
+      <g class="connector-group">
+        <path d="M 1065 110 L 1065 175" fill="none" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow-slate)" class="connector-line" />
+        <g transform="translate(1065, 138)">
+          <rect x="-24" y="-10" width="48" height="20" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+          <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#475569" text-anchor="middle">opens</text>
+        </g>
+      </g>
+
+      <!-- Visitor -> Contact Page Drop (x=1240) -->
+      <g class="connector-group">
+        <path d="M 1240 110 L 1240 175" fill="none" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow-slate)" class="connector-line" />
+        <g transform="translate(1240, 138)">
+          <rect x="-24" y="-10" width="48" height="20" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+          <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#475569" text-anchor="middle">opens</text>
+        </g>
+      </g>
+
+      <!-- ========================================================================= -->
+      <!-- ZONE 1 INTERNAL CONNECTORS                                                -->
+      <!-- ========================================================================= -->
+
+      <!-- Home Page -> Tech Stack Card -->
+      <g class="connector-group">
+        <path d="M 535 235 L 535 270" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(535, 253)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#1D4ED8" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Home Page -> Experience Section -->
+      <g class="connector-group">
+        <path d="M 615 235 L 615 252 L 705 252 L 705 270" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(660, 252)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#1D4ED8" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Tech Stack Card -> Tech Stack Modal -->
+      <g class="connector-group">
+        <path d="M 535 325 L 535 350" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(535, 338)">
+          <rect x="-22" y="-9" width="44" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#1D4ED8" text-anchor="middle">opens</text>
+        </g>
+      </g>
+
+      <!-- Tech Stack Modal -> Tech Stack Data -->
+      <g class="connector-group">
+        <path d="M 535 405 L 535 425 L 610 425 L 610 440" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(570, 425)">
+          <rect x="-34" y="-9" width="68" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#1D4ED8" text-anchor="middle">reads stack</text>
+        </g>
+      </g>
+
+      <!-- Tech Stack Card -> Tech Stack Data (Direct Read) -->
+      <g class="connector-group">
+        <path d="M 465 300 L 440 300 L 440 460 L 545 460" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(440, 380)">
+          <rect x="-33" y="-9" width="66" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#1D4ED8" text-anchor="middle">reads stack</text>
+        </g>
+      </g>
+
+      <!-- About Page -> Certificate Data -->
+      <g class="connector-group">
+        <path d="M 850 235 L 850 270" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(850, 253)">
+          <rect x="-34" y="-9" width="68" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#1D4ED8" text-anchor="middle">reads certs</text>
+        </g>
+      </g>
+
+      <!-- About Page -> Tech Stack Data -->
+      <g class="connector-group">
+        <path d="M 810 235 L 810 460 L 710 460" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(810, 395)">
+          <rect x="-33" y="-9" width="66" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#1D4ED8" text-anchor="middle">reads stack</text>
+        </g>
+      </g>
+
+      <!-- Certificate Data -> Certificate Carousel UI -->
+      <g class="connector-group">
+        <path d="M 850 325 L 850 350" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(850, 338)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#1D4ED8" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Resume Page -> Resume Viewer Loader -->
+      <g class="connector-group">
+        <path d="M 1065 235 L 1065 270" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(1065, 253)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#1D4ED8" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Resume Viewer Loader -> PDF Resume Viewer -->
+      <g class="connector-group">
+        <path d="M 1065 325 L 1065 350" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" class="connector-line" />
+        <g transform="translate(1065, 338)">
+          <rect x="-44" y="-9" width="88" height="18" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#1D4ED8" text-anchor="middle">loads dynamically</text>
+        </g>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- ZONE 2 INTERNAL & CROSS CONNECTORS (PROJECT CONTENT)                      -->
+      <!-- ========================================================================= -->
+
+      <!-- Current Projects -> Project Queries -->
+      <g class="connector-group">
+        <path d="M 230 610 L 230 630 L 155 630 L 155 645" fill="none" stroke="#D97706" stroke-width="1.8" marker-end="url(#arrow-amber)" class="connector-line" />
+        <g transform="translate(190, 630)">
+          <rect x="-42" y="-9" width="84" height="18" rx="4" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#B45309" text-anchor="middle">uses project data</text>
+        </g>
+      </g>
+
+      <!-- Current Projects -> Project Card -->
+      <g class="connector-group">
+        <path d="M 330 610 L 330 630 L 370 630 L 370 645" fill="none" stroke="#D97706" stroke-width="1.8" marker-end="url(#arrow-amber)" class="connector-line" />
+        <g transform="translate(350, 630)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#B45309" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Project Queries -> MDX Project Loader -->
+      <g class="connector-group">
+        <path d="M 145 695 L 145 730" fill="none" stroke="#D97706" stroke-width="1.8" marker-end="url(#arrow-amber)" class="connector-line" />
+        <g transform="translate(145, 713)">
+          <rect x="-45" y="-9" width="90" height="18" rx="4" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#B45309" text-anchor="middle">gets project content</text>
+        </g>
+      </g>
+
+      <!-- Case Study Page -> MDX Project Loader (Cross-Zone) -->
+      <g class="connector-group">
+        <path d="M 85 235 L 85 758 L 65 758 L 65 758" fill="none" stroke="#D97706" stroke-width="1.8" />
+        <path d="M 85 758 L 70 758" fill="none" stroke="#D97706" stroke-width="1.8" marker-end="url(#arrow-amber)" class="connector-line" />
+        <g transform="translate(85, 470)">
+          <rect x="-40" y="-9" width="80" height="18" rx="4" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#B45309" text-anchor="middle">loads case study</text>
+        </g>
+      </g>
+
+      <!-- Projects Page -> Project Queries -->
+      <g class="connector-group">
+        <path d="M 315 235 L 315 480 L 125 480 L 125 640" fill="none" stroke="#D97706" stroke-width="1.8" marker-end="url(#arrow-amber)" class="connector-line" />
+        <g transform="translate(200, 480)">
+          <rect x="-35" y="-9" width="70" height="18" rx="4" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#B45309" text-anchor="middle">gets projects</text>
+        </g>
+      </g>
+
+      <!-- Projects Page -> Project Card -->
+      <g class="connector-group">
+        <path d="M 355 235 L 355 495 L 350 495 L 350 640" fill="none" stroke="#D97706" stroke-width="1.8" marker-end="url(#arrow-amber)" class="connector-line" />
+        <g transform="translate(355, 430)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#B45309" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Home Page -> Current Projects -->
+      <g class="connector-group">
+        <path d="M 505 235 L 505 510 L 285 510 L 285 555" fill="none" stroke="#D97706" stroke-width="1.8" marker-end="url(#arrow-amber)" class="connector-line" />
+        <g transform="translate(390, 510)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#B45309" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Home Page -> Project Card -->
+      <g class="connector-group">
+        <path d="M 525 235 L 525 525 L 420 525 L 420 640" fill="none" stroke="#D97706" stroke-width="1.8" marker-end="url(#arrow-amber)" class="connector-line" />
+        <g transform="translate(470, 525)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#B45309" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- ZONE 3 INTERNAL & CROSS CONNECTORS (VISITOR INTERACTIONS)                 -->
+      <!-- ========================================================================= -->
+
+      <!-- Floating Chat -> Chat API Route -->
+      <g class="connector-group">
+        <path d="M 990 610 L 990 640" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-emerald)" class="connector-line" />
+        <g transform="translate(990, 626)">
+          <rect x="-35" y="-9" width="70" height="18" rx="4" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#047857" text-anchor="middle">posts question</text>
+        </g>
+      </g>
+
+      <!-- Chat API Route -> Render AI Backend -->
+      <g class="connector-group">
+        <path d="M 990 695 L 990 730" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-emerald)" class="connector-line" />
+        <g transform="translate(990, 713)">
+          <rect x="-32" y="-9" width="64" height="18" rx="4" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#047857" text-anchor="middle">invokes RAG</text>
+        </g>
+      </g>
+
+      <!-- Contact Form -> Contact API Route -->
+      <g class="connector-group">
+        <path d="M 1215 610 L 1215 640" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-emerald)" class="connector-line" />
+        <g transform="translate(1215, 626)">
+          <rect x="-30" y="-9" width="60" height="18" rx="4" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#047857" text-anchor="middle">submits to</text>
+        </g>
+      </g>
+
+      <!-- Contact API Route -> Resend Email Service -->
+      <g class="connector-group">
+        <path d="M 1215 695 L 1215 730" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-emerald)" class="connector-line" />
+        <g transform="translate(1215, 713)">
+          <rect x="-30" y="-9" width="60" height="18" rx="4" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#047857" text-anchor="middle">sends email</text>
+        </g>
+      </g>
+
+      <!-- Contact Page -> Contact Form (Cross-Zone) -->
+      <g class="connector-group">
+        <path d="M 1240 235 L 1240 555" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-emerald)" class="connector-line" />
+        <g transform="translate(1240, 480)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#047857" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Home Page / Site Layout -> Floating Chat (Cross-Zone) -->
+      <g class="connector-group">
+        <path d="M 945 405 L 945 555" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-emerald)" class="connector-line" />
+        <g transform="translate(945, 480)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#047857" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- ZONE 4 INTERNAL & SYSTEM CONNECTORS (SHARED UI & PREFERENCES)             -->
+      <!-- ========================================================================= -->
+
+      <!-- Site Layout -> Navigation Bar -->
+      <g class="connector-group">
+        <path d="M 285 910 L 285 928 L 145 928 L 145 940" fill="none" stroke="#E11D48" stroke-width="1.8" marker-end="url(#arrow-rose)" class="connector-line" />
+        <g transform="translate(205, 928)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#BE123C" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Site Layout -> Conditional Analytics -->
+      <g class="connector-group">
+        <path d="M 335 910 L 335 940" fill="none" stroke="#E11D48" stroke-width="1.8" marker-end="url(#arrow-rose)" class="connector-line" />
+        <g transform="translate(335, 925)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#BE123C" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Site Layout -> Consent Banner -->
+      <g class="connector-group">
+        <path d="M 405 910 L 405 928 L 500 928 L 500 940" fill="none" stroke="#E11D48" stroke-width="1.8" marker-end="url(#arrow-rose)" class="connector-line" />
+        <g transform="translate(450, 928)">
+          <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#BE123C" text-anchor="middle">renders</text>
+        </g>
+      </g>
+
+      <!-- Site Layout -> Consent Provider -->
+      <g class="connector-group">
+        <path d="M 360 910 L 360 1005" fill="none" stroke="#E11D48" stroke-width="1.8" marker-end="url(#arrow-rose)" class="connector-line" />
+        <g transform="translate(360, 960)">
+          <rect x="-42" y="-9" width="84" height="18" rx="4" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600" fill="#BE123C" text-anchor="middle">provides context</text>
+        </g>
+      </g>
+
+      <!-- Conditional Analytics -> Consent Provider (Checks Consent) -->
+      <g class="connector-group">
+        <path d="M 270 995 L 270 1030 L 315 1030" fill="none" stroke="#E11D48" stroke-width="1.8" marker-end="url(#arrow-rose)" class="connector-line" />
+        <g transform="translate(270, 1018)">
+          <rect x="-35" y="-9" width="70" height="18" rx="4" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600" fill="#BE123C" text-anchor="middle">checks consent</text>
+        </g>
+      </g>
+
+      <!-- Consent Provider -> Floating Chat (Checks Consent Across Zones) -->
+      <g class="connector-group">
+        <path d="M 485 1030 L 840 1030 L 840 605 L 895 605" fill="none" stroke="#E11D48" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-rose)" class="connector-line" />
+        <g transform="translate(840, 750)">
+          <rect x="-36" y="-9" width="72" height="18" rx="4" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600" fill="#BE123C" text-anchor="middle">checks consent</text>
+        </g>
+      </g>
+
+      <!-- Theme Toggle -> Theme Provider -->
+      <g class="connector-group">
+        <path d="M 685 910 L 685 935" fill="none" stroke="#E11D48" stroke-width="1.8" marker-end="url(#arrow-rose)" class="connector-line" />
+        <g transform="translate(685, 922)">
+          <rect x="-30" y="-9" width="60" height="18" rx="4" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#BE123C" text-anchor="middle">uses theme</text>
+        </g>
+      </g>
+
+      <!-- Theme Provider -> Site Layout -->
+      <g class="connector-group">
+        <path d="M 620 960 L 590 960 L 590 885 L 445 885" fill="none" stroke="#E11D48" stroke-width="1.8" marker-end="url(#arrow-rose)" class="connector-line" />
+        <g transform="translate(535, 885)">
+          <rect x="-36" y="-9" width="72" height="18" rx="4" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#BE123C" text-anchor="middle">provides theme</text>
+        </g>
+      </g>
+
+      <!-- Fade-in Animation -> Home Page Sections (Cross-Zone) -->
+      <g class="connector-group">
+        <path d="M 885 860 L 885 510 L 660 510 L 660 330" fill="none" stroke="#E11D48" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-rose)" class="connector-line" />
+        <g transform="translate(885, 780)">
+          <rect x="-44" y="-9" width="88" height="18" rx="4" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1" />
+          <text x="0" y="3.5" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600" fill="#BE123C" text-anchor="middle">animates sections</text>
+        </g>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 3. TOP ACTOR NODE: VISITOR                                                -->
+      <!-- ========================================================================= -->
+
+      <g id="actor-visitor" transform="translate(690, 48)" class="node-card">
+        <!-- Outer Glowing Ring -->
+        <circle cx="0" cy="0" r="28" fill="#FFFFFF" stroke="#3B82F6" stroke-width="2.5" filter="url(#visitor-shadow)" />
+        <circle cx="0" cy="0" r="23" fill="#EFF6FF" />
+        <!-- Person Icon -->
+        <circle cx="0" cy="-6" r="6.5" fill="#1D4ED8" />
+        <path d="M -11 11 C -11 5 -4 4 0 4 C 4 4 11 5 11 11 Z" fill="#1D4ED8" />
+        <!-- Label Badge -->
+        <text x="0" y="42" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#0F172A" text-anchor="middle" letter-spacing="-0.02em">Visitor</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 4. ZONE 1 CARDS: PORTFOLIO PAGES                                          -->
+      <!-- ========================================================================= -->
+
+      <!-- Case Study Page -->
+      <g transform="translate(65, 175)" class="node-card">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="55" rx="2" fill="#2563EB" />
+        <text x="14" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0F172A">Case study page</text>
+        <text x="14" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#64748B">[page.tsx]</text>
+      </g>
+
+      <!-- Projects Page -->
+      <g transform="translate(265, 175)" class="node-card">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="55" rx="2" fill="#2563EB" />
+        <text x="14" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0F172A">Projects page</text>
+        <text x="14" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#64748B">[page.tsx]</text>
+      </g>
+
+      <!-- Home Page -->
+      <g transform="translate(490, 175)" class="node-card">
+        <rect x="0" y="0" width="170" height="55" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.8" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="5" height="55" rx="2" fill="#2563EB" />
+        <text x="16" y="24" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#0F172A">Home page</text>
+        <text x="16" y="42" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="600" fill="#2563EB">[app/page.tsx]</text>
+      </g>
+
+      <!-- About Page -->
+      <g transform="translate(795, 175)" class="node-card">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="55" rx="2" fill="#2563EB" />
+        <text x="14" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0F172A">About page</text>
+        <text x="14" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#64748B">[page.tsx]</text>
+      </g>
+
+      <!-- Resume Page -->
+      <g transform="translate(985, 175)" class="node-card">
+        <rect x="0" y="0" width="160" height="55" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="55" rx="2" fill="#2563EB" />
+        <text x="14" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0F172A">Resume page</text>
+        <text x="14" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#64748B">[page.tsx]</text>
+      </g>
+
+      <!-- Contact Page -->
+      <g transform="translate(1165, 175)" class="node-card">
+        <rect x="0" y="0" width="150" height="55" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="55" rx="2" fill="#2563EB" />
+        <text x="14" y="24" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0F172A">Contact page</text>
+        <text x="14" y="42" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#64748B">[page.tsx]</text>
+      </g>
+
+      <!-- Tech Stack Card -->
+      <g transform="translate(460, 275)" class="node-card">
+        <rect x="0" y="0" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="75" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Tech stack card</text>
+        <text x="75" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[TechStackCard.tsx]</text>
+      </g>
+
+      <!-- Experience Section -->
+      <g transform="translate(630, 275)" class="node-card">
+        <rect x="0" y="0" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="75" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Experience section</text>
+        <text x="75" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[ExperienceSection.tsx]</text>
+      </g>
+
+      <!-- Tech Stack Modal -->
+      <g transform="translate(460, 355)" class="node-card">
+        <rect x="0" y="0" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="75" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Tech stack modal</text>
+        <text x="75" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[TechStackModal.tsx]</text>
+      </g>
+
+      <!-- Tech Stack Data -->
+      <g transform="translate(550, 440)" class="node-card">
+        <rect x="0" y="0" width="160" height="46" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.4" filter="url(#card-shadow)" />
+        <text x="80" y="20" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#1D4ED8" text-anchor="middle">Tech stack data</text>
+        <text x="80" y="35" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#2563EB" text-anchor="middle">[tech-stack.ts]</text>
+      </g>
+
+      <!-- Certificate Data -->
+      <g transform="translate(775, 275)" class="node-card">
+        <rect x="0" y="0" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="75" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Certificate data</text>
+        <text x="75" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[certications.ts]</text>
+      </g>
+
+      <!-- Certificate Carousel UI -->
+      <g transform="translate(775, 355)" class="node-card">
+        <rect x="0" y="0" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="75" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Certificate carousel UI</text>
+        <text x="75" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[CertificateCarousel.tsx]</text>
+      </g>
+
+      <!-- Resume Viewer Loader -->
+      <g transform="translate(985, 275)" class="node-card">
+        <rect x="0" y="0" width="160" height="50" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="80" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Resume viewer loader</text>
+        <text x="80" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[ResumeViewerClient.tsx]</text>
+      </g>
+
+      <!-- PDF Resume Viewer -->
+      <g transform="translate(985, 355)" class="node-card">
+        <rect x="0" y="0" width="160" height="50" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.4" filter="url(#card-shadow)" />
+        <text x="80" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#1D4ED8" text-anchor="middle">PDF resume viewer</text>
+        <text x="80" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#2563EB" text-anchor="middle">[ResumeViewer.tsx]</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 5. ZONE 2 CARDS: PROJECT CONTENT                                          -->
+      <!-- ========================================================================= -->
+
+      <!-- Current projects -->
+      <g transform="translate(200, 560)" class="node-card">
+        <rect x="0" y="0" width="160" height="50" rx="8" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="50" rx="2" fill="#F59E0B" />
+        <text x="14" y="22" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#92400E">Current projects</text>
+        <text x="14" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#78350F">[CurrentProjects.tsx]</text>
+      </g>
+
+      <!-- Project queries -->
+      <g transform="translate(65, 645)" class="node-card">
+        <rect x="0" y="0" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="50" rx="2" fill="#F59E0B" />
+        <text x="14" y="22" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#92400E">Project queries</text>
+        <text x="14" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#78350F">[projects.ts]</text>
+      </g>
+
+      <!-- Project card -->
+      <g transform="translate(290, 645)" class="node-card">
+        <rect x="0" y="0" width="160" height="50" rx="8" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="50" rx="2" fill="#F59E0B" />
+        <text x="14" y="22" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#92400E">Project card</text>
+        <text x="14" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#78350F">[ProjectCard.tsx]</text>
+      </g>
+
+      <!-- MDX project loader -->
+      <g transform="translate(65, 735)" class="node-card">
+        <rect x="0" y="0" width="150" height="48" rx="8" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5" filter="url(#card-shadow)" />
+        <text x="75" y="20" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#92400E" text-anchor="middle">MDX project loader</text>
+        <text x="75" y="36" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#78350F" text-anchor="middle">[mdx.ts]</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 6. ZONE 3 CARDS: VISITOR INTERACTIONS                                     -->
+      <!-- ========================================================================= -->
+
+      <!-- Floating chat -->
+      <g transform="translate(905, 560)" class="node-card">
+        <rect x="0" y="0" width="170" height="50" rx="8" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="50" rx="2" fill="#10B981" />
+        <text x="14" y="22" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#065F46">Floating chat</text>
+        <text x="14" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#047857">[FloatingChat.tsx]</text>
+      </g>
+
+      <!-- Contact form -->
+      <g transform="translate(1130, 560)" class="node-card">
+        <rect x="0" y="0" width="170" height="50" rx="8" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="50" rx="2" fill="#10B981" />
+        <text x="14" y="22" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#065F46">Contact form</text>
+        <text x="14" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#047857">[ContactForm.tsx]</text>
+      </g>
+
+      <!-- Chat API -->
+      <g transform="translate(905, 645)" class="node-card">
+        <rect x="0" y="0" width="170" height="50" rx="8" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="50" rx="2" fill="#10B981" />
+        <text x="14" y="22" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#065F46">Chat API</text>
+        <text x="14" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#047857">[api/chat/route.ts]</text>
+      </g>
+
+      <!-- Contact API -->
+      <g transform="translate(1130, 645)" class="node-card">
+        <rect x="0" y="0" width="170" height="50" rx="8" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1.4" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="50" rx="2" fill="#10B981" />
+        <text x="14" y="22" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#065F46">Contact API</text>
+        <text x="14" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#047857">[api/contact/route.ts]</text>
+      </g>
+
+      <!-- Render AI Backend -->
+      <g transform="translate(905, 735)" class="node-card">
+        <rect x="0" y="0" width="170" height="46" rx="8" fill="#ECFDF5" stroke="#10B981" stroke-width="1.4" filter="url(#card-shadow)" />
+        <text x="85" y="20" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#047857" text-anchor="middle">Render AI Backend</text>
+        <text x="85" y="35" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#059669" text-anchor="middle">[FastAPI Service]</text>
+      </g>
+
+      <!-- Resend email -->
+      <g transform="translate(1130, 735)" class="node-card">
+        <rect x="0" y="0" width="170" height="46" rx="8" fill="#ECFDF5" stroke="#10B981" stroke-width="1.4" filter="url(#card-shadow)" />
+        <text x="85" y="20" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#047857" text-anchor="middle">Resend email</text>
+        <text x="85" y="35" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#059669" text-anchor="middle">[resend.com API]</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 7. ZONE 4 CARDS: SHARED UI & PREFERENCES                                  -->
+      <!-- ========================================================================= -->
+
+      <!-- Site layout -->
+      <g transform="translate(260, 860)" class="node-card">
+        <rect x="0" y="0" width="160" height="50" rx="8" fill="#FFFFFF" stroke="#FDA4AF" stroke-width="1.5" filter="url(#card-shadow)" />
+        <rect x="0" y="0" width="4" height="50" rx="2" fill="#E11D48" />
+        <text x="14" y="22" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#9F1239">Site layout</text>
+        <text x="14" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#881337">[layout.tsx]</text>
+      </g>
+
+      <!-- Navigation bar -->
+      <g transform="translate(65, 940)" class="node-card">
+        <rect x="0" y="0" width="150" height="48" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="75" y="20" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Navigation bar</text>
+        <text x="75" y="36" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[Navbar.tsx]</text>
+      </g>
+
+      <!-- Conditional analytics -->
+      <g transform="translate(240, 940)" class="node-card">
+        <rect x="0" y="0" width="160" height="48" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="80" y="20" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Conditional analytics</text>
+        <text x="80" y="36" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="500" fill="#64748B" text-anchor="middle">[ConditionalAnalytics.tsx]</text>
+      </g>
+
+      <!-- Consent banner -->
+      <g transform="translate(425, 940)" class="node-card">
+        <rect x="0" y="0" width="150" height="48" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="75" y="20" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Consent banner</text>
+        <text x="75" y="36" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="500" fill="#64748B" text-anchor="middle">[CookieConsentBanner.tsx]</text>
+      </g>
+
+      <!-- Consent provider -->
+      <g transform="translate(315, 1005)" class="node-card">
+        <rect x="0" y="0" width="170" height="46" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="1.4" filter="url(#card-shadow)" />
+        <text x="85" y="19" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#9F1239" text-anchor="middle">Consent provider</text>
+        <text x="85" y="34" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#BE123C" text-anchor="middle">[CookieConsentProvider.tsx]</text>
+      </g>
+
+      <!-- Theme toggle -->
+      <g transform="translate(615, 860)" class="node-card">
+        <rect x="0" y="0" width="145" height="50" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="72.5" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Theme toggle</text>
+        <text x="72.5" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[ThemeToggle.tsx]</text>
+      </g>
+
+      <!-- Theme provider -->
+      <g transform="translate(615, 935)" class="node-card">
+        <rect x="0" y="0" width="145" height="50" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="72.5" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Theme provider</text>
+        <text x="72.5" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[ThemeProvider.tsx]</text>
+      </g>
+
+      <!-- Fade-in animation -->
+      <g transform="translate(805, 860)" class="node-card">
+        <rect x="0" y="0" width="160" height="50" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#card-shadow)" />
+        <text x="80" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">Fade-in animation</text>
+        <text x="80" y="38" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="500" fill="#64748B" text-anchor="middle">[fadeIn.tsx]</text>
+      </g>
+
+    </svg>
+
+    <!-- Footer Caption Bar -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mt-4 pt-3 border-t border-slate-200 text-xs font-mono text-slate-500">
+      <div>
+        <span>System: </span><span class="font-bold text-slate-800">JRioP/rio_joshua_portfolio</span>
+      </div>
+      <div>
+        <span>Rendered in </span><span class="font-bold text-slate-800">Eraser.io Vector Architecture Canvas</span>
+      </div>
+      <div class="text-slate-400">
+        gitdiagram.com/jriop/rio_joshua_portfolio · Redrawn with 100% Vector Lock
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
+
