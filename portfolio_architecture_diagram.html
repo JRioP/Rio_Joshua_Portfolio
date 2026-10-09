@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joshua Rio Portfolio — Architecture Diagram</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Authentic Eraser.io Technical Grid */
+    .bg-grid-canvas {
+      background-color: #ffffff;
+      background-image: 
+        linear-gradient(to right, #eceef1 1px, transparent 1px),
+        linear-gradient(to bottom, #eceef1 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { padding: 0; background: white; }
+    }
+  </style>
+</head>
+<body class="bg-grid-canvas text-slate-800 min-h-screen p-4 md:p-8 flex flex-col items-center justify-center">
+
+  <!-- Control Header Bar -->
+  <div class="no-print w-full max-w-[1140px] mb-4 flex items-center justify-between">
+    <div class="flex items-center gap-2.5 text-xs font-mono text-slate-700">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-bold text-slate-900">Portfolio System Architecture</span>
+      <span class="text-slate-400">·</span>
+      <span class="text-slate-500">Eraser.io Blueprint Style</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="window.print()" class="px-3.5 py-1.5 bg-white border border-slate-300 rounded-lg shadow-2xs hover:bg-slate-50 text-slate-800 font-sans font-semibold text-xs transition cursor-pointer flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        </svg>
+        Export PDF / Print
+      </button>
+    </div>
+  </div>
+
+  <!-- Master Canvas Board -->
+  <div class="w-full max-w-[1140px] bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 relative overflow-hidden bg-grid-canvas">
+
+    <!-- MASTER VECTOR SVG (1:1 Exact Match with Eraser.io Sketch) -->
+    <svg class="w-full h-auto" viewBox="0 0 1100 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Standard Arrowhead Markers -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b" />
+        </marker>
+        <marker id="arrow-bi" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 8 1.5 L 0 5 L 8 8.5 z" fill="#1e293b" />
+        </marker>
+        <!-- Subtle Card Shadow -->
+        <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.06" />
+        </filter>
+      </defs>
+
+      <!-- ========================================================================= -->
+      <!-- 1. TOP-LEFT METADATA BLOCK                                                -->
+      <!-- ========================================================================= -->
+      <g transform="translate(60, 22)">
+        <text x="0" y="16" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0f172a">Domain Registrar:</text>
+        <text x="0" y="32" font-family="'Inter', sans-serif" font-size="11.5" font-weight="600" fill="#334155">DNS: Cloudflare (DNS-only) → Vercel</text>
+
+        <text x="210" y="16" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0f172a">Monitoring &amp; Analytics</text>
+        <text x="210" y="32" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#64748b">Vercel Speed Insights</text>
+        <text x="210" y="46" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#64748b">Vercel Analytics</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 2. DASHED BOUNDARY CONTAINER & THREE COLUMNS                              -->
+      <!-- ========================================================================= -->
+      <g id="boundaries">
+        <!-- Outer Dashed Box -->
+        <rect x="60" y="85" width="980" height="585" rx="8" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="6 6" />
+
+        <!-- Vertical Divider 1: User / System Boundary -->
+        <line x1="225" y1="85" x2="225" y2="670" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="6 6" />
+
+        <!-- Vertical Divider 2: System Boundary / Backend -->
+        <line x1="720" y1="85" x2="720" y2="670" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="6 6" />
+
+        <!-- Column Header Titles -->
+        <text x="142" y="112" font-family="'Inter', sans-serif" font-size="13" font-weight="600" fill="#475569" text-anchor="middle">User</text>
+        <text x="472" y="112" font-family="'Inter', sans-serif" font-size="13" font-weight="600" fill="#475569" text-anchor="middle">System Boundary</text>
+        <text x="850" y="112" font-family="'Inter', sans-serif" font-size="13" font-weight="600" fill="#475569" text-anchor="middle">Backend</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 3. CONNECTORS & ARROWS                                                    -->
+      <!-- ========================================================================= -->
+
+      <!-- Visitor -> Cloudflare (Straight horizontal) -->
+      <path d="M 180 370 L 260 370" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+      <!-- Cloudflare -> Vercel (Right -> Up -> Right) -->
+      <path d="M 330 350 L 365 350 L 365 240 L 415 240" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+      <!-- GitHub -> Vercel (Triggers Deploy: Curves Left & Down) -->
+      <path d="M 810 185 L 485 185 L 485 210" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+      <text x="648" y="176" font-family="'Inter', sans-serif" font-size="13.5" font-weight="600" fill="#0f172a" text-anchor="middle">Triggers Deploy</text>
+
+      <!-- Vercel -> GitHub (Source Code: Straight horizontal) -->
+      <path d="M 565 240 L 815 240" fill="none" stroke="#1e293b" stroke-width="1.8" marker-start="url(#arrow-bi)" />
+      <text x="670" y="230" font-family="'Inter', sans-serif" font-size="13.5" font-weight="600" fill="#0f172a" text-anchor="middle">Source Code</text>
+
+      <!-- Vercel -> Next.js App (Straight Down) -->
+      <path d="M 485 260 L 485 315" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+      <!-- Next.js App <-> FASTAPI Cloud Google (REST API CALL: Double-headed horizontal) -->
+      <path d="M 545 375 L 770 375" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" marker-start="url(#arrow-bi)" />
+      <text x="658" y="395" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">REST API CALL</text>
+
+      <!-- Next.js App -> Pages (Straight Down) -->
+      <path d="M 485 435 L 485 470" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+      <!-- MDX Files -> Pages (Reads Content: Straight horizontal) -->
+      <path d="M 350 500 L 440 500" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+      <text x="395" y="478" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Reads</text>
+      <text x="395" y="494" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Content</text>
+
+      <!-- Pages Distribution Tree Trunk & Branches -->
+      <path d="M 485 530 L 485 560" fill="none" stroke="#1e293b" stroke-width="1.8" />
+      <!-- Horizontal Distribution Bus from x=345 to x=645 -->
+      <path d="M 345 560 L 645 560" fill="none" stroke="#1e293b" stroke-width="1.8" />
+      <!-- 4 Drops to Subfolders -->
+      <path d="M 345 560 L 345 585" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+      <path d="M 445 560 L 445 585" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+      <path d="M 545 560 L 545 585" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+      <path d="M 645 560 L 645 585" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+      <!-- Contact -> Resend (Sends Email) -->
+      <path d="M 680 610 L 805 610" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+      <text x="740" y="618" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">Sends</text>
+      <text x="740" y="632" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">Email</text>
+
+
+      <!-- ========================================================================= -->
+      <!-- 4. COLUMN 1: USER NODE (VISITOR)                                          -->
+      <!-- ========================================================================= -->
+      <g transform="translate(142, 360)">
+        <!-- Eraser.io Minimalist Avatar -->
+        <!-- Head -->
+        <circle cx="0" cy="-28" r="10" stroke="#1e293b" stroke-width="2.2" fill="#ffffff" />
+        <!-- Hair Swoop -->
+        <path d="M -7 -30 C -5 -35 -1 -35 1 -33 C 3 -35 6 -35 7 -30" stroke="#1e293b" stroke-width="2" stroke-linecap="round" fill="none" />
+        <!-- Neck & Collar -->
+        <path d="M -3 -18 V -14 H 3 V -18" stroke="#1e293b" stroke-width="1.8" fill="none" />
+        <!-- Shoulders / Torso -->
+        <path d="M -14 10 L -9 -12 C -9 -12 -4 -9 0 -9 C 4 -9 9 -12 9 -12 L 14 10" stroke="#1e293b" stroke-width="2.2" stroke-linejoin="round" fill="#ffffff" />
+        <path d="M 0 -9 V 10" stroke="#1e293b" stroke-width="1.8" />
+        <!-- Label -->
+        <text x="0" y="32" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">visitor</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 5. COLUMN 2: SYSTEM BOUNDARY NODES                                        -->
+      <!-- ========================================================================= -->
+
+      <!-- [NODE: CLOUDFLARE] -->
+      <g transform="translate(295, 365)">
+        <!-- Cloudflare Cloud with Sparkle -->
+        <path d="M 19 -8 C 18 -14 13 -18 7 -18 C 2 -18 -2 -15 -4 -11 C -6 -12 -7 -12 -8 -12 C -12 -12 -16 -8 -16 -4 C -19 -3 -22 0 -22 5 C -22 10 -18 14 -13 14 L 18 14 C 23 14 27 10 27 5 C 27 0 23 -4 19 -5 Z" fill="#F38020" />
+        <!-- Cloudflare Sparkle Crosses -->
+        <path d="M 12 -4 L 14 -4 L 14 -2 L 14 -4 L 16 -4 L 14 -4 L 14 -6 Z" stroke="#ffffff" stroke-width="1.4" fill="none" />
+        <path d="M 6 4 L 7.5 4 L 7.5 5.5 L 7.5 4 L 9 4 L 7.5 4 L 7.5 2.5 Z" stroke="#ffffff" stroke-width="1.2" fill="none" />
+        <!-- Text -->
+        <text x="0" y="32" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">Cloudflare</text>
+        <text x="0" y="47" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="middle">DNS only</text>
+      </g>
+
+      <!-- [NODE: VERCEL] -->
+      <g transform="translate(485, 238)">
+        <!-- Vercel Triangle -->
+        <path d="M -42 8 L -28 -14 L -14 8 Z" fill="#000000" />
+        <!-- Vercel Bold Text -->
+        <text x="12" y="6" font-family="'Inter', sans-serif" font-size="24" font-weight="900" fill="#000000" text-anchor="middle" letter-spacing="-0.03em">Vercel</text>
+      </g>
+
+      <!-- [NODE: NEXT.JS APP] -->
+      <g transform="translate(485, 375)">
+        <!-- Black Disc -->
+        <circle cx="0" cy="0" r="33" fill="#000000" />
+        <!-- White Stylized N Logo -->
+        <path d="M 14 18 L -14 -18 H -20 V 18 H -14 V -8 L 11 23 C 12 22 13 20 14 18 Z" fill="#ffffff" />
+        <path d="M 6 -18 H 12 V 12 H 6 Z" fill="#ffffff" opacity="0.3" />
+        <!-- Label -->
+        <text x="0" y="52" font-family="'Inter', sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Next.js App</text>
+      </g>
+
+      <!-- [NODE: MDX FILES] -->
+      <g transform="translate(320, 500)">
+        <!-- Cute Yellow Folder with Blue Peeking Doc -->
+        <!-- Back Folder -->
+        <path d="M -18 -8 C -18 -10 -16 -11 -14 -11 H -6 C -5 -11 -4 -10.5 -3 -10 L -1 -8 H 14 C 16 -8 18 -6 18 -4 V 14 C 18 16 16 18 14 18 H -14 C -16 18 -18 16 -18 14 Z" fill="#F59E0B" stroke="#D97706" stroke-width="1.2" />
+        <!-- Peeking Blue Doc -->
+        <rect x="-11" y="-15" width="18" height="18" rx="2" fill="#E0F2FE" stroke="#38BDF8" stroke-width="1" />
+        <line x1="-8" y1="-10" x2="3" y2="-10" stroke="#0284C7" stroke-width="1.2" stroke-linecap="round" />
+        <line x1="-8" y1="-6" x2="1" y2="-6" stroke="#0284C7" stroke-width="1.2" stroke-linecap="round" />
+        <!-- Front Flap -->
+        <path d="M -18 -3 C -18 -5 -16 -6 -14 -6 H 14 C 16 -6 18 -5 18 -3 V 14 C 18 16 16 18 14 18 H -14 C -16 18 -18 16 -18 14 Z" fill="#FBBF24" stroke="#D97706" stroke-width="1.2" />
+        <!-- Label -->
+        <text x="0" y="34" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">MDX Files</text>
+      </g>
+
+      <!-- [NODE: PAGES] -->
+      <g transform="translate(485, 500)">
+        <!-- Cute Yellow Folder with Blue Peeking Doc -->
+        <path d="M -18 -8 C -18 -10 -16 -11 -14 -11 H -6 C -5 -11 -4 -10.5 -3 -10 L -1 -8 H 14 C 16 -8 18 -6 18 -4 V 14 C 18 16 16 18 14 18 H -14 C -16 18 -18 16 -18 14 Z" fill="#F59E0B" stroke="#D97706" stroke-width="1.2" />
+        <rect x="-11" y="-15" width="18" height="18" rx="2" fill="#E0F2FE" stroke="#38BDF8" stroke-width="1" />
+        <line x1="-8" y1="-10" x2="3" y2="-10" stroke="#0284C7" stroke-width="1.2" stroke-linecap="round" />
+        <line x1="-8" y1="-6" x2="1" y2="-6" stroke="#0284C7" stroke-width="1.2" stroke-linecap="round" />
+        <path d="M -18 -3 C -18 -5 -16 -6 -14 -6 H 14 C 16 -6 18 -5 18 -3 V 14 C 18 16 16 18 14 18 H -14 C -16 18 -18 16 -18 14 Z" fill="#FBBF24" stroke="#D97706" stroke-width="1.2" />
+        <text x="0" y="34" font-family="'Inter', sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Pages</text>
+      </g>
+
+      <!-- [SUBFOLDER 1: HOME] -->
+      <g transform="translate(345, 608)">
+        <path d="M -14 -6 C -14 -7.5 -12.5 -8 -11 -8 H -4 L -1 -6 H 11 C 12.5 -6 14 -4.5 14 -3 V 11 C 14 12.5 12.5 14 11 14 H -11 C -12.5 14 -14 12.5 -14 11 Z" fill="#F59E0B" stroke="#D97706" stroke-width="1" />
+        <rect x="-8" y="-11" width="14" height="14" rx="1.5" fill="#E0F2FE" stroke="#38BDF8" stroke-width="0.8" />
+        <path d="M -14 -2 H 11 C 12.5 -2 14 -0.5 14 1 V 11 C 14 12.5 12.5 14 11 14 H -11 C -12.5 14 -14 12.5 -14 11 Z" fill="#FBBF24" stroke="#D97706" stroke-width="1" />
+        <text x="0" y="27" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">Home</text>
+      </g>
+
+      <!-- [SUBFOLDER 2: PROJECTS] -->
+      <g transform="translate(445, 608)">
+        <path d="M -14 -6 C -14 -7.5 -12.5 -8 -11 -8 H -4 L -1 -6 H 11 C 12.5 -6 14 -4.5 14 -3 V 11 C 14 12.5 12.5 14 11 14 H -11 C -12.5 14 -14 12.5 -14 11 Z" fill="#F59E0B" stroke="#D97706" stroke-width="1" />
+        <rect x="-8" y="-11" width="14" height="14" rx="1.5" fill="#E0F2FE" stroke="#38BDF8" stroke-width="0.8" />
+        <path d="M -14 -2 H 11 C 12.5 -2 14 -0.5 14 1 V 11 C 14 12.5 12.5 14 11 14 H -11 C -12.5 14 -14 12.5 -14 11 Z" fill="#FBBF24" stroke="#D97706" stroke-width="1" />
+        <text x="0" y="27" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">Projects</text>
+      </g>
+
+      <!-- [SUBFOLDER 3: ABOUT] -->
+      <g transform="translate(545, 608)">
+        <path d="M -14 -6 C -14 -7.5 -12.5 -8 -11 -8 H -4 L -1 -6 H 11 C 12.5 -6 14 -4.5 14 -3 V 11 C 14 12.5 12.5 14 11 14 H -11 C -12.5 14 -14 12.5 -14 11 Z" fill="#F59E0B" stroke="#D97706" stroke-width="1" />
+        <rect x="-8" y="-11" width="14" height="14" rx="1.5" fill="#E0F2FE" stroke="#38BDF8" stroke-width="0.8" />
+        <path d="M -14 -2 H 11 C 12.5 -2 14 -0.5 14 1 V 11 C 14 12.5 12.5 14 11 14 H -11 C -12.5 14 -14 12.5 -14 11 Z" fill="#FBBF24" stroke="#D97706" stroke-width="1" />
+        <text x="0" y="27" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">About</text>
+      </g>
+
+      <!-- [SUBFOLDER 4: CONTACT] -->
+      <g transform="translate(645, 608)">
+        <path d="M -14 -6 C -14 -7.5 -12.5 -8 -11 -8 H -4 L -1 -6 H 11 C 12.5 -6 14 -4.5 14 -3 V 11 C 14 12.5 12.5 14 11 14 H -11 C -12.5 14 -14 12.5 -14 11 Z" fill="#F59E0B" stroke="#D97706" stroke-width="1" />
+        <rect x="-8" y="-11" width="14" height="14" rx="1.5" fill="#E0F2FE" stroke="#38BDF8" stroke-width="0.8" />
+        <path d="M -14 -2 H 11 C 12.5 -2 14 -0.5 14 1 V 11 C 14 12.5 12.5 14 11 14 H -11 C -12.5 14 -14 12.5 -14 11 Z" fill="#FBBF24" stroke="#D97706" stroke-width="1" />
+        <text x="0" y="27" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">Contact</text>
+      </g>
+
+
+      <!-- ========================================================================= -->
+      <!-- 6. COLUMN 3: BACKEND NODES                                                -->
+      <!-- ========================================================================= -->
+
+      <!-- [NODE: GITHUB] -->
+      <g transform="translate(850, 238)">
+        <!-- Official GitHub Octocat Silhouette -->
+        <circle cx="0" cy="-12" r="24" fill="#0f172a" />
+        <path d="M 0 -31 C -10.5 -31 -19 -22.5 -19 -12 C -19 -3.6 -13.5 3.5 -6 6 C -5 6.2 -4.7 5.6 -4.7 5 C -4.7 4.5 -4.7 3.1 -4.7 1.4 C -10 2.5 -11.1 -1.2 -11.1 -1.2 C -12 -3.4 -13.2 -4 -13.2 -4 C -14.9 -5.2 -13.1 -5.2 -13.1 -5.2 C -11.2 -5.1 -10.2 -3.2 -10.2 -3.2 C -8.5 -0.3 -5.7 -1.1 -4.6 -1.6 C -4.4 -2.8 -3.9 -3.6 -3.4 -4.1 C -7.6 -4.6 -12 -6.2 -12 -13.4 C -12 -15.5 -11.2 -17.2 -10 -18.5 C -10.2 -19 -10.9 -21 -9.8 -23.5 C -9.8 -23.5 -8.2 -24 -4.6 -21.6 C -3.1 -22 -1.5 -22.2 0 -22.2 C 1.5 -22.2 3.1 -22 4.6 -21.6 C 8.2 -24 9.8 -23.5 9.8 -23.5 C 10.9 -21 10.2 -19 10 -18.5 C 11.2 -17.2 12 -15.5 12 -13.4 C 12 -6.2 7.6 -4.6 3.4 -4.1 C 4 -4.6 4.6 -5.6 4.6 -7.2 C 4.6 -9.5 4.6 -11.4 4.6 -12 C 4.6 -12.6 4.9 -13.2 6 -13 C 13.5 -15.5 19 -22.5 19 -31 Z" fill="#ffffff" />
+        <text x="0" y="26" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle">Github</text>
+      </g>
+
+      <!-- [NODE: CLOUD GOOGLE CONTAINER BOX] -->
+      <g transform="translate(850, 460)">
+        <!-- Container Box -->
+        <rect x="-70" y="-130" width="140" height="230" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4" filter="url(#soft-shadow)" />
+
+        <!-- Red Title: Cloud Google -->
+        <text x="0" y="-108" font-family="'Inter', sans-serif" font-size="12.5" font-weight="700" fill="#ef4444" text-anchor="middle">Cloud Google</text>
+
+        <!-- FASTAPI Node -->
+        <circle cx="0" cy="-55" r="28" fill="#009688" />
+        <!-- Lightning Bolt -->
+        <path d="M 2 -70 L -10 -52 H 0 L -2 -40 L 10 -58 H 0 Z" fill="#ffffff" />
+        <text x="0" y="-10" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="0.04em">FASTAPI</text>
+
+        <!-- Grok Node -->
+        <!-- Grok Circle Slash Icon -->
+        <circle cx="-28" cy="50" r="11" fill="none" stroke="#0f172a" stroke-width="2.5" />
+        <line x1="-36" y1="58" x2="-20" y2="42" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" />
+        <!-- Grok Text -->
+        <text x="8" y="55" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#0f172a" text-anchor="middle">Grok</text>
+
+        <!-- Internal Connector: Grok -> FASTAPI (Curves Right & Up) -->
+        <path d="M 40 50 L 55 50 L 55 -55 L 35 -55" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+      </g>
+
+      <!-- [NODE: RESEND] -->
+      <g transform="translate(845, 610)">
+        <text x="0" y="8" font-family="'Inter', sans-serif" font-size="20" font-weight="900" fill="#000000" letter-spacing="-0.03em">Resend</text>
+      </g>
+
+    </svg>
+
+    <!-- Canvas Footer Note -->
+    <div class="text-center text-[11px] font-mono text-slate-400 mt-3 pt-3 border-t border-slate-200">
+      Joshua Rio Portfolio · Architecture Canvas (Eraser.io 1:1 Vector Blueprint)
+    </div>
+
+  </div>
+
+</body>
+</html>
