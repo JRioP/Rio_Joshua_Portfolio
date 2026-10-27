@@ -33,34 +33,45 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://joshuario.com"),
   title: {
-    default: "Joshua Rio — Full-Stack Developer",
+    default: "Joshua Rio — Full-Stack Developer & Hardware Technologist",
     template: "%s · Joshua Rio",
   },
   description:
-    "Full-stack developer from Batangas. I build Android apps, production websites, and AI-powered tools.",
-  keywords: ["Joshua Rio", "full-stack developer", "Android", "Next.js", "Philippines", "Batangas"],
+    "Full-stack developer & hardware technician from Batangas. I build Android apps, production websites, AI tools, custom PC builds, and provide laptop hardware servicing.",
+  keywords: [
+    "Joshua Rio",
+    "full-stack developer",
+    "hardware technician",
+    "custom PC builder",
+    "laptop repair",
+    "thermal repasting",
+    "Android",
+    "Next.js",
+    "Philippines",
+    "Batangas"
+  ],
   authors: [{ name: "Joshua Rio", url: "https://github.com/JRioP" }],
   creator: "Joshua Rio",
   openGraph: {
     type: "website",
     locale: "en_PH",
     url: "https://joshuario.com",
-    title: "Joshua Rio — Full-Stack Developer",
-    description: "Full-stack developer from Batangas. I build Android apps, production websites, and AI-powered tools.",
+    title: "Joshua Rio — Full-Stack Developer & Hardware Technologist",
+    description: "Full-stack developer and hardware specialist from Batangas. Building production software and assembling custom hardware systems.",
     siteName: "Joshua Rio",
     images: [
       {
         url: "/og-image.jpg", 
         width: 1200,
         height: 630,
-        alt: "Joshua Rio — Full-Stack Developer",
+        alt: "Joshua Rio — Full-Stack Developer & Hardware Technologist",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Joshua Rio — Full-Stack Developer",
-    description: "Full-stack developer from Batangas.",
+    title: "Joshua Rio — Full-Stack Developer & Hardware Technologist",
+    description: "Full-stack developer & hardware specialist from Batangas.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -81,8 +92,8 @@ export default function RootLayout({
       "alternateName": "Joshua Rio",
       "url": "https://joshuario.com",
       "email": "riojoshuadev@gmail.com",
-      "jobTitle": "Junior Full-Stack Developer",
-      "description": "Cum Laude BSIT graduate, Programmer of the Year. Ships production-ready web, mobile, and AI applications.",
+      "jobTitle": "Full-Stack Developer & Hardware Specialist",
+      "description": "Cum Laude BSIT graduate, Programmer of the Year. Ships production-ready web, mobile, and AI applications, and provides custom PC building and hardware servicing.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Talisay City",
@@ -93,10 +104,24 @@ export default function RootLayout({
         "@type": "CollegeOrUniversity",
         "name": "STI College Tanauan"
         },
-      "knowsAbout": ["PHP", "Java", "Python", "React", "Next.js", "Firebase", "WordPress", "Android Development", "AI/LLM"],
+      "knowsAbout": [
+        "PHP",
+        "Java",
+        "Python",
+        "React",
+        "Next.js",
+        "Firebase",
+        "WordPress",
+        "Android Development",
+        "AI/LLM",
+        "Custom PC Assembly",
+        "Hardware Diagnostics",
+        "Thermal Repasting & Servicing",
+        "Laptop Component Repair"
+      ],
       "sameAs": [
         "https://github.com/JRioP",
-       "https://linkedin.com/in/japrdev"
+        "https://linkedin.com/in/japrdev"
         ]
       };
 
@@ -128,4 +153,3 @@ export default function RootLayout({
     </html>
   );
 }
-

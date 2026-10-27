@@ -33,13 +33,14 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-neutral-400 text-lg leading-relaxed mb-4">
-          Full-stack developer from the Philippines. I've shipped a real-time
-          Android app, a live corporate website, and a local AI chatbot.
+          Full-stack developer & hardware technician from the Philippines. I build
+          production software and provide hands-on PC assembly, laptop repairs, and thermal servicing.
           </p>
 
           <ul className="flex flex-col gap-3 mb-10">
           {[
             "Builds things that actually get deployed.",
+            "Hands-on with hardware: custom PC builds, laptop repair, and thermal repasting.",
             "Solves real problems, not just tutorial projects.",
             "Ships fast, secures properly, and documents clearly.",
             ].map((item) => (
@@ -194,7 +195,7 @@ export default function Home() {
           <div className="flex-1 min-w-0">
              <p className="text-neutral-400 text-2xl leading-relaxed mb-5 md:text-4xl">
               I'm a BSIT graduate from STI College Tanauan, based in Talisay City, Batangas. 
-              I like building things that solve real problems: a real-time roadside assistance app, a production corporate website, and a local AI document chatbot.
+              I build production software and provide hands-on hardware services — from real-time Android apps and local AI chatbots to custom PC builds, component repairs, and thermal repasting.
               I'm currently looking for a professional role, open to Metro Manila or remote.
             </p>
           </div>
@@ -206,7 +207,7 @@ export default function Home() {
           <div className="py-12 pb-24 px-6 max-w-2xl mx-auto">
             <h2 className="font-display text-4xl font-bold mb-4 md:text-6xl">Get in touch<span className="text-accent-500">.</span></h2>
             <p className="text-neutral-400 mb-12">
-              Open to full-time roles and interesting projects. Based in Talisay City, Batangas (available remotely).
+              Open to full-time roles, software projects, and hardware consultations. Based in Talisay City, Batangas (available remotely).
             </p>
             <ContactForm />
           </div>
