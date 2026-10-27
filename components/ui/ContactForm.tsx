@@ -106,7 +106,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           rows={6}
-          placeholder="Tell me what you're working on..."
+          placeholder="Tell me what you're working on, or describe your PC build / hardware service request..."
           className="w-full bg-neutral-900 border border-neutral-750 rounded-xl px-4 py-3 text-base sm:text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-accent-500 focus-visible:ring-2 focus-visible:ring-accent-500/25 transition-all resize-none"
         />
       </div>

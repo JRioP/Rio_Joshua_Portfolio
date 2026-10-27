@@ -45,6 +45,11 @@ export const ALL_TECH_STACK: TechItem[] = [
   { name: "LangChain",        icon: iconPath("langchain.svg"),     category: "Enterprise & AI" },
   { name: "Ollama",           icon: iconPath("ollama.svg"),        category: "Enterprise & AI" },
   { name: "ChromaDB",         icon: iconPath("chromadb.svg"),      category: "Enterprise & AI" },
+
+  { name: "Custom PC Building", icon: iconPath("pc-build.svg"),      category: "Hardware & Systems" },
+  { name: "Laptop Part Repair", icon: iconPath("laptop-repair.svg"), category: "Hardware & Systems" },
+  { name: "Thermal Repasting",  icon: iconPath("thermal.svg"),       category: "Hardware & Systems" },
+  { name: "Hardware Diagnostics", icon: iconPath("diagnostics.svg"), category: "Hardware & Systems" },
 ] as const;
 
 
@@ -52,4 +57,3 @@ export const GROUPED_TECH_STACK = ALL_TECH_STACK.reduce((acc, item) => {
   (acc[item.category] ??= []).push(item);
   return acc;
 }, {} as Record<string, TechItem[]>);
-

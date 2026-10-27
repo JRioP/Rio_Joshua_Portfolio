@@ -3,11 +3,12 @@ import { useState, useEffect, useRef } from "react";
 
 const ROTATING_TEXTS = [
   "a Full-Stack Developer.",
+  "a PC & Hardware Specialist.",
   "an Android Developer.",
   "a Web Developer.",
   "an AI Enthusiast.",
+  "a Hardware & Systems Builder.",
   "a Problem Solver.",
-  "a Lifelong Learner.",
   "a WordPress Developer.",
   "a Technology Enthusiast."
 ];
